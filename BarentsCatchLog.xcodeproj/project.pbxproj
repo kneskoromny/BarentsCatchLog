@@ -64,12 +64,9 @@
 		F7703BDD26D7874500D7DAFB /* BarentsCatchLog */ = {
 			isa = PBXGroup;
 			children = (
-				F7703BDE26D7874500D7DAFB /* AppDelegate.swift */,
-				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
+				F7703BFC26D7913C00D7DAFB /* Supports */,
 				F7703BF226D78EE900D7DAFB /* Controllers */,
-				F7703BE426D7874500D7DAFB /* Main.storyboard */,
-				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
-				F7703BE926D7874700D7DAFB /* LaunchScreen.storyboard */,
+				F7703BFB26D7911900D7DAFB /* Storyboards */,
 				F7703BEC26D7874700D7DAFB /* Info.plist */,
 			);
 			path = BarentsCatchLog;
@@ -85,6 +82,25 @@
 				F7703BF926D7905000D7DAFB /* OnBoardTVC.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F7703BFB26D7911900D7DAFB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				F7703BE426D7874500D7DAFB /* Main.storyboard */,
+				F7703BE926D7874700D7DAFB /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		F7703BFC26D7913C00D7DAFB /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				F7703BDE26D7874500D7DAFB /* AppDelegate.swift */,
+				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
+				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
+			);
+			path = Supports;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
