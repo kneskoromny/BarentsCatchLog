@@ -18,6 +18,7 @@
 		F7703BF826D7900900D7DAFB /* OnBoardNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BF726D7900900D7DAFB /* OnBoardNC.swift */; };
 		F7703BFA26D7905000D7DAFB /* OnBoardTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BF926D7905000D7DAFB /* OnBoardTVC.swift */; };
 		F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */; };
+		F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		F7703BF726D7900900D7DAFB /* OnBoardNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardNC.swift; sourceTree = "<group>"; };
 		F7703BF926D7905000D7DAFB /* OnBoardTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardTVC.swift; sourceTree = "<group>"; };
 		F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		F7703C0026D7956200D7DAFB /* BarentsCatchLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarentsCatchLog.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				F7703BFB26D7911900D7DAFB /* Storyboards */,
 				F7703BEC26D7874700D7DAFB /* Info.plist */,
 				F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */,
+				F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */,
 			);
 			path = BarentsCatchLog;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */,
 				F7703BE326D7874500D7DAFB /* DayCatchVC.swift in Sources */,
 				F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */,
+				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
 				F7703BF826D7900900D7DAFB /* OnBoardNC.swift in Sources */,
 				F7703BF626D78FC300D7DAFB /* SSDVC.swift in Sources */,
@@ -387,6 +391,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F7703C0026D7956200D7DAFB /* BarentsCatchLog.xcdatamodel */,
+			);
+			currentVersion = F7703C0026D7956200D7DAFB /* BarentsCatchLog.xcdatamodel */;
+			path = BarentsCatchLog.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F7703BD326D7874500D7DAFB /* Project object */;
 }
