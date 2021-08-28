@@ -15,10 +15,10 @@
 		F7703BEB26D7874700D7DAFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7703BE926D7874700D7DAFB /* LaunchScreen.storyboard */; };
 		F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BF326D78F9400D7DAFB /* StartTBC.swift */; };
 		F7703BF626D78FC300D7DAFB /* SSDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BF526D78FC300D7DAFB /* SSDVC.swift */; };
-		F7703BF826D7900900D7DAFB /* OnBoardNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BF726D7900900D7DAFB /* OnBoardNC.swift */; };
-		F7703BFA26D7905000D7DAFB /* OnBoardTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BF926D7905000D7DAFB /* OnBoardTVC.swift */; };
 		F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */; };
 		F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */; };
+		F7703C0326D92AF700D7DAFB /* OnBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0226D92AF700D7DAFB /* OnBoardVC.swift */; };
+		F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0426DA1FAE00D7DAFB /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +32,10 @@
 		F7703BEC26D7874700D7DAFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7703BF326D78F9400D7DAFB /* StartTBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTBC.swift; sourceTree = "<group>"; };
 		F7703BF526D78FC300D7DAFB /* SSDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDVC.swift; sourceTree = "<group>"; };
-		F7703BF726D7900900D7DAFB /* OnBoardNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardNC.swift; sourceTree = "<group>"; };
-		F7703BF926D7905000D7DAFB /* OnBoardTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardTVC.swift; sourceTree = "<group>"; };
 		F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F7703C0026D7956200D7DAFB /* BarentsCatchLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarentsCatchLog.xcdatamodel; sourceTree = "<group>"; };
+		F7703C0226D92AF700D7DAFB /* OnBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardVC.swift; sourceTree = "<group>"; };
+		F7703C0426DA1FAE00D7DAFB /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +83,8 @@
 			children = (
 				F7703BF326D78F9400D7DAFB /* StartTBC.swift */,
 				F7703BE226D7874500D7DAFB /* DayCatchVC.swift */,
-				F7703BF726D7900900D7DAFB /* OnBoardNC.swift */,
+				F7703C0226D92AF700D7DAFB /* OnBoardVC.swift */,
 				F7703BF526D78FC300D7DAFB /* SSDVC.swift */,
-				F7703BF926D7905000D7DAFB /* OnBoardTVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -105,6 +104,7 @@
 				F7703BDE26D7874500D7DAFB /* AppDelegate.swift */,
 				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
 				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
+				F7703C0426DA1FAE00D7DAFB /* Helpers.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -179,14 +179,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7703C0326D92AF700D7DAFB /* OnBoardVC.swift in Sources */,
 				F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */,
 				F7703BE326D7874500D7DAFB /* DayCatchVC.swift in Sources */,
 				F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */,
+				F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */,
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
-				F7703BF826D7900900D7DAFB /* OnBoardNC.swift in Sources */,
 				F7703BF626D78FC300D7DAFB /* SSDVC.swift in Sources */,
-				F7703BFA26D7905000D7DAFB /* OnBoardTVC.swift in Sources */,
 				F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
