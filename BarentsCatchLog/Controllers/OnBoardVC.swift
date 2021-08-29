@@ -12,6 +12,8 @@ class OnBoardVC: UIViewController {
     
     //MARK: - IB Outlets
     // ПОСТОЯННЫЕ ЛЕЙБЛЫ
+    
+    
     @IBOutlet var frozenPerDayLabels: [UILabel]!
     @IBOutlet var rawPerDayLabels: [UILabel]!
     @IBOutlet var frozenOnBoardLabels: [UILabel]!

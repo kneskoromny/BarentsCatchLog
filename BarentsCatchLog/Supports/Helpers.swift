@@ -13,3 +13,10 @@ enum FishTypes: String {
     case catfish = "Зубатка"
     case redfish = "Окунь"
 }
+
+enum Ratios: Double {
+    case cod = 1.5
+    case haddock = 1.4
+    case catfish = 1.65
+    case redfish = 1.95
+}

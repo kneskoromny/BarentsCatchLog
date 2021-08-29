@@ -32,6 +32,8 @@ class DayCatchVC: UIViewController {
     
     let pickerView = UIPickerView()
     
+    private var yesterdayCatch: Fish?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Готовая продукция за"
@@ -62,11 +64,36 @@ class DayCatchVC: UIViewController {
         //            let results = try coreDataStack.managedContext.fetch(catchRequest).sorted { fish1, fish2 in
         //                fish1.date?.compare(fish2.date!) == .orderedDescending
         //            }
+        
+        // запрос на существ рыбу для получения кол-ва готовой и сырой на вчерашний день
+        let yesterday = Date.yesterday
+        let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.date), yesterday as CVarArg)
+        do {
+            yesterdayCatch = try coreDataStack.managedContext.fetch(fetchRequest).first
+        } catch let error as NSError {
+            print("Fetch error: \(error) description: \(error.userInfo)")
+        }
+        
         fishCatch.name = fishName
-        fishCatch.date = Date()
-        fishCatch.ratio = 1.5
-        fishCatch.frozenBoard = Int64(fishWeight)!
+        fishCatch.date = Date.yesterday
+        
+        switch fishName {
+        case FishTypes.cod.rawValue:
+            fishCatch.ratio = Ratios.cod.rawValue
+        case FishTypes.haddock.rawValue:
+            fishCatch.ratio = Ratios.haddock.rawValue
+        case FishTypes.catfish.rawValue:
+            fishCatch.ratio = Ratios.catfish.rawValue
+        default:
+            fishCatch.ratio = Ratios.redfish.rawValue
+        }
+        
+        fishCatch.frozenBoard = Double(fishWeight)!
+        fishCatch.frozenPerDay = fishCatch.frozenBoard - (yesterdayCatch?.frozenBoard ?? 0)
         fishCatch.rawBoard = Double(fishCatch.frozenBoard) * fishCatch.ratio
+        fishCatch.rawPerDay = fishCatch.rawBoard - (yesterdayCatch?.rawBoard ?? 0)
         
         coreDataStack.saveContext()
         
@@ -110,7 +137,15 @@ extension DayCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
         default: fishTypeTF.text = arrayForPicker[4]
         }
     }
+}
+extension Date {
+    static var yesterday: Date { return Date().dayBefore }
     
-    
+    var dayBefore: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+    }
+    var noon: Date {
+            return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
+        }
 }
 
