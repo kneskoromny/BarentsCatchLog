@@ -77,7 +77,7 @@ class DayCatchVC: UIViewController {
         }
         
         fishCatch.name = fishName
-        fishCatch.date = Date.yesterday
+        fishCatch.date = Date()
         
         switch fishName {
         case FishTypes.cod.rawValue:

@@ -43,7 +43,7 @@ class OnBoardVC: UIViewController {
     
     //MARK: - Public Properties
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
-    var catches: [Fish] = []
+    var caughtFishes: [Fish] = []
     
     //MARK: - Private Properties
     private var fishNames = [FishTypes.cod.rawValue,
@@ -55,12 +55,13 @@ class OnBoardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for iteration in 0..<fishNames.count {
-            fishTypes.forEach { fishType in
-                fishType.text = fishNames[iteration]
-            } 
+        var index = 0
+        fishTypes.forEach { fishType in
+            fishType.text = fishNames[index]
+            index += 1
         }
-
+        
+        
         frozenPerDayLabels.forEach { frozenPerDayLabel in
             frozenPerDayLabel.text = "Готовая за сутки"
         }
@@ -76,7 +77,7 @@ class OnBoardVC: UIViewController {
 
         let catchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
         do {
-            catches = try coreDataStack.managedContext.fetch(catchRequest)
+            caughtFishes = try coreDataStack.managedContext.fetch(catchRequest)
             
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
@@ -86,11 +87,14 @@ class OnBoardVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(catches.count)
+        print(caughtFishes.count)
+        caughtFishes.forEach { fish in
+            print(fish.date!)
+        }
     }
     
     private func showQuantityOrHideLabels(for mainLabel: UILabel, and secondaryLabel: UILabel) {
-        for fish in catches {
+        for fish in caughtFishes {
             if mainLabel.text == fish.name {
                 secondaryLabel.text = "\(fish.name!) - \(fish.frozenBoard) - \(fish.rawBoard)"
             }
