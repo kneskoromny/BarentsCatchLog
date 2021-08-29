@@ -12,6 +12,7 @@ class OnBoardVC: UIViewController {
     
     //MARK: - IB Outlets
     // ПОСТОЯННЫЕ ЛЕЙБЛЫ
+    @IBOutlet var fishTypes: [UILabel]!
     
     
     @IBOutlet var frozenPerDayLabels: [UILabel]!
@@ -40,12 +41,25 @@ class OnBoardVC: UIViewController {
     @IBOutlet weak var redFRZOnBoard: UILabel!
     @IBOutlet weak var redRAWOnBoard: UILabel!
     
+    //MARK: - Public Properties
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     var catches: [Fish] = []
+    
+    //MARK: - Private Properties
+    private var fishNames = [FishTypes.cod.rawValue,
+                             FishTypes.haddock.rawValue,
+                             FishTypes.catfish.rawValue,
+                             FishTypes.redfish.rawValue]
 
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for iteration in 0..<fishNames.count {
+            fishTypes.forEach { fishType in
+                fishType.text = fishNames[iteration]
+            } 
+        }
 
         frozenPerDayLabels.forEach { frozenPerDayLabel in
             frozenPerDayLabel.text = "Готовая за сутки"

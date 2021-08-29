@@ -543,6 +543,10 @@
                         <outletCollection property="rawOnBoardLabels" destination="Jtq-Kf-ETO" collectionClass="NSMutableArray" id="VDA-Ve-WhX"/>
                         <outletCollection property="rawOnBoardLabels" destination="Bnv-am-Qea" collectionClass="NSMutableArray" id="ipF-Fu-dzt"/>
                         <outletCollection property="rawOnBoardLabels" destination="yTl-nq-JVN" collectionClass="NSMutableArray" id="JQI-9a-04y"/>
+                        <outletCollection property="fishTypes" destination="Q0c-c6-hau" collectionClass="NSMutableArray" id="JUv-ur-EdI"/>
+                        <outletCollection property="fishTypes" destination="BfJ-TF-PwO" collectionClass="NSMutableArray" id="5jr-eH-1lp"/>
+                        <outletCollection property="fishTypes" destination="VcF-XI-PfX" collectionClass="NSMutableArray" id="8wc-1N-LIM"/>
+                        <outletCollection property="fishTypes" destination="gJl-iP-Xmy" collectionClass="NSMutableArray" id="EUh-re-mAf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2s-PU-RPm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
