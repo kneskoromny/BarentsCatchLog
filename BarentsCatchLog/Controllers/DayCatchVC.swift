@@ -9,26 +9,26 @@ import UIKit
 import CoreData
 
 class DayCatchVC: UIViewController {
-
+    
     //MARK: - IB Outlets
     @IBOutlet weak var fishTypeTF: UITextField!
     @IBOutlet weak var frozenOnBoardTF: UITextField!
     
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
-      let formatter = DateFormatter()
-      formatter.dateStyle = .short
-      formatter.timeStyle = .medium
-      return formatter
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .medium
+        return formatter
     }()
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     
     //MARK: - Private Properties
     let arrayForPicker = ["",
-        FishTypes.cod.rawValue,
-        FishTypes.haddock.rawValue,
-        FishTypes.catfish.rawValue,
-        FishTypes.redfish.rawValue]
+                          FishTypes.cod.rawValue,
+                          FishTypes.haddock.rawValue,
+                          FishTypes.catfish.rawValue,
+                          FishTypes.redfish.rawValue]
     
     let pickerView = UIPickerView()
     
@@ -46,20 +46,27 @@ class DayCatchVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-
+    
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
+        
         let fishCatch = Fish(context: coreDataStack.managedContext)
         guard let fishName = fishTypeTF.text, let fishWeight = frozenOnBoardTF.text else { return }
+        
+        // запрос на уже существ рыбу
+        //        let catchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
+        //        catchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
+        
+        
+        // сортируем массив по дате, для доступа к правильному тотал числу
+        //            let results = try coreDataStack.managedContext.fetch(catchRequest).sorted { fish1, fish2 in
+        //                fish1.date?.compare(fish2.date!) == .orderedDescending
+        //            }
         fishCatch.name = fishName
-        print(fishCatch.name)
-        fishCatch.frozenBoard = Int64(fishWeight)!
-        print(fishCatch.frozenBoard)
         fishCatch.date = Date()
-        print(fishCatch.date)
         fishCatch.ratio = 1.5
+        fishCatch.frozenBoard = Int64(fishWeight)!
         fishCatch.rawBoard = Double(fishCatch.frozenBoard) * fishCatch.ratio
-        print(fishCatch.rawBoard)
         
         coreDataStack.saveContext()
         
