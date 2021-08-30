@@ -28,7 +28,7 @@
         <!--Сутки-->
         <scene sceneID="wW7-B1-Ubk">
             <objects>
-                <viewController id="4t9-p1-WJe" customClass="DayCatchVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4t9-p1-WJe" customClass="DaylyCatchVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MIn-xC-lkt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,7 +41,7 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="Bnt-1K-fgg">
-                                <rect key="frame" x="107" y="225.5" width="200" height="445"/>
+                                <rect key="frame" x="107" y="190" width="200" height="516"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Объект промысла" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Ax-igt">
                                         <rect key="frame" x="28" y="0.0" width="144.5" height="20.5"/>
@@ -79,15 +79,22 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="viZ-8G-wF6">
-                                        <rect key="frame" x="45.5" y="344" width="109" height="30"/>
-                                        <state key="normal" title="Всего на борту"/>
+                                        <rect key="frame" x="39.5" y="344" width="121" height="30"/>
+                                        <state key="normal" title="Суточная сводка"/>
                                         <connections>
                                             <action selector="showOnBoardBtnPressed" destination="4t9-p1-WJe" eventType="touchUpInside" id="liF-3O-D4t"/>
                                             <segue destination="Qw8-KC-hNU" kind="presentation" id="HzL-kF-n4s"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07H-D1-Dp1">
+                                        <rect key="frame" x="33" y="415" width="134" height="30"/>
+                                        <state key="normal" title="Суточная сводка 2"/>
+                                        <connections>
+                                            <segue destination="CjG-LF-lKF" kind="show" id="3Bt-R1-OnB"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oga-9k-dAB">
-                                        <rect key="frame" x="31.5" y="415" width="137" height="30"/>
+                                        <rect key="frame" x="31.5" y="486" width="137" height="30"/>
                                         <state key="normal" title="Очистить CoreData"/>
                                         <connections>
                                             <action selector="deleteDataBtnPressed" destination="4t9-p1-WJe" eventType="touchUpInside" id="Wfh-Jh-fVO"/>
@@ -113,10 +120,10 @@
             </objects>
             <point key="canvasLocation" x="650.72463768115949" y="-644.19642857142856"/>
         </scene>
-        <!--On BoardVC-->
+        <!--Daily ReportVC-->
         <scene sceneID="hCU-2g-nhF">
             <objects>
-                <viewController id="Qw8-KC-hNU" customClass="OnBoardVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qw8-KC-hNU" customClass="DailyReportVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pDJ-xw-fa4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -553,6 +560,44 @@
             </objects>
             <point key="canvasLocation" x="1505.7971014492755" y="-644.19642857142856"/>
         </scene>
+        <!--Daily Report TableVC-->
+        <scene sceneID="VWA-TN-WH6">
+            <objects>
+                <tableViewController id="Mkb-Ao-d4F" customClass="DailyReportTableVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8cr-Nq-F2A">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="RqA-6u-o5s" style="IBUITableViewCellStyleDefault" id="jrQ-KN-79w">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jrQ-KN-79w" id="59U-2q-rU3">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RqA-6u-o5s">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Mkb-Ao-d4F" id="qxd-bh-QJy"/>
+                            <outlet property="delegate" destination="Mkb-Ao-d4F" id="JY7-WT-kgO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Kte-Oj-2t9"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3gs-xp-dLR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2413" y="92"/>
+        </scene>
         <!--StartTBC-->
         <scene sceneID="rlg-9n-lAV">
             <objects>
@@ -571,6 +616,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZP-QI-lko" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-253" y="-101"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="f4G-dC-U8O">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CjG-LF-lKF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Dca-7c-LzG"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="baP-DD-uJt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Mkb-Ao-d4F" kind="relationship" relationship="rootViewController" id="sSv-Kz-5zY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OtY-Qd-0ih" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1506" y="93"/>
         </scene>
     </scenes>
     <resources>

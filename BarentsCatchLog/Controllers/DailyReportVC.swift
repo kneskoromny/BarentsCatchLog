@@ -8,12 +8,11 @@
 import UIKit
 import CoreData
 
-class OnBoardVC: UIViewController {
+class DailyReportVC: UIViewController {
     
     //MARK: - IB Outlets
     // ПОСТОЯННЫЕ ЛЕЙБЛЫ
     @IBOutlet var fishTypes: [UILabel]!
-    
     
     @IBOutlet var frozenPerDayLabels: [UILabel]!
     @IBOutlet var rawPerDayLabels: [UILabel]!
@@ -60,8 +59,6 @@ class OnBoardVC: UIViewController {
             fishType.text = fishNames[index]
             index += 1
         }
-        
-        
         frozenPerDayLabels.forEach { frozenPerDayLabel in
             frozenPerDayLabel.text = "Готовая за сутки"
         }
@@ -82,23 +79,45 @@ class OnBoardVC: UIViewController {
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
-       
+//        fishTypes.forEach { fishType in
+//            insertDataToLabels(for: fishType, frzPerDay: codFRZPerDay, rawPerDay: codRAWPerDay, frzOnBoard: codFRZOnBoard, and: codRAWOnBoard)
+//        }
+        for fish in caughtFishes {
+            fishTypes.forEach { fishTypeLabel in
+                if fishTypeLabel.text == fish.name {
+                    
+                    switch fishTypeLabel.text {
+                    case FishTypes.cod.rawValue:
+                        codFRZPerDay.text = String(fish.frozenPerDay)
+                        codRAWPerDay.text = String(fish.rawPerDay)
+                        codFRZOnBoard.text = String(fish.frozenBoard)
+                        codRAWOnBoard.text = String(fish.rawBoard)
+                    case FishTypes.haddock.rawValue:
+                        hadFRZPerDay.text = String(fish.frozenPerDay)
+                        hadRAWPerDay.text = String(fish.rawPerDay)
+                        hadFRZOnBoard.text = String(fish.frozenBoard)
+                        hadRAWOnBoard.text = String(fish.rawBoard)
+                    case FishTypes.catfish.rawValue:
+                        catFRZPerDay.text = String(fish.frozenPerDay)
+                        catRAWPerDay.text = String(fish.rawPerDay)
+                        catFRZOnBoard.text = String(fish.frozenBoard)
+                        catRAWOnBoard.text = String(fish.rawBoard)
+                    default:
+                        redFRZPerDay.text = String(fish.frozenPerDay)
+                        redRAWPerDay.text = String(fish.rawPerDay)
+                        redFRZOnBoard.text = String(fish.frozenBoard)
+                        redRAWOnBoard.text = String(fish.rawBoard)
+                        
+                    }
+                }
+            }
+        }
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print(caughtFishes.count)
-        caughtFishes.forEach { fish in
-            print(fish.date!)
-        }
-    }
-    
-    private func showQuantityOrHideLabels(for mainLabel: UILabel, and secondaryLabel: UILabel) {
-        for fish in caughtFishes {
-            if mainLabel.text == fish.name {
-                secondaryLabel.text = "\(fish.name!) - \(fish.frozenBoard) - \(fish.rawBoard)"
-            }
-        }
+        
     }
 
 }

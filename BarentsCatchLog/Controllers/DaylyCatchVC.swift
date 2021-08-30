@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class DayCatchVC: UIViewController {
+class DaylyCatchVC: UIViewController {
     
     //MARK: - IB Outlets
     @IBOutlet weak var fishTypeTF: UITextField!
@@ -54,12 +54,8 @@ class DayCatchVC: UIViewController {
         
         let fishCatch = Fish(context: coreDataStack.managedContext)
         guard let fishName = fishTypeTF.text, let fishWeight = frozenOnBoardTF.text else { return }
-        
-        // запрос на уже существ рыбу
-        //        let catchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
-        //        catchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
-        
-        
+        print(fishName)
+       
         // сортируем массив по дате, для доступа к правильному тотал числу
         //            let results = try coreDataStack.managedContext.fetch(catchRequest).sorted { fish1, fish2 in
         //                fish1.date?.compare(fish2.date!) == .orderedDescending
@@ -69,9 +65,10 @@ class DayCatchVC: UIViewController {
         let yesterday = Date.yesterday
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
-        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.date), yesterday as CVarArg)
+        //fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.date), yesterday as CVarArg)
         do {
             yesterdayCatch = try coreDataStack.managedContext.fetch(fetchRequest).first
+            print(yesterdayCatch?.date)
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
@@ -94,6 +91,7 @@ class DayCatchVC: UIViewController {
         fishCatch.frozenPerDay = fishCatch.frozenBoard - (yesterdayCatch?.frozenBoard ?? 0)
         fishCatch.rawBoard = Double(fishCatch.frozenBoard) * fishCatch.ratio
         fishCatch.rawPerDay = fishCatch.rawBoard - (yesterdayCatch?.rawBoard ?? 0)
+
         
         coreDataStack.saveContext()
         
@@ -118,7 +116,7 @@ class DayCatchVC: UIViewController {
 }
 
 //MARK: - Picker View Data Source, Delegate
-extension DayCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
+extension DaylyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
