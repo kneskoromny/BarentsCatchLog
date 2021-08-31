@@ -21,6 +21,8 @@
 		F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0426DA1FAE00D7DAFB /* Helpers.swift */; };
 		F7703C0726DD23ED00D7DAFB /* DailyReportTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */; };
 		F7703C0926DD41FA00D7DAFB /* FullDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0826DD41FA00D7DAFB /* FullDescriptionVC.swift */; };
+		F7946DE026DE4EA100241C16 /* TrawlsReportTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */; };
+		F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		F7703C0426DA1FAE00D7DAFB /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReportTableVC.swift; sourceTree = "<group>"; };
 		F7703C0826DD41FA00D7DAFB /* FullDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionVC.swift; sourceTree = "<group>"; };
+		F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlsReportTableVC.swift; sourceTree = "<group>"; };
+		F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlDescriptionVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 				F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */,
 				F7703C0826DD41FA00D7DAFB /* FullDescriptionVC.swift */,
 				F7703BF526D78FC300D7DAFB /* ByTrawlsVC.swift */,
+				F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */,
+				F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -191,6 +197,8 @@
 				F7703C0726DD23ED00D7DAFB /* DailyReportTableVC.swift in Sources */,
 				F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */,
 				F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */,
+				F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */,
+				F7946DE026DE4EA100241C16 /* TrawlsReportTableVC.swift in Sources */,
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703C0926DD41FA00D7DAFB /* FullDescriptionVC.swift in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,

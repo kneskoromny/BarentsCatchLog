@@ -21,8 +21,7 @@ class FullDescriptionVC: UIViewController {
     
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        //formatter.timeStyle = .medium
+        formatter.dateFormat = "ddMM"
         return formatter
     }()
 
@@ -30,8 +29,7 @@ class FullDescriptionVC: UIViewController {
         super.viewDidLoad()
 
         nameLabel.text = fish.name
-        //dateLabel.text = "Сводка за: \(String(describing: fish.date!))"
-        dateLabel.text = "Сводка за: \(Date())"
+        dateLabel.text = "Сводка за: "
         ratioLabel.text = "Коэффициент - \(fish.ratio)"
         frzPerDayLabel.text = "Готовой за сутки - \(fish.frozenPerDay)"
         rawPerDayLabel.text = "Вылов за сутки - \(fish.rawPerDay)"

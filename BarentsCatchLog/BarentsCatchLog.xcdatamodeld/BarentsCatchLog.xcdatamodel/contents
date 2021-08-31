@@ -10,18 +10,23 @@
         <attribute name="rawPerDay" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Trawl" representedClassName="Trawl" syncable="YES" codeGenerationType="class">
+        <attribute name="catRaw" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="codRaw" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateHoist" optional="YES" attributeType="String"/>
         <attribute name="dateShoot" optional="YES" attributeType="String"/>
+        <attribute name="hadRaw" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="latitudeHoist" optional="YES" attributeType="String"/>
         <attribute name="latitudeShoot" optional="YES" attributeType="String"/>
         <attribute name="longitudeHoist" optional="YES" attributeType="String"/>
         <attribute name="longitudeShoot" optional="YES" attributeType="String"/>
+        <attribute name="redRaw" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="timeHoist" optional="YES" attributeType="String"/>
         <attribute name="timeShoot" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="Fish" positionX="-36" positionY="9" width="128" height="134"/>
-        <element name="Trawl" positionX="-36" positionY="63" width="128" height="164"/>
+        <element name="Trawl" positionX="-36" positionY="63" width="128" height="239"/>
     </elements>
 </model>

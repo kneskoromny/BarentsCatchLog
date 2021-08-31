@@ -17,7 +17,7 @@ class DaylyCatchVC: UIViewController {
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yy H:mm"
+        formatter.dateFormat = "ddMM"
         return formatter
     }()
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
@@ -53,18 +53,10 @@ class DaylyCatchVC: UIViewController {
         
         let fishCatch = Fish(context: coreDataStack.managedContext)
         guard let fishName = fishTypeTF.text, let fishWeight = frozenOnBoardTF.text else { return }
-        print(fishName)
-       
-        // сортируем массив по дате, для доступа к правильному тотал числу
-        //            let results = try coreDataStack.managedContext.fetch(catchRequest).sorted { fish1, fish2 in
-        //                fish1.date?.compare(fish2.date!) == .orderedDescending
-        //            }
         
         // запрос на существ рыбу для получения кол-ва готовой и сырой на вчерашний день
-        let yesterday = Date.yesterday
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
-        //fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.date), yesterday as CVarArg)
         do {
             yesterdayCatch = try coreDataStack.managedContext.fetch(fetchRequest).first
             print(yesterdayCatch?.date)

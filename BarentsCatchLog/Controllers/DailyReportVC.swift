@@ -79,9 +79,7 @@ class DailyReportVC: UIViewController {
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
-//        fishTypes.forEach { fishType in
-//            insertDataToLabels(for: fishType, frzPerDay: codFRZPerDay, rawPerDay: codRAWPerDay, frzOnBoard: codFRZOnBoard, and: codRAWOnBoard)
-//        }
+
         for fish in caughtFishes {
             fishTypes.forEach { fishTypeLabel in
                 if fishTypeLabel.text == fish.name {

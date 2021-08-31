@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 class ByTrawlsVC: UIViewController {
@@ -19,6 +20,9 @@ class ByTrawlsVC: UIViewController {
     @IBOutlet weak var timeOfHoistingTF: UITextField!
     @IBOutlet weak var latitudeOfHoistingTF: UITextField!
     @IBOutlet weak var longitudeOfHoistingTF: UITextField!
+    
+    //MARK: - Public Properties
+    lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     
     //MARK: - Private Properties
     private let datePicker = UIDatePicker()
@@ -59,6 +63,7 @@ class ByTrawlsVC: UIViewController {
         
         longitudeOfHoistingTF.keyboardType = .decimalPad
         longitudeOfHoistingTF.placeholder = "04515"
+        
     }
     
     // убирает окна при нажатии на экран
@@ -68,11 +73,57 @@ class ByTrawlsVC: UIViewController {
     
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
-        if let timeDateString = timeOfShootingTF.text {
-            print(timeDateString)
-            let timeDateArray = timeDateString.components(separatedBy: " ")
+        let trawl = Trawl(context: coreDataStack.managedContext)
+        var shootingTime: [String] = []
+        var hoistingTime: [String] = []
+        
+        if let shootDateString = timeOfShootingTF.text {
+            print(shootDateString)
+            shootingTime = shootDateString.components(separatedBy: " ")
+            print(shootingTime)
+        }
+        if let hoistDateString = timeOfHoistingTF.text {
+            print(hoistDateString)
+            hoistingTime = hoistDateString.components(separatedBy: " ")
+            print(hoistingTime)
+        }
+        let dateShoot = shootingTime[0]
+        let timeShoot = shootingTime[1]
+        let dateHoist = hoistingTime[0]
+        let timeHoist = hoistingTime[1]
+        
+        guard let id = numberOfTrawlTF.text,
+              let latShoot = latitudeOfShootingTF.text,
+              let lonShoot = longitudeOfShootingTF.text,
+              let latHoist = latitudeOfHoistingTF.text,
+              let lonHoist = longitudeOfHoistingTF.text else {
             
-            print(timeDateArray)
+            self.showAlert()
+            return
+        }
+        trawl.id = id
+        trawl.date = Date()
+        trawl.dateShoot = dateShoot
+        trawl.timeShoot = timeShoot
+        trawl.latitudeShoot = latShoot
+        trawl.longitudeShoot = lonShoot
+        trawl.dateHoist = dateHoist
+        trawl.timeHoist = timeHoist
+        trawl.latitudeHoist = latHoist
+        trawl.longitudeHoist = lonHoist
+        
+        coreDataStack.saveContext()
+        print(trawl)
+    }
+    
+    @IBAction func deleteDataBtnPressed() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Trawl")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try coreDataStack.managedContext.execute(batchDeleteRequest)
+        } catch let error as NSError {
+            print("Fetch error: \(error) description: \(error.userInfo)")
         }
     }
     
@@ -88,7 +139,19 @@ class ByTrawlsVC: UIViewController {
     private func getDateFromPicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "ddMM HHmm"
-        timeOfShootingTF.text = formatter.string(from: datePicker.date)
+        if timeOfShootingTF.isFirstResponder {
+            timeOfShootingTF.text = formatter.string(from: datePicker.date)
+        }
+        if timeOfHoistingTF.isFirstResponder {
+            timeOfHoistingTF.text = formatter.string(from: datePicker.date)
+        }
+    }
+    private func showAlert() {
+        let alert = UIAlertController(title: "Повнимательнее!", message: "Заполните все поля для продолжения.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 
 }

@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="jvS-HW-Ub9">
-                                <rect key="frame" x="38.5" y="147" width="337.5" height="602.5"/>
+                                <rect key="frame" x="38.5" y="87" width="337.5" height="722.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Номер траления" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEF-Q7-Deg">
                                         <rect key="frame" x="102" y="0.0" width="133" height="20.5"/>
@@ -145,6 +145,20 @@
                                         <state key="normal" title="Сохранить"/>
                                         <connections>
                                             <action selector="saveBtnPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mnu-nc-rRn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0A-YV-zqG">
+                                        <rect key="frame" x="135" y="632.5" width="67" height="30"/>
+                                        <state key="normal" title="Показать"/>
+                                        <connections>
+                                            <segue destination="Pmr-Mc-3o1" kind="presentation" id="sA6-FY-KxF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFY-A4-7WZ">
+                                        <rect key="frame" x="139.5" y="692.5" width="58" height="30"/>
+                                        <state key="normal" title="Стереть"/>
+                                        <connections>
+                                            <action selector="deleteDataBtnPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="6da-vF-Pli"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -862,6 +876,97 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OtY-Qd-0ih" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1506" y="93"/>
+        </scene>
+        <!--Trawls Report TableVC-->
+        <scene sceneID="7Ze-Ot-cPE">
+            <objects>
+                <tableViewController id="6ek-zy-Te1" customClass="TrawlsReportTableVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Obw-cn-3kl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="trawlCell" textLabel="9PI-7M-H5E" style="IBUITableViewCellStyleDefault" id="PGm-2t-lpe">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PGm-2t-lpe" id="x0S-k0-lwe">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9PI-7M-H5E">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="lki-cm-CW3" kind="presentation" id="pKJ-md-MK9"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6ek-zy-Te1" id="096-2J-UAj"/>
+                            <outlet property="delegate" destination="6ek-zy-Te1" id="JD7-wU-1oK"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="0eg-7m-sY7"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4eL-LO-4Wq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1506" y="755"/>
+        </scene>
+        <!--Trawl DescriptionVC-->
+        <scene sceneID="30G-DL-Raf">
+            <objects>
+                <viewController id="lki-cm-CW3" customClass="TrawlDescriptionVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PuK-7x-PxJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OcL-1O-9uR">
+                                <rect key="frame" x="16" y="407.5" width="382" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="41S-ME-EtG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OcL-1O-9uR" firstAttribute="centerY" secondItem="PuK-7x-PxJ" secondAttribute="centerY" id="A0m-68-aX1"/>
+                            <constraint firstItem="41S-ME-EtG" firstAttribute="trailing" secondItem="OcL-1O-9uR" secondAttribute="trailing" constant="16" id="Cit-Lb-DKT"/>
+                            <constraint firstItem="OcL-1O-9uR" firstAttribute="centerX" secondItem="PuK-7x-PxJ" secondAttribute="centerX" id="bqA-lA-IrV"/>
+                            <constraint firstItem="OcL-1O-9uR" firstAttribute="leading" secondItem="41S-ME-EtG" secondAttribute="leading" constant="16" id="q5F-2B-SRs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="trawlDescriptionLabel" destination="OcL-1O-9uR" id="Zpw-08-6yV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bIs-Ae-lsI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2412" y="755"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ekR-s5-RpK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pmr-Mc-3o1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KFi-oP-Uvk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6ek-zy-Te1" kind="relationship" relationship="rootViewController" id="Gs8-tG-PgH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NMy-zV-9gK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="625" y="755"/>
         </scene>
     </scenes>
     <resources>
