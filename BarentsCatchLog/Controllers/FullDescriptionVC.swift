@@ -12,6 +12,7 @@ class FullDescriptionVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var ratioLabel: UILabel!
+    @IBOutlet weak var gradeLabel: UILabel!
     @IBOutlet weak var frzPerDayLabel: UILabel!
     @IBOutlet weak var rawPerDayLabel: UILabel!
     @IBOutlet weak var frzOnBoardLabel: UILabel!
@@ -31,6 +32,7 @@ class FullDescriptionVC: UIViewController {
         nameLabel.text = fish.name
         dateLabel.text = "Сводка за: "
         ratioLabel.text = "Коэффициент - \(fish.ratio)"
+        gradeLabel.text = "Навеска: \(fish.grade!)"
         frzPerDayLabel.text = "Готовой за сутки - \(fish.frozenPerDay)"
         rawPerDayLabel.text = "Вылов за сутки - \(fish.rawPerDay)"
         frzOnBoardLabel.text = "Готовой на борту - \(fish.frozenBoard)"

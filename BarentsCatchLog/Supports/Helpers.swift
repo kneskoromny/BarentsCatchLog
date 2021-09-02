@@ -20,3 +20,12 @@ enum Ratios: Double {
     case catfish = 1.65
     case redfish = 1.95
 }
+
+enum FishGrades: String {
+    case lessThanHalf = "-0.5"
+    case fromHalfToKilo = "0.5-1.0"
+    case fromKiloToTwo = "1.0-2.0"
+    case fromTwoToThree = "2.0-3.0"
+    case fromThreeToFive = "3.0-5.0"
+    case moreThanFive = "5.0+"
+}

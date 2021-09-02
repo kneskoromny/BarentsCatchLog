@@ -12,6 +12,7 @@ class DaylyCatchVC: UIViewController {
     
     //MARK: - IB Outlets
     @IBOutlet weak var fishTypeTF: UITextField!
+    @IBOutlet weak var fishGradeTF: UITextField!
     @IBOutlet weak var frozenOnBoardTF: UITextField!
     
     //MARK: - Public Properties
@@ -23,11 +24,19 @@ class DaylyCatchVC: UIViewController {
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     
     //MARK: - Private Properties
-    let arrayForPicker = ["",
+    let arrayForFishTypePicker = ["",
                           FishTypes.cod.rawValue,
                           FishTypes.haddock.rawValue,
                           FishTypes.catfish.rawValue,
                           FishTypes.redfish.rawValue]
+    
+    let arrayForGradePicker = ["",
+                               FishGrades.lessThanHalf.rawValue,
+                               FishGrades.fromHalfToKilo.rawValue,
+                               FishGrades.fromKiloToTwo.rawValue,
+                               FishGrades.fromTwoToThree.rawValue,
+                               FishGrades.fromThreeToFive.rawValue,
+                               FishGrades.moreThanFive.rawValue]
     
     let pickerView = UIPickerView()
     
@@ -38,6 +47,7 @@ class DaylyCatchVC: UIViewController {
         self.navigationItem.title = "Готовая продукция за"
         
         fishTypeTF.inputView = pickerView
+        fishGradeTF.inputView = pickerView
         pickerView.delegate = self
         pickerView.dataSource = self
         
@@ -52,7 +62,9 @@ class DaylyCatchVC: UIViewController {
     @IBAction func saveBtnPressed() {
         
         let fishCatch = Fish(context: coreDataStack.managedContext)
-        guard let fishName = fishTypeTF.text, let fishWeight = frozenOnBoardTF.text else { return }
+        guard let fishName = fishTypeTF.text,
+              let fishGrade = fishGradeTF.text,
+              let fishWeight = frozenOnBoardTF.text else { return }
         
         // запрос на существ рыбу для получения кол-ва готовой и сырой на вчерашний день
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
@@ -65,6 +77,7 @@ class DaylyCatchVC: UIViewController {
         }
         
         fishCatch.name = fishName
+        fishCatch.grade = fishGrade
         fishCatch.date = Date()
         
         switch fishName {
@@ -80,7 +93,7 @@ class DaylyCatchVC: UIViewController {
         
         fishCatch.frozenBoard = Double(fishWeight)!
         fishCatch.frozenPerDay = fishCatch.frozenBoard - (yesterdayCatch?.frozenBoard ?? 0)
-        fishCatch.rawBoard = Double(fishCatch.frozenBoard) * fishCatch.ratio
+        fishCatch.rawBoard = (Double(fishCatch.frozenBoard) * fishCatch.ratio).rounded()
         fishCatch.rawPerDay = fishCatch.rawBoard - (yesterdayCatch?.rawBoard ?? 0)
 
         
@@ -88,7 +101,9 @@ class DaylyCatchVC: UIViewController {
         
         // вызывать аларм контроллер
         fishTypeTF.text = ""
+        fishGradeTF.text = ""
         frozenOnBoardTF.text = ""
+        fishTypeTF.becomeFirstResponder()
     }
     @IBAction func showOnBoardBtnPressed() {
     }
@@ -112,18 +127,37 @@ extension DaylyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return arrayForPicker.count
+        if fishTypeTF.isFirstResponder {
+            return arrayForFishTypePicker.count
+        } else {
+            return arrayForGradePicker.count
+        }
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        arrayForPicker[row]
+        if fishTypeTF.isFirstResponder {
+            return arrayForFishTypePicker[row]
+        } else {
+            return arrayForGradePicker[row]
+        }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch row {
-        case 0: fishTypeTF.text = arrayForPicker[0]
-        case 1: fishTypeTF.text = arrayForPicker[1]
-        case 2: fishTypeTF.text = arrayForPicker[2]
-        case 3: fishTypeTF.text = arrayForPicker[3]
-        default: fishTypeTF.text = arrayForPicker[4]
+        if fishTypeTF.isFirstResponder {
+            switch row {
+            case 0: fishTypeTF.text = arrayForFishTypePicker[0]
+            case 1: fishTypeTF.text = arrayForFishTypePicker[1]
+            case 2: fishTypeTF.text = arrayForFishTypePicker[2]
+            case 3: fishTypeTF.text = arrayForFishTypePicker[3]
+            default: fishTypeTF.text = arrayForFishTypePicker[4]
+            }
+        } else {
+            switch row {
+            case 0: fishGradeTF.text = arrayForGradePicker[0]
+            case 1: fishGradeTF.text = arrayForGradePicker[1]
+            case 2: fishGradeTF.text = arrayForGradePicker[2]
+            case 3: fishGradeTF.text = arrayForGradePicker[3]
+            case 4: fishGradeTF.text = arrayForGradePicker[4]
+            default: fishGradeTF.text = arrayForGradePicker[5]
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ class TrawlsReportTableVC: UITableViewController {
         
         // запрос на тралы
         let trawlRequest: NSFetchRequest<Trawl> = Trawl.fetchRequest()
+        trawlRequest.predicate = datePredicate
         
         do {
             trawls = try coreDataStack.managedContext.fetch(trawlRequest)

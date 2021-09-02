@@ -202,10 +202,10 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="Bnt-1K-fgg">
-                                <rect key="frame" x="107" y="190" width="200" height="516"/>
+                                <rect key="frame" x="107" y="122" width="200" height="652.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Объект промысла" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Ax-igt">
-                                        <rect key="frame" x="28" y="0.0" width="144.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рыба" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Ax-igt">
+                                        <rect key="frame" x="79.5" y="0.0" width="41.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -218,14 +218,28 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Навеска" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCC-7p-gFI">
+                                        <rect key="frame" x="66.5" y="136.5" width="67" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWN-By-GlN">
+                                        <rect key="frame" x="0.0" y="198" width="200" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="9g1-Qe-Fgr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Готовой на борту" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ3-yB-r7c">
-                                        <rect key="frame" x="31.5" y="136.5" width="137" height="20.5"/>
+                                        <rect key="frame" x="31.5" y="273" width="137" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcB-04-yaE">
-                                        <rect key="frame" x="0.0" y="198" width="200" height="34"/>
+                                        <rect key="frame" x="0.0" y="334.5" width="200" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="IhS-L5-bQt"/>
                                         </constraints>
@@ -233,14 +247,14 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eh-T1-KZ2">
-                                        <rect key="frame" x="61.5" y="273" width="77" height="30"/>
+                                        <rect key="frame" x="61.5" y="409.5" width="77" height="30"/>
                                         <state key="normal" title="Сохранить"/>
                                         <connections>
                                             <action selector="saveBtnPressed" destination="4t9-p1-WJe" eventType="touchUpInside" id="PNG-Xf-DT6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="viZ-8G-wF6">
-                                        <rect key="frame" x="39.5" y="344" width="121" height="30"/>
+                                        <rect key="frame" x="39.5" y="480.5" width="121" height="30"/>
                                         <state key="normal" title="Суточная сводка"/>
                                         <connections>
                                             <action selector="showOnBoardBtnPressed" destination="4t9-p1-WJe" eventType="touchUpInside" id="liF-3O-D4t"/>
@@ -248,14 +262,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07H-D1-Dp1">
-                                        <rect key="frame" x="33" y="415" width="134" height="30"/>
+                                        <rect key="frame" x="33" y="551.5" width="134" height="30"/>
                                         <state key="normal" title="Суточная сводка 2"/>
                                         <connections>
                                             <segue destination="CjG-LF-lKF" kind="show" id="3Bt-R1-OnB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oga-9k-dAB">
-                                        <rect key="frame" x="31.5" y="486" width="137" height="30"/>
+                                        <rect key="frame" x="31.5" y="622.5" width="137" height="30"/>
                                         <state key="normal" title="Очистить CoreData"/>
                                         <connections>
                                             <action selector="deleteDataBtnPressed" destination="4t9-p1-WJe" eventType="touchUpInside" id="Wfh-Jh-fVO"/>
@@ -273,6 +287,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Сутки" id="9ZS-3c-S34"/>
                     <connections>
+                        <outlet property="fishGradeTF" destination="rWN-By-GlN" id="L6A-5n-BTX"/>
                         <outlet property="fishTypeTF" destination="O3G-Yx-Md5" id="GnG-jw-bJc"/>
                         <outlet property="frozenOnBoardTF" destination="XcB-04-yaE" id="InR-yC-cic"/>
                     </connections>
@@ -771,7 +786,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="y1a-N2-se7">
-                                <rect key="frame" x="177.5" y="152.5" width="59" height="537"/>
+                                <rect key="frame" x="177.5" y="110.5" width="59" height="621.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAc-Wc-Hlg">
                                         <rect key="frame" x="0.0" y="0.0" width="59" height="30"/>
@@ -791,26 +806,32 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Kc-KR-DCH">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLg-3z-eHk">
                                         <rect key="frame" x="0.0" y="263" width="59" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvu-eN-cZf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Kc-KR-DCH">
                                         <rect key="frame" x="0.0" y="347.5" width="59" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUO-Vr-IhC">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvu-eN-cZf">
                                         <rect key="frame" x="0.0" y="432" width="59" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glm-vl-7Du">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUO-Vr-IhC">
                                         <rect key="frame" x="0.0" y="516.5" width="59" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glm-vl-7Du">
+                                        <rect key="frame" x="0.0" y="601" width="59" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -829,6 +850,7 @@
                         <outlet property="dateLabel" destination="yci-6G-Xyp" id="b1D-JU-ukR"/>
                         <outlet property="frzOnBoardLabel" destination="vUO-Vr-IhC" id="ESv-e8-aSb"/>
                         <outlet property="frzPerDayLabel" destination="5Kc-KR-DCH" id="dBN-mE-hjH"/>
+                        <outlet property="gradeLabel" destination="NLg-3z-eHk" id="OBG-PQ-euK"/>
                         <outlet property="nameLabel" destination="MAc-Wc-Hlg" id="2V3-O3-bWq"/>
                         <outlet property="ratioLabel" destination="Wx5-6T-I3j" id="Vqb-rt-yrR"/>
                         <outlet property="rawOnBoardLabel" destination="glm-vl-7Du" id="Wnx-gS-HCa"/>
