@@ -168,12 +168,19 @@ class DailyReportTableVC: UITableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let indexPath = tableView.indexPathForSelectedRow {
-//            let fish = caughtFishes[indexPath.row]
-//
-//            let fullDescriptionVC = segue.destination as! FullDescriptionVC
-//            fullDescriptionVC.fish = fish
-//        }
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            print(indexPath)
+            var fish: Fish?
+            switch indexPath.section {
+            case 0: fish = totalCod[indexPath.row]
+            case 1: fish = totalHaddock[indexPath.row]
+            case 2: fish = totalCatfish[indexPath.row]
+            default: fish = totalRedfish[indexPath.row]
+            }
+            let fullDescriptionVC = segue.destination as! FullDescriptionVC
+            fullDescriptionVC.fish = fish
+        }
         
     }
     
