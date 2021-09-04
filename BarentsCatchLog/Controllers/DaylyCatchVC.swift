@@ -38,16 +38,22 @@ class DaylyCatchVC: UIViewController {
                                FishGrades.fromThreeToFive.rawValue,
                                FishGrades.moreThanFive.rawValue]
     
-    let pickerView = UIPickerView()
+    private let pickerView = UIPickerView()
+    private let toolbar = UIToolbar()
     
     private var yesterdayCatch: Fish?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Готовая продукция за"
-        
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.sizeToFit()
+        toolbar.setItems([flexSpace, doneBtn], animated: true)
         fishTypeTF.inputView = pickerView
+        fishTypeTF.inputAccessoryView = toolbar
         fishGradeTF.inputView = pickerView
+        fishGradeTF.inputAccessoryView = toolbar
+        
         pickerView.delegate = self
         pickerView.dataSource = self
         
@@ -61,6 +67,14 @@ class DaylyCatchVC: UIViewController {
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
         
+        // календарь с системной временной зоной
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.system
+        
+        // получаем начало и окончание вчерашнего дня
+        let dateFrom = calendar.startOfDay(for: Date.yesterday)
+        let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
+        
         let fishCatch = Fish(context: coreDataStack.managedContext)
         guard let fishName = fishTypeTF.text,
               let fishGrade = fishGradeTF.text,
@@ -68,10 +82,24 @@ class DaylyCatchVC: UIViewController {
         
         // запрос на существ рыбу для получения кол-ва готовой и сырой на вчерашний день
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
+        // предикаты по названию и градации
+        let namePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
+        let gradePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.grade), fishGrade)
+        // предикаты по дате
+        let fromPredicate = NSPredicate(format: "date >= %@", dateFrom as NSDate)
+        let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
+        // массив с предикатами
+        let generalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, gradePredicate, fromPredicate, toPredicate])
+       
+        fetchRequest.predicate = generalPredicate
         do {
             yesterdayCatch = try coreDataStack.managedContext.fetch(fetchRequest).first
-            print(yesterdayCatch?.date)
+            print("""
+                Вчерашняя рыба - это \(yesterdayCatch?.name ?? "Вчера рыбы не было")
+                Дата вчерашней рыбы - \(yesterdayCatch?.date)
+                Навеска - \(yesterdayCatch?.grade ?? "Вчера рыбы не было")
+                """
+            )
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
@@ -79,6 +107,7 @@ class DaylyCatchVC: UIViewController {
         fishCatch.name = fishName
         fishCatch.grade = fishGrade
         fishCatch.date = Date()
+        print("Дата внесенной рыбы - \(fishCatch.date!)")
         
         switch fishName {
         case FishTypes.cod.rawValue:
@@ -117,6 +146,9 @@ class DaylyCatchVC: UIViewController {
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
+    }
+    @objc func doneAction() {
+        view.endEditing(true)
     }
     
 }

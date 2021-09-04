@@ -14,12 +14,13 @@ class DailyReportTableVC: UITableViewController {
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     
     // MARK: - Private Properties
-    private var caughtFishes: [Fish] = []
-    private var totalCod: [Fish] = []
-    private var totalHaddock: [Fish] = []
-    private var totalCatfish: [Fish] = []
-    private var totalRedfish: [Fish] = []
+    private var caughtFishesToday: [Fish] = []
+    private var totalCodToday: [Fish] = []
+    private var totalHaddockToday: [Fish] = []
+    private var totalCatfishToday: [Fish] = []
+    private var totalRedfishToday: [Fish] = []
     
+    // добавить здесь "ВСЕГО" и описать в методах Table View поведение лейблов (считать по всем массивам)
     private let sections = [FishTypes.cod.rawValue,
                             FishTypes.haddock.rawValue,
                             FishTypes.catfish.rawValue,
@@ -44,17 +45,17 @@ class DailyReportTableVC: UITableViewController {
         let catchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
         catchRequest.predicate = datePredicate
         do {
-            caughtFishes = try coreDataStack.managedContext.fetch(catchRequest)
+            caughtFishesToday = try coreDataStack.managedContext.fetch(catchRequest)
             
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
-        print("\(caughtFishes.count) in TableView")
+        print("\(caughtFishesToday.count) in TableView")
         
-        totalCod = caughtFishes.filter { $0.name == FishTypes.cod.rawValue}
-        totalHaddock = caughtFishes.filter { $0.name == FishTypes.haddock.rawValue }
-        totalCatfish = caughtFishes.filter { $0.name == FishTypes.catfish.rawValue }
-        totalRedfish = caughtFishes.filter { $0.name == FishTypes.redfish.rawValue }
+        totalCodToday = caughtFishesToday.filter { $0.name == FishTypes.cod.rawValue}
+        totalHaddockToday = caughtFishesToday.filter { $0.name == FishTypes.haddock.rawValue }
+        totalCatfishToday = caughtFishesToday.filter { $0.name == FishTypes.catfish.rawValue }
+        totalRedfishToday = caughtFishesToday.filter { $0.name == FishTypes.redfish.rawValue }
     }
     
     // MARK: - Table view data source
@@ -62,126 +63,193 @@ class DailyReportTableVC: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
     }
-    //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    //        sections[section]
-    //    }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50)
         let headerView = UIView(frame: frame)
         
         // название в секции
         let nameLabel = UILabel()
-        nameLabel.frame = CGRect(x: 10,
+        nameLabel.frame = CGRect(x: 0,
                                  y: 5,
-                                 width: headerView.frame.width / 3,
-                                 height: headerView.frame.height - 10)
+                                 width: headerView.frame.width,
+                                 height: headerView.frame.height - 5)
         nameLabel.text = sections[section]
-        nameLabel.font = .systemFont(ofSize: 16)
+        nameLabel.font = .systemFont(ofSize: 25)
+        nameLabel.textAlignment = .center
         nameLabel.backgroundColor = .lightGray
-        nameLabel.textColor = .white
-        
-        // готовая за сутки в секции
-        let frzWeightLabel = UILabel()
-        frzWeightLabel.frame = CGRect(x: headerView.frame.width / 3 + 10,
-                                      y: 5,
-                                      width: headerView.frame.width / 3,
-                                      height: headerView.frame.height - 10)
-        var frzSumm: Double = 0
-        switch nameLabel.text {
-        case FishTypes.cod.rawValue:
-            totalCod.forEach { frzSumm += $0.frozenBoard }
-        case FishTypes.haddock.rawValue:
-            totalHaddock.forEach { frzSumm += $0.frozenBoard }
-        case FishTypes.catfish.rawValue:
-            totalCatfish.forEach { frzSumm += $0.frozenBoard }
-        default:
-            totalRedfish.forEach { frzSumm += $0.frozenBoard }
-        }
-        frzWeightLabel.text = "Готовая за сутки: \(frzSumm)"
-        frzWeightLabel.font = .systemFont(ofSize: 12)
-        frzWeightLabel.backgroundColor = .darkGray
-        frzWeightLabel.textColor = .white
-        
-        // вылов за сутки в секции
-        let rawWeightLabel = UILabel()
-        rawWeightLabel.frame = CGRect(x: (headerView.frame.width / 3) * 2 + 10,
-                                      y: 5,
-                                      width: headerView.frame.width / 3,
-                                      height: headerView.frame.height - 10)
-        var rawSumm: Double = 0
-        switch nameLabel.text {
-        case FishTypes.cod.rawValue:
-            totalCod.forEach { rawSumm += $0.rawBoard }
-        case FishTypes.haddock.rawValue:
-            totalHaddock.forEach { rawSumm += $0.rawBoard }
-        case FishTypes.catfish.rawValue:
-            totalCatfish.forEach { rawSumm += $0.rawBoard }
-        default:
-            totalRedfish.forEach { rawSumm += $0.rawBoard }
-        }
-        rawWeightLabel.text = "Вылов за сутки: \(rawSumm)"
-        rawWeightLabel.font = .systemFont(ofSize: 12)
-        rawWeightLabel.backgroundColor = .black
-        rawWeightLabel.textColor = .white
+        nameLabel.textColor = .black
         
         headerView.addSubview(nameLabel)
-        headerView.addSubview(frzWeightLabel)
-        headerView.addSubview(rawWeightLabel)
-        
         return headerView
+    }
+    // Footer
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80)
+        let footerView = UIView(frame: frame)
+        
+        // готовая за сутки в секции
+        let frzPerDayLabel = UILabel()
+        frzPerDayLabel.frame = CGRect(x: 0,
+                                      y: 5,
+                                      width: footerView.frame.width / 4,
+                                      height: footerView.frame.height - 5)
+        var frzSummPerDay: Double = 0
+        switch sections[section] {
+        case FishTypes.cod.rawValue:
+            totalCodToday.forEach { frzSummPerDay += $0.frozenPerDay }
+        case FishTypes.haddock.rawValue:
+            totalHaddockToday.forEach { frzSummPerDay += $0.frozenPerDay }
+        case FishTypes.catfish.rawValue:
+            totalCatfishToday.forEach { frzSummPerDay += $0.frozenPerDay }
+        default:
+            totalRedfishToday.forEach { frzSummPerDay += $0.frozenPerDay }
+        }
+        frzPerDayLabel.text = "Готовая за сутки ВСЕГО: \(frzSummPerDay)"
+        frzPerDayLabel.numberOfLines = 0
+        frzPerDayLabel.font = .systemFont(ofSize: 12)
+        frzPerDayLabel.textAlignment = .center
+        
+        // готовая на борту в секции
+        let frzOnBoardLabel = UILabel()
+        frzOnBoardLabel.frame = CGRect(x: footerView.frame.width / 4,
+                                      y: 5,
+                                      width: footerView.frame.width / 4,
+                                      height: footerView.frame.height - 5)
+        var frzSummOnBoard: Double = 0
+        switch sections[section] {
+        case FishTypes.cod.rawValue:
+            totalCodToday.forEach { frzSummOnBoard += $0.frozenBoard }
+        case FishTypes.haddock.rawValue:
+            totalHaddockToday.forEach { frzSummOnBoard += $0.frozenBoard }
+        case FishTypes.catfish.rawValue:
+            if let totalCatfishToday = totalCatfishToday.first {
+                frzSummOnBoard = totalCatfishToday.frozenBoard
+            }
+        default:
+            if let totalRedfishToday = totalRedfishToday.first {
+                frzSummOnBoard = totalRedfishToday.frozenBoard
+            }
+        }
+        frzOnBoardLabel.text = "Готовая на борту ВСЕГО: \(frzSummOnBoard)"
+        frzOnBoardLabel.numberOfLines = 0
+        frzOnBoardLabel.font = .systemFont(ofSize: 12)
+        frzOnBoardLabel.textAlignment = .center
+        
+        // вылов за сутки в секции
+        let rawPerDayLabel = UILabel()
+        rawPerDayLabel.frame = CGRect(x: (footerView.frame.width / 4) * 2,
+                                      y: 5,
+                                      width: footerView.frame.width / 4,
+                                      height: footerView.frame.height - 5)
+        var rawSummPerDay: Double = 0
+        switch sections[section] {
+        case FishTypes.cod.rawValue:
+            rawSummPerDay = (frzSummPerDay * Ratios.cod.rawValue).rounded()
+        case FishTypes.haddock.rawValue:
+            rawSummPerDay = (frzSummPerDay * Ratios.haddock.rawValue).rounded()
+        case FishTypes.catfish.rawValue:
+            if let catfishRawPerDay = totalCatfishToday.first?.rawPerDay {
+                rawSummPerDay = catfishRawPerDay
+            }
+        default:
+            if let redfishRawPerDay = totalRedfishToday.first?.rawPerDay {
+                rawSummPerDay = redfishRawPerDay
+            }
+        }
+        rawPerDayLabel.text = "Вылов за сутки ВСЕГО: \(rawSummPerDay)"
+        rawPerDayLabel.font = .systemFont(ofSize: 12)
+        rawPerDayLabel.numberOfLines = 0
+        rawPerDayLabel.textAlignment = .center
+        
+        // вылов на борту в секции
+        let rawOnBoardLabel = UILabel()
+        rawOnBoardLabel.frame = CGRect(x: (footerView.frame.width / 4) * 3,
+                                      y: 5,
+                                      width: footerView.frame.width / 4,
+                                      height: footerView.frame.height - 5)
+        var rawSummOnBoard: Double = 0
+        switch sections[section] {
+        case FishTypes.cod.rawValue:
+            rawSummOnBoard = (frzSummOnBoard * Ratios.cod.rawValue).rounded()
+        case FishTypes.haddock.rawValue:
+            rawSummOnBoard = (frzSummOnBoard * Ratios.haddock.rawValue).rounded()
+        case FishTypes.catfish.rawValue:
+            if let catfishRawPerDay = totalCatfishToday.first?.rawBoard {
+                rawSummOnBoard = catfishRawPerDay
+            }
+        default:
+            if let redfishRawPerDay = totalRedfishToday.first?.rawBoard {
+                rawSummOnBoard = redfishRawPerDay
+            }
+        }
+        rawOnBoardLabel.text = "Вылов за сутки ВСЕГО: \(rawSummOnBoard)"
+        rawOnBoardLabel.font = .systemFont(ofSize: 12)
+        rawOnBoardLabel.numberOfLines = 0
+        rawOnBoardLabel.textAlignment = .center
+        
+        footerView.addSubview(frzPerDayLabel)
+        footerView.addSubview(frzOnBoardLabel)
+        footerView.addSubview(rawPerDayLabel)
+        footerView.addSubview(rawOnBoardLabel)
+        
+        return footerView
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         50
     }
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        80
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        80
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return totalCod.count
-        case 1: return totalHaddock.count
-        case 2: return totalCatfish.count
-        default: return totalRedfish.count
+        case 0: return totalCodToday.count
+        case 1: return totalHaddockToday.count
+        case 2: return totalCatfishToday.count
+        default: return totalRedfishToday.count
         }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dailyReportCell", for: indexPath) as! DailyCatchCell
         switch indexPath.section {
         case 0:
-            let fish = totalCod[indexPath.row]
-            cell.textLabel?.text = fish.name
-            cell.detailTextLabel?.text = fish.grade
+            let fish = totalCodToday[indexPath.row]
+            cell.nameLabel.text = fish.name
+            cell.gradeLabel.text = fish.grade
+            cell.frzPerDayLabel.text = "Готовая за сутки: \(fish.frozenPerDay)"
+            cell.frzOnBoardLabel.text = "Готовая на борту: \(fish.frozenBoard)"
+            cell.rawPerDayLabel.isHidden = true
+            cell.rawOnBoardLabel.isHidden = true
+            
         case 1:
-            let fish = totalHaddock[indexPath.row]
-            cell.textLabel?.text = fish.name
-            cell.detailTextLabel?.text = fish.grade
+            let fish = totalHaddockToday[indexPath.row]
+            cell.nameLabel.text = fish.name
+            cell.gradeLabel.text = fish.grade
+            cell.frzPerDayLabel.text = "Готовая за сутки: \(fish.frozenPerDay)"
+            cell.frzOnBoardLabel.text = "Готовая на борту: \(fish.frozenBoard)"
+            cell.rawPerDayLabel.isHidden = true
+            cell.rawOnBoardLabel.isHidden = true
+            
         case 2:
-            let fish = totalCatfish[indexPath.row]
-            cell.textLabel?.text = fish.name
-            cell.detailTextLabel?.text = fish.grade
+            let fish = totalCatfishToday[indexPath.row]
+            cell.nameLabel.text = fish.name
+            cell.gradeLabel.text = fish.grade
+            cell.frzPerDayLabel.text = "Готовая за сутки: \(fish.frozenPerDay)"
+            cell.frzOnBoardLabel.text = "Готовая на борту: \(fish.frozenBoard)"
+            cell.rawPerDayLabel.text = "Вылов за сутки: \(fish.rawPerDay)"
+            cell.rawOnBoardLabel.text = "Вылов на борту: \(fish.rawBoard)"
         default:
-            let fish = totalRedfish[indexPath.row]
-            cell.textLabel?.text = fish.name
-            cell.detailTextLabel?.text = fish.grade
+            let fish = totalRedfishToday[indexPath.row]
+            cell.nameLabel.text = fish.name
+            cell.gradeLabel.text = fish.grade
+            cell.frzPerDayLabel.text = "Готовая за сутки: \(fish.frozenPerDay)"
+            cell.frzOnBoardLabel.text = "Готовая на борту: \(fish.frozenBoard)"
+            cell.rawPerDayLabel.text = "Вылов за сутки: \(fish.rawPerDay)"
+            cell.rawOnBoardLabel.text = "Вылов на борту: \(fish.rawBoard)"
         }
         return cell
-    }
-    
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let indexPath = tableView.indexPathForSelectedRow {
-            print(indexPath)
-            var fish: Fish?
-            switch indexPath.section {
-            case 0: fish = totalCod[indexPath.row]
-            case 1: fish = totalHaddock[indexPath.row]
-            case 2: fish = totalCatfish[indexPath.row]
-            default: fish = totalRedfish[indexPath.row]
-            }
-            let fullDescriptionVC = segue.destination as! FullDescriptionVC
-            fullDescriptionVC.fish = fish
-        }
-        
     }
     
     

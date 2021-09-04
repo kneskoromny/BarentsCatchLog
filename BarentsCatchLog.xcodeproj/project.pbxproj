@@ -17,12 +17,11 @@
 		F7703BF626D78FC300D7DAFB /* ByTrawlsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BF526D78FC300D7DAFB /* ByTrawlsVC.swift */; };
 		F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */; };
 		F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */; };
-		F7703C0326D92AF700D7DAFB /* DailyReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0226D92AF700D7DAFB /* DailyReportVC.swift */; };
 		F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0426DA1FAE00D7DAFB /* Helpers.swift */; };
 		F7703C0726DD23ED00D7DAFB /* DailyReportTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */; };
-		F7703C0926DD41FA00D7DAFB /* FullDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0826DD41FA00D7DAFB /* FullDescriptionVC.swift */; };
 		F7946DE026DE4EA100241C16 /* TrawlsReportTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */; };
 		F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */; };
+		F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,12 +37,11 @@
 		F7703BF526D78FC300D7DAFB /* ByTrawlsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByTrawlsVC.swift; sourceTree = "<group>"; };
 		F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F7703C0026D7956200D7DAFB /* BarentsCatchLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarentsCatchLog.xcdatamodel; sourceTree = "<group>"; };
-		F7703C0226D92AF700D7DAFB /* DailyReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReportVC.swift; sourceTree = "<group>"; };
 		F7703C0426DA1FAE00D7DAFB /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReportTableVC.swift; sourceTree = "<group>"; };
-		F7703C0826DD41FA00D7DAFB /* FullDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionVC.swift; sourceTree = "<group>"; };
 		F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlsReportTableVC.swift; sourceTree = "<group>"; };
 		F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlDescriptionVC.swift; sourceTree = "<group>"; };
+		F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCatchCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +76,7 @@
 			children = (
 				F7703BFC26D7913C00D7DAFB /* Supports */,
 				F7703BF226D78EE900D7DAFB /* Controllers */,
-				F7703BFB26D7911900D7DAFB /* Storyboards */,
+				F7703BFB26D7911900D7DAFB /* Views */,
 				F7703BEC26D7874700D7DAFB /* Info.plist */,
 				F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */,
 				F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */,
@@ -91,9 +89,7 @@
 			children = (
 				F7703BF326D78F9400D7DAFB /* StartTBC.swift */,
 				F7703BE226D7874500D7DAFB /* DaylyCatchVC.swift */,
-				F7703C0226D92AF700D7DAFB /* DailyReportVC.swift */,
 				F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */,
-				F7703C0826DD41FA00D7DAFB /* FullDescriptionVC.swift */,
 				F7703BF526D78FC300D7DAFB /* ByTrawlsVC.swift */,
 				F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */,
 				F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */,
@@ -101,13 +97,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		F7703BFB26D7911900D7DAFB /* Storyboards */ = {
+		F7703BFB26D7911900D7DAFB /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F7703BE426D7874500D7DAFB /* Main.storyboard */,
 				F7703BE926D7874700D7DAFB /* LaunchScreen.storyboard */,
+				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
 			);
-			path = Storyboards;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F7703BFC26D7913C00D7DAFB /* Supports */ = {
@@ -191,7 +188,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7703C0326D92AF700D7DAFB /* DailyReportVC.swift in Sources */,
 				F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */,
 				F7703BE326D7874500D7DAFB /* DaylyCatchVC.swift in Sources */,
 				F7703C0726DD23ED00D7DAFB /* DailyReportTableVC.swift in Sources */,
@@ -200,8 +196,8 @@
 				F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */,
 				F7946DE026DE4EA100241C16 /* TrawlsReportTableVC.swift in Sources */,
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
-				F7703C0926DD41FA00D7DAFB /* FullDescriptionVC.swift in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
+				F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */,
 				F7703BF626D78FC300D7DAFB /* ByTrawlsVC.swift in Sources */,
 				F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */,
 			);
