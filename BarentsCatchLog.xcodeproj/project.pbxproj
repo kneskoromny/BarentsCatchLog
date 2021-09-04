@@ -22,6 +22,7 @@
 		F7946DE026DE4EA100241C16 /* TrawlsReportTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */; };
 		F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */; };
 		F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */; };
+		F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlsReportTableVC.swift; sourceTree = "<group>"; };
 		F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlDescriptionVC.swift; sourceTree = "<group>"; };
 		F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCatchCell.swift; sourceTree = "<group>"; };
+		F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlDescriptionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				F7703BE426D7874500D7DAFB /* Main.storyboard */,
 				F7703BE926D7874700D7DAFB /* LaunchScreen.storyboard */,
 				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
+				F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */,
 				F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */,
 				F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */,
+				F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */,
 				F7946DE026DE4EA100241C16 /* TrawlsReportTableVC.swift in Sources */,
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,

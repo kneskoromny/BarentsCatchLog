@@ -26,7 +26,7 @@ class DailyReportTableVC: UITableViewController {
                             FishTypes.catfish.rawValue,
                             FishTypes.redfish.rawValue]
     
-    // MARK: - Override Methods
+    // MARK: - Life Cycle Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // календарь с системной временной зоной
@@ -58,8 +58,7 @@ class DailyReportTableVC: UITableViewController {
         totalRedfishToday = caughtFishesToday.filter { $0.name == FishTypes.redfish.rawValue }
     }
     
-    // MARK: - Table view data source
-    
+    // MARK: - Table View Override Methods
     override func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
     }
@@ -87,7 +86,7 @@ class DailyReportTableVC: UITableViewController {
         let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80)
         let footerView = UIView(frame: frame)
         
-        // готовая за сутки в секции
+        // готовая за сутки
         let frzPerDayLabel = UILabel()
         frzPerDayLabel.frame = CGRect(x: 0,
                                       y: 5,
@@ -109,7 +108,7 @@ class DailyReportTableVC: UITableViewController {
         frzPerDayLabel.font = .systemFont(ofSize: 12)
         frzPerDayLabel.textAlignment = .center
         
-        // готовая на борту в секции
+        // готовая на борту
         let frzOnBoardLabel = UILabel()
         frzOnBoardLabel.frame = CGRect(x: footerView.frame.width / 4,
                                       y: 5,
@@ -135,7 +134,7 @@ class DailyReportTableVC: UITableViewController {
         frzOnBoardLabel.font = .systemFont(ofSize: 12)
         frzOnBoardLabel.textAlignment = .center
         
-        // вылов за сутки в секции
+        // вылов за сутки
         let rawPerDayLabel = UILabel()
         rawPerDayLabel.frame = CGRect(x: (footerView.frame.width / 4) * 2,
                                       y: 5,
@@ -161,7 +160,7 @@ class DailyReportTableVC: UITableViewController {
         rawPerDayLabel.numberOfLines = 0
         rawPerDayLabel.textAlignment = .center
         
-        // вылов на борту в секции
+        // вылов на борту
         let rawOnBoardLabel = UILabel()
         rawOnBoardLabel.frame = CGRect(x: (footerView.frame.width / 4) * 3,
                                       y: 5,
@@ -250,7 +249,5 @@ class DailyReportTableVC: UITableViewController {
             cell.rawOnBoardLabel.text = "Вылов на борту: \(fish.rawBoard)"
         }
         return cell
-    }
-    
-    
+    }   
 }

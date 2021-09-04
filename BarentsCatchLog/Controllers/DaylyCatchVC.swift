@@ -40,9 +40,9 @@ class DaylyCatchVC: UIViewController {
     
     private let pickerView = UIPickerView()
     private let toolbar = UIToolbar()
-    
     private var yesterdayCatch: Fish?
     
+    //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
@@ -66,7 +66,6 @@ class DaylyCatchVC: UIViewController {
     
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
-        
         // календарь с системной временной зоной
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.system
@@ -74,7 +73,7 @@ class DaylyCatchVC: UIViewController {
         // получаем начало и окончание вчерашнего дня
         let dateFrom = calendar.startOfDay(for: Date.yesterday)
         let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
-        
+        // создаем экземпляр класса в контексте
         let fishCatch = Fish(context: coreDataStack.managedContext)
         guard let fishName = fishTypeTF.text,
               let fishGrade = fishGradeTF.text,
@@ -134,8 +133,6 @@ class DaylyCatchVC: UIViewController {
         frozenOnBoardTF.text = ""
         fishTypeTF.becomeFirstResponder()
     }
-    @IBAction func showOnBoardBtnPressed() {
-    }
     // очищает Core Data
     @IBAction func deleteDataBtnPressed() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Fish")
@@ -147,10 +144,11 @@ class DaylyCatchVC: UIViewController {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
     }
+    
+    //MARK: - Public Methods
     @objc func doneAction() {
         view.endEditing(true)
-    }
-    
+    }  
 }
 
 //MARK: - Picker View Data Source, Delegate
