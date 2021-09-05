@@ -23,6 +23,8 @@
 		F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */; };
 		F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */; };
 		F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */; };
+		F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE726E4EE4B00241C16 /* DateVC.swift */; };
+		F7946DEC26E4F34A00241C16 /* GradeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DEB26E4F34900241C16 /* GradeTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		F7946DE126DE511300241C16 /* TrawlDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlDescriptionVC.swift; sourceTree = "<group>"; };
 		F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCatchCell.swift; sourceTree = "<group>"; };
 		F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlDescriptionCell.swift; sourceTree = "<group>"; };
+		F7946DE726E4EE4B00241C16 /* DateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateVC.swift; sourceTree = "<group>"; };
+		F7946DEB26E4F34900241C16 /* GradeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 			children = (
 				F7703BF326D78F9400D7DAFB /* StartTBC.swift */,
 				F7703BE226D7874500D7DAFB /* DaylyCatchVC.swift */,
+				F7946DE726E4EE4B00241C16 /* DateVC.swift */,
+				F7946DEB26E4F34900241C16 /* GradeTVC.swift */,
 				F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */,
 				F7703BF526D78FC300D7DAFB /* ByTrawlsVC.swift */,
 				F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */,
@@ -199,8 +205,10 @@
 				F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */,
 				F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */,
 				F7946DE026DE4EA100241C16 /* TrawlsReportTableVC.swift in Sources */,
+				F7946DEC26E4F34A00241C16 /* GradeTVC.swift in Sources */,
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
+				F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */,
 				F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */,
 				F7703BF626D78FC300D7DAFB /* ByTrawlsVC.swift in Sources */,
 				F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */,

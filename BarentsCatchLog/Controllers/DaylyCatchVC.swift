@@ -48,6 +48,8 @@ class DaylyCatchVC: UIViewController {
     private var yesterdayCatch: Fish?
     
     private let cellIdentifier = "Cell"
+    private let toDateIdentifier = "toDateVC"
+    private let toGradeIdentifier = "toGradeVC"
     
     //MARK: - Override Methods
     override func viewDidLoad() {
@@ -210,7 +212,20 @@ extension DaylyCatchVC: UITableViewDataSource {
     cell.textLabel?.text = object
     return cell
   }
+    
 }
+// MARK: - UITableViewDelegate
+extension DaylyCatchVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            performSegue(withIdentifier: toDateIdentifier, sender: nil)
+        default:
+            performSegue(withIdentifier: toGradeIdentifier, sender: nil)
+        }
+    }
+}
+// MARK: - Date
 extension Date {
     static var yesterday: Date { return Date().dayBefore }
     
