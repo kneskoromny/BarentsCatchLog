@@ -194,74 +194,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6je-W5-jyD">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6je-W5-jyD">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem id="2jV-t7-y0U"/>
+                                    <navigationItem title="Новый улов" id="2jV-t7-y0U"/>
                                 </items>
                             </navigationBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="Bnt-1K-fgg">
-                                <rect key="frame" x="107" y="157.5" width="200" height="581.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="6Cc-Eq-eHK">
+                                <rect key="frame" x="16" y="108" width="382" height="439"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рыба" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Ax-igt">
-                                        <rect key="frame" x="79.5" y="0.0" width="41.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O3G-Yx-Md5">
-                                        <rect key="frame" x="0.0" y="61.5" width="200" height="34"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="kY2-do-KAC"/>
-                                        </constraints>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Объект промысла" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O3G-Yx-Md5">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="45.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Навеска" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCC-7p-gFI">
-                                        <rect key="frame" x="66.5" y="136.5" width="67" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWN-By-GlN">
-                                        <rect key="frame" x="0.0" y="198" width="200" height="34"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="9g1-Qe-Fgr"/>
-                                        </constraints>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="US2-oD-o5j">
+                                        <rect key="frame" x="0.0" y="90.5" width="382" height="187"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" textLabel="LNJ-v4-ulc" style="IBUITableViewCellStyleDefault" id="Lse-CA-f7k">
+                                                <rect key="frame" x="0.0" y="24.5" width="382" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lse-CA-f7k" id="93z-qU-IQj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LNJ-v4-ulc">
+                                                            <rect key="frame" x="20" y="0.0" width="342" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="4t9-p1-WJe" id="7Ge-Hy-GFw"/>
+                                            <outlet property="delegate" destination="4t9-p1-WJe" id="Jgz-bR-cLI"/>
+                                        </connections>
+                                    </tableView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Навеска" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWN-By-GlN">
+                                        <rect key="frame" x="0.0" y="322.5" width="382" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Готовой на борту" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ3-yB-r7c">
-                                        <rect key="frame" x="31.5" y="273" width="137" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcB-04-yaE">
-                                        <rect key="frame" x="0.0" y="334.5" width="200" height="34"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="IhS-L5-bQt"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Готовой на борту" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcB-04-yaE">
+                                        <rect key="frame" x="0.0" y="401.5" width="382" height="37.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OaQ-2k-ovH">
+                                <rect key="frame" x="120" y="663" width="174" height="130"/>
+                                <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eh-T1-KZ2">
-                                        <rect key="frame" x="61.5" y="409.5" width="77" height="30"/>
+                                        <rect key="frame" x="48.5" y="0.0" width="77" height="30"/>
                                         <state key="normal" title="Сохранить"/>
                                         <connections>
                                             <action selector="saveBtnPressed" destination="4t9-p1-WJe" eventType="touchUpInside" id="PNG-Xf-DT6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07H-D1-Dp1">
-                                        <rect key="frame" x="33" y="480.5" width="134" height="30"/>
-                                        <state key="normal" title="Суточная сводка 2"/>
+                                        <rect key="frame" x="24.5" y="50" width="125" height="30"/>
+                                        <state key="normal" title="Суточная сводка "/>
                                         <connections>
                                             <segue destination="CjG-LF-lKF" kind="show" id="3Bt-R1-OnB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oga-9k-dAB">
-                                        <rect key="frame" x="31.5" y="551.5" width="137" height="30"/>
+                                        <rect key="frame" x="18.5" y="100" width="137" height="30"/>
                                         <state key="normal" title="Очистить CoreData"/>
                                         <connections>
                                             <action selector="deleteDataBtnPressed" destination="4t9-p1-WJe" eventType="touchUpInside" id="Wfh-Jh-fVO"/>
@@ -273,8 +277,16 @@
                         <viewLayoutGuide key="safeArea" id="lvh-Do-7Ik"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Bnt-1K-fgg" firstAttribute="centerY" secondItem="MIn-xC-lkt" secondAttribute="centerY" id="BVM-HQ-Kan"/>
-                            <constraint firstItem="Bnt-1K-fgg" firstAttribute="centerX" secondItem="MIn-xC-lkt" secondAttribute="centerX" id="R0p-hu-iz9"/>
+                            <constraint firstItem="6je-W5-jyD" firstAttribute="leading" secondItem="lvh-Do-7Ik" secondAttribute="leading" id="2T3-xc-myY"/>
+                            <constraint firstItem="6je-W5-jyD" firstAttribute="centerX" secondItem="6Cc-Eq-eHK" secondAttribute="centerX" id="IQI-aF-Adq"/>
+                            <constraint firstItem="lvh-Do-7Ik" firstAttribute="trailing" secondItem="6Cc-Eq-eHK" secondAttribute="trailing" constant="16" id="LH8-wC-jni"/>
+                            <constraint firstItem="6je-W5-jyD" firstAttribute="top" secondItem="lvh-Do-7Ik" secondAttribute="top" id="Lwn-fe-iEa"/>
+                            <constraint firstItem="lvh-Do-7Ik" firstAttribute="bottom" secondItem="OaQ-2k-ovH" secondAttribute="bottom" constant="20" id="MWL-gI-NNC"/>
+                            <constraint firstItem="6Cc-Eq-eHK" firstAttribute="top" secondItem="6je-W5-jyD" secondAttribute="bottom" constant="20" id="P3z-3Z-jC5"/>
+                            <constraint firstItem="lvh-Do-7Ik" firstAttribute="trailing" secondItem="OaQ-2k-ovH" secondAttribute="trailing" constant="120" id="hSc-wx-C5V"/>
+                            <constraint firstAttribute="bottom" secondItem="6Cc-Eq-eHK" secondAttribute="bottom" constant="349" id="jmZ-aL-Rwy"/>
+                            <constraint firstItem="6Cc-Eq-eHK" firstAttribute="leading" secondItem="lvh-Do-7Ik" secondAttribute="leading" constant="16" id="nbg-u4-jE8"/>
+                            <constraint firstItem="OaQ-2k-ovH" firstAttribute="leading" secondItem="lvh-Do-7Ik" secondAttribute="leading" constant="120" id="wrx-22-MWm"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Сутки" id="9ZS-3c-S34"/>
@@ -282,6 +294,7 @@
                         <outlet property="fishGradeTF" destination="rWN-By-GlN" id="L6A-5n-BTX"/>
                         <outlet property="fishTypeTF" destination="O3G-Yx-Md5" id="GnG-jw-bJc"/>
                         <outlet property="frozenOnBoardTF" destination="XcB-04-yaE" id="InR-yC-cic"/>
+                        <outlet property="tableView" destination="US2-oD-o5j" id="tKe-73-EE1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUS-ko-B9q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

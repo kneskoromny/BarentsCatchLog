@@ -15,6 +15,9 @@ class DaylyCatchVC: UIViewController {
     @IBOutlet weak var fishGradeTF: UITextField!
     @IBOutlet weak var frozenOnBoardTF: UITextField!
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -38,9 +41,13 @@ class DaylyCatchVC: UIViewController {
                                FishGrades.fromThreeToFive.rawValue,
                                FishGrades.moreThanFive.rawValue]
     
+    let arrayForTableView = ["Дата", "Навеска"]
+    
     private let pickerView = UIPickerView()
     private let toolbar = UIToolbar()
     private var yesterdayCatch: Fish?
+    
+    private let cellIdentifier = "Cell"
     
     //MARK: - Override Methods
     override func viewDidLoad() {
@@ -191,6 +198,19 @@ extension DaylyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
 }
+// MARK: - UITableViewDataSource
+extension DaylyCatchVC: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    arrayForTableView.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+    let object = arrayForTableView[indexPath.row]
+    cell.textLabel?.text = object
+    return cell
+  }
+}
 extension Date {
     static var yesterday: Date { return Date().dayBefore }
     
@@ -201,4 +221,5 @@ extension Date {
             return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
         }
 }
+
 
