@@ -26,6 +26,8 @@
 		F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE726E4EE4B00241C16 /* DateVC.swift */; };
 		F7946DEC26E4F34A00241C16 /* GradeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DEB26E4F34900241C16 /* GradeTVC.swift */; };
 		F7946DEE26E6773300241C16 /* GradeTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DED26E6773300241C16 /* GradeTVCNC.swift */; };
+		F7946DF026E681B900241C16 /* FishTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DEF26E681B900241C16 /* FishTVCNC.swift */; };
+		F7946DF226E681E300241C16 /* FishTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF126E681E300241C16 /* FishTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		F7946DE726E4EE4B00241C16 /* DateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateVC.swift; sourceTree = "<group>"; };
 		F7946DEB26E4F34900241C16 /* GradeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeTVC.swift; sourceTree = "<group>"; };
 		F7946DED26E6773300241C16 /* GradeTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeTVCNC.swift; sourceTree = "<group>"; };
+		F7946DEF26E681B900241C16 /* FishTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishTVCNC.swift; sourceTree = "<group>"; };
+		F7946DF126E681E300241C16 /* FishTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				F7946DE726E4EE4B00241C16 /* DateVC.swift */,
 				F7946DED26E6773300241C16 /* GradeTVCNC.swift */,
 				F7946DEB26E4F34900241C16 /* GradeTVC.swift */,
+				F7946DEF26E681B900241C16 /* FishTVCNC.swift */,
+				F7946DF126E681E300241C16 /* FishTVC.swift */,
 				F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */,
 				F7703BF526D78FC300D7DAFB /* ByTrawlsVC.swift */,
 				F7946DDF26DE4EA100241C16 /* TrawlsReportTableVC.swift */,
@@ -201,8 +207,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */,
+				F7946DF226E681E300241C16 /* FishTVC.swift in Sources */,
 				F7703BE326D7874500D7DAFB /* DailyCatchVC.swift in Sources */,
 				F7703C0726DD23ED00D7DAFB /* DailyReportTableVC.swift in Sources */,
+				F7946DF026E681B900241C16 /* FishTVCNC.swift in Sources */,
 				F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */,
 				F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */,
 				F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */,

@@ -8,10 +8,10 @@
 import Foundation
 
 enum FishTypes: String {
-    case cod = "Треска"
-    case haddock = "Пикша"
-    case catfish = "Зубатка"
-    case redfish = "Окунь"
+    case cod = "Треска б/г мороженая"
+    case haddock = "Пикша б/г мороженая"
+    case catfish = "Зубатка синяя б/г мороженая"
+    case redfish = "Окунь золотистый б/г мороженый"
 }
 
 enum Ratios: Double {

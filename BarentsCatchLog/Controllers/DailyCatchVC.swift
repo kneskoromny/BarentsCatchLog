@@ -14,12 +14,15 @@ protocol DateVCDelegate {
 protocol GradeTVCDelegate {
     func gradeDidChanged(to grade: String)
 }
+protocol FishTVCDelegate {
+    func fishDidChanged(to fish: String)
+}
 
 class DailyCatchVC: UIViewController {
     
     //MARK: - IB Outlets
-    @IBOutlet weak var fishTypeTF: UITextField!
-    @IBOutlet weak var fishGradeTF: UITextField!
+    //@IBOutlet weak var fishTypeTF: UITextField!
+    //@IBOutlet weak var fishGradeTF: UITextField!
     @IBOutlet weak var frozenOnBoardTF: UITextField!
     
     @IBOutlet weak var tableView: UITableView!
@@ -48,7 +51,7 @@ class DailyCatchVC: UIViewController {
                                FishGrades.fromThreeToFive.rawValue,
                                FishGrades.moreThanFive.rawValue]
     
-    let arrayForTableView = ["Дата", "Навеска"]
+    let arrayForTableView = ["Дата", "Рыба", "Навеска"]
     
     private let pickerView = UIPickerView()
     private let toolbar = UIToolbar()
@@ -56,10 +59,12 @@ class DailyCatchVC: UIViewController {
     
     private let cellIdentifier = "Cell"
     private let toDateIdentifier = "toDateVC"
-    private let toGradeIdentifier = "toGradeVC"
+    private let toGradeIdentifier = "toGradeTVC"
+    private let toFishIdentifier = "toFishTVC"
     
     private var choozenDate = Date()
     private var choozenGrade: String?
+    private var choozenFish: String?
     
     //MARK: - Override Methods
     override func viewDidLoad() {
@@ -68,13 +73,9 @@ class DailyCatchVC: UIViewController {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.sizeToFit()
         toolbar.setItems([flexSpace, doneBtn], animated: true)
-        fishTypeTF.inputView = pickerView
-        fishTypeTF.inputAccessoryView = toolbar
-        fishGradeTF.inputView = pickerView
-        fishGradeTF.inputAccessoryView = toolbar
         
-        pickerView.delegate = self
-        pickerView.dataSource = self
+//        pickerView.delegate = self
+//        pickerView.dataSource = self
         
         frozenOnBoardTF.keyboardType = .decimalPad
     }
@@ -87,10 +88,16 @@ class DailyCatchVC: UIViewController {
             if let dateVC = segue.destination as? DateVC {
                 dateVC.delegate = self
             }
-        } else  {
+        } else if segue.identifier == toGradeIdentifier {
             if let navController = segue.destination as? GradeTVCNC {
                 if let gradeTVC = navController.topViewController as? GradeTVC {
                     gradeTVC.delegate = self
+                }
+            }
+        } else {
+            if let navController = segue.destination as? FishTVCNC {
+                if let fishTVC = navController.topViewController as? FishTVC {
+                    fishTVC.delegate = self
                 }
             }
         }
@@ -111,8 +118,8 @@ class DailyCatchVC: UIViewController {
         let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
         // создаем экземпляр класса в контексте
         let fishCatch = Fish(context: coreDataStack.managedContext)
-        guard let fishName = fishTypeTF.text,
-              let fishGrade = fishGradeTF.text,
+        guard let fishName = choozenFish,
+              let fishGrade = choozenGrade,
               let fishWeight = frozenOnBoardTF.text else { return }
         
         // запрос на существ рыбу для получения кол-ва готовой и сырой на вчерашний день
@@ -139,7 +146,8 @@ class DailyCatchVC: UIViewController {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
         
-        fishCatch.name = fishName
+        fishCatch.name = choozenFish
+        print("Название внесенной рыбы - \(fishCatch.name!)")
         fishCatch.grade = choozenGrade
         print("Навеска внесенной рыбы - \(fishCatch.grade!)")
         fishCatch.date = choozenDate
@@ -166,10 +174,7 @@ class DailyCatchVC: UIViewController {
         coreDataStack.saveContext()
         
         // вызывать аларм контроллер
-        fishTypeTF.text = ""
-        fishGradeTF.text = ""
-        frozenOnBoardTF.text = ""
-        fishTypeTF.becomeFirstResponder()
+        
     }
     // очищает Core Data
     @IBAction func deleteDataBtnPressed() {
@@ -190,45 +195,36 @@ class DailyCatchVC: UIViewController {
 }
 
 //MARK: - Picker View Data Source, Delegate
-extension DailyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if fishTypeTF.isFirstResponder {
-            return arrayForFishTypePicker.count
-        } else {
-            return arrayForGradePicker.count
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if fishTypeTF.isFirstResponder {
-            return arrayForFishTypePicker[row]
-        } else {
-            return arrayForGradePicker[row]
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if fishTypeTF.isFirstResponder {
-            switch row {
-            case 0: fishTypeTF.text = arrayForFishTypePicker[0]
-            case 1: fishTypeTF.text = arrayForFishTypePicker[1]
-            case 2: fishTypeTF.text = arrayForFishTypePicker[2]
-            case 3: fishTypeTF.text = arrayForFishTypePicker[3]
-            default: fishTypeTF.text = arrayForFishTypePicker[4]
-            }
-        } else {
-            switch row {
-            case 0: fishGradeTF.text = arrayForGradePicker[0]
-            case 1: fishGradeTF.text = arrayForGradePicker[1]
-            case 2: fishGradeTF.text = arrayForGradePicker[2]
-            case 3: fishGradeTF.text = arrayForGradePicker[3]
-            case 4: fishGradeTF.text = arrayForGradePicker[4]
-            default: fishGradeTF.text = arrayForGradePicker[5]
-            }
-        }
-    }
-}
+//extension DailyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        if fishTypeTF.isFirstResponder {
+//            return arrayForFishTypePicker.count
+//        } else {
+//            return arrayForGradePicker.count
+//        }
+//    }
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        if fishTypeTF.isFirstResponder {
+//            return arrayForFishTypePicker[row]
+//        } else {
+//            return arrayForGradePicker[row]
+//        }
+//    }
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//            switch row {
+//            case 0: fishTypeTF.text = arrayForFishTypePicker[0]
+//            case 1: fishTypeTF.text = arrayForFishTypePicker[1]
+//            case 2: fishTypeTF.text = arrayForFishTypePicker[2]
+//            case 3: fishTypeTF.text = arrayForFishTypePicker[3]
+//            default: fishTypeTF.text = arrayForFishTypePicker[4]
+//            }
+//
+//
+//    }
+//}
 // MARK: - UITableViewDataSource
 extension DailyCatchVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -247,6 +243,12 @@ extension DailyCatchVC: UITableViewDataSource {
         } else {
             cell.detailTextLabel?.text = "Сегодня"
         }
+    case "Рыба":
+        if choozenFish != nil {
+            cell.detailTextLabel?.text = choozenFish
+        } else {
+            cell.detailTextLabel?.text = ""
+        }
     default:
         if choozenGrade != nil {
             cell.detailTextLabel?.text = choozenGrade
@@ -264,7 +266,8 @@ extension DailyCatchVC: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             performSegue(withIdentifier: toDateIdentifier, sender: nil)
-            
+        case 1:
+            performSegue(withIdentifier: toFishIdentifier, sender: nil)
         default:
             performSegue(withIdentifier: toGradeIdentifier, sender: nil)
         }
@@ -281,6 +284,14 @@ extension DailyCatchVC: DateVCDelegate {
 extension DailyCatchVC: GradeTVCDelegate {
     func gradeDidChanged(to grade: String) {
         self.choozenGrade = grade
+        self.tableView.reloadData()
+    }
+}
+
+// MARK: - FishTVC Delegate
+extension DailyCatchVC: FishTVCDelegate {
+    func fishDidChanged(to fish: String) {
+        self.choozenFish = fish
         self.tableView.reloadData()
     }
 }

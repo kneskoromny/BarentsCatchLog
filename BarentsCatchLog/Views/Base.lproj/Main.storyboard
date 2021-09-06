@@ -222,7 +222,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38h-iw-Q1q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3239.130434782609" y="-1332.5892857142856"/>
+            <point key="canvasLocation" x="651" y="-2034"/>
         </scene>
         <!--Сутки-->
         <scene sceneID="wW7-B1-Ubk">
@@ -241,13 +241,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="6Cc-Eq-eHK">
                                 <rect key="frame" x="16" y="108" width="382" height="439"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Объект промысла" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O3G-Yx-Md5">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="45.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="US2-oD-o5j">
-                                        <rect key="frame" x="0.0" y="90.5" width="382" height="187"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="187"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" textLabel="LNJ-v4-ulc" detailTextLabel="FnA-Fh-ZJW" style="IBUITableViewCellStyleValue1" id="Lse-CA-f7k">
@@ -280,13 +275,8 @@
                                             <outlet property="delegate" destination="4t9-p1-WJe" id="Jgz-bR-cLI"/>
                                         </connections>
                                     </tableView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Навеска" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWN-By-GlN">
-                                        <rect key="frame" x="0.0" y="322.5" width="382" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Готовой на борту" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcB-04-yaE">
-                                        <rect key="frame" x="0.0" y="401.5" width="382" height="37.5"/>
+                                        <rect key="frame" x="0.0" y="232" width="382" height="207"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -336,12 +326,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Сутки" id="9ZS-3c-S34"/>
                     <connections>
-                        <outlet property="fishGradeTF" destination="rWN-By-GlN" id="L6A-5n-BTX"/>
-                        <outlet property="fishTypeTF" destination="O3G-Yx-Md5" id="GnG-jw-bJc"/>
                         <outlet property="frozenOnBoardTF" destination="XcB-04-yaE" id="InR-yC-cic"/>
                         <outlet property="tableView" destination="US2-oD-o5j" id="tKe-73-EE1"/>
                         <segue destination="JJi-xC-COe" kind="presentation" identifier="toDateVC" id="Y6S-qH-vgU"/>
-                        <segue destination="kW3-Xw-ArO" kind="presentation" identifier="toGradeVC" id="YaX-bK-37G"/>
+                        <segue destination="kW3-Xw-ArO" kind="presentation" identifier="toGradeTVC" id="YaX-bK-37G"/>
+                        <segue destination="Ghl-Za-XcT" kind="presentation" identifier="toFishTVC" id="MAb-sJ-dJD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUS-ko-B9q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -498,7 +487,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1cR-CN-cgF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1521.7391304347827" y="-1332.5892857142856"/>
+            <point key="canvasLocation" x="-187" y="-1313"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f4G-dC-U8O">
@@ -708,7 +697,63 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2328.985507246377" y="-1333.2589285714284"/>
+            <point key="canvasLocation" x="651" y="-1313"/>
+        </scene>
+        <!--FishTVC-->
+        <scene sceneID="3o5-Uh-Y3g">
+            <objects>
+                <tableViewController id="be3-Vr-GRo" customClass="FishTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3GW-sN-EqP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fishCell" textLabel="y10-we-xX5" style="IBUITableViewCellStyleDefault" id="FO2-zi-Uzu">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FO2-zi-Uzu" id="Ae1-96-SaA">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y10-we-xX5">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="be3-Vr-GRo" id="hD8-fU-EmC"/>
+                            <outlet property="delegate" destination="be3-Vr-GRo" id="r3h-Hl-oR8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="wH4-bK-UUV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ILb-HX-MX6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1506" y="-2034"/>
+        </scene>
+        <!--FishTVCNC-->
+        <scene sceneID="rzq-Ga-oyd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ghl-Za-XcT" customClass="FishTVCNC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7ga-wM-jAF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="be3-Vr-GRo" kind="relationship" relationship="rootViewController" id="LBL-aj-LM9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="beV-gu-rs2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1506" y="-1323"/>
         </scene>
     </scenes>
     <resources>
