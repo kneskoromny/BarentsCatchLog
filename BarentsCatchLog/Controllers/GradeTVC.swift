@@ -10,6 +10,8 @@ import UIKit
 class GradeTVC: UITableViewController {
     
     let grades = ["0.5 -", "0.5 +", "0.5 - 1", "1 +", "1 -", "1 - 2", "2 - 3", "3 +", "5 +"]
+    
+    var delegate: GradeTVCDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,12 @@ class GradeTVC: UITableViewController {
         cell.textLabel?.text = grade
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let grade = grades[indexPath.row]
+        delegate.gradeDidChanged(to: grade)
+        dismiss(animated: true)
     }
     
 

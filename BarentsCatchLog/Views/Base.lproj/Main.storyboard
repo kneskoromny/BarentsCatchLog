@@ -227,7 +227,7 @@
         <!--Сутки-->
         <scene sceneID="wW7-B1-Ubk">
             <objects>
-                <viewController id="4t9-p1-WJe" customClass="DaylyCatchVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4t9-p1-WJe" customClass="DailyCatchVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MIn-xC-lkt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -250,7 +250,7 @@
                                         <rect key="frame" x="0.0" y="90.5" width="382" height="187"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" textLabel="LNJ-v4-ulc" style="IBUITableViewCellStyleDefault" id="Lse-CA-f7k">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" textLabel="LNJ-v4-ulc" detailTextLabel="FnA-Fh-ZJW" style="IBUITableViewCellStyleValue1" id="Lse-CA-f7k">
                                                 <rect key="frame" x="0.0" y="24.5" width="382" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lse-CA-f7k" id="93z-qU-IQj">
@@ -258,7 +258,14 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LNJ-v4-ulc">
-                                                            <rect key="frame" x="20" y="0.0" width="342" height="43.5"/>
+                                                            <rect key="frame" x="20" y="11" width="35" height="21.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FnA-Fh-ZJW">
+                                                            <rect key="frame" x="316" y="11" width="46" height="21.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -474,6 +481,9 @@
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                     <!--1970-01-01 11:00:00 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="datePickerValueChanged:" destination="JJi-xC-COe" eventType="valueChanged" id="04W-LZ-oID"/>
+                                </connections>
                             </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lFz-bq-GX9"/>
@@ -682,10 +692,11 @@
             </objects>
             <point key="canvasLocation" x="1506" y="78"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--GradeTVCNC-->
         <scene sceneID="GY7-DQ-A42">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kW3-Xw-ArO" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aDX-jO-dWl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kW3-Xw-ArO" customClass="GradeTVCNC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ieq-e9-yls">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -696,7 +707,6 @@
                         <segue destination="gHj-vC-9uj" kind="relationship" relationship="rootViewController" id="pTx-1Z-7so"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aDX-jO-dWl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2328.985507246377" y="-1333.2589285714284"/>
         </scene>

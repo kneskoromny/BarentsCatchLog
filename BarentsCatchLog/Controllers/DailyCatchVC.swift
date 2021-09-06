@@ -8,7 +8,14 @@
 import UIKit
 import CoreData
 
-class DaylyCatchVC: UIViewController {
+protocol DateVCDelegate {
+    func dateDidChanged(to date: Date)
+}
+protocol GradeTVCDelegate {
+    func gradeDidChanged(to grade: String)
+}
+
+class DailyCatchVC: UIViewController {
     
     //MARK: - IB Outlets
     @IBOutlet weak var fishTypeTF: UITextField!
@@ -21,7 +28,7 @@ class DaylyCatchVC: UIViewController {
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "ddMM"
+        formatter.dateFormat = "dd-MM-YYYY"
         return formatter
     }()
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
@@ -51,6 +58,9 @@ class DaylyCatchVC: UIViewController {
     private let toDateIdentifier = "toDateVC"
     private let toGradeIdentifier = "toGradeVC"
     
+    private var choozenDate: Date?
+    private var choozenGrade: String?
+    
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +77,25 @@ class DaylyCatchVC: UIViewController {
         pickerView.dataSource = self
         
         frozenOnBoardTF.keyboardType = .decimalPad
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == toDateIdentifier {
+            let dateVC = segue.destination as? DateVC
+            dateVC!.delegate = self
+            print("123")
+        } else  {
+            if segue.identifier == toGradeIdentifier {
+                let navController = segue.destination as? GradeTVCNC
+                let gradeTVC = navController?.topViewController as? GradeTVC
+                gradeTVC!.delegate = self
+                print("123")
+                
+            }
+        }
     }
     // убирает окна при нажатии на экран
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -161,7 +190,7 @@ class DaylyCatchVC: UIViewController {
 }
 
 //MARK: - Picker View Data Source, Delegate
-extension DaylyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
+extension DailyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -201,7 +230,7 @@ extension DaylyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 // MARK: - UITableViewDataSource
-extension DaylyCatchVC: UITableViewDataSource {
+extension DailyCatchVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     arrayForTableView.count
   }
@@ -210,27 +239,62 @@ extension DaylyCatchVC: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
     let object = arrayForTableView[indexPath.row]
     cell.textLabel?.text = object
+    switch object {
+    case "Дата":
+        if choozenDate != nil {
+            let convertedDate = dateFormatter.string(from: choozenDate!)
+            cell.detailTextLabel?.text = String(describing: convertedDate)
+        } else {
+            cell.detailTextLabel?.text = "Сегодня"
+        }
+    default:
+        if choozenGrade != nil {
+            cell.detailTextLabel?.text = choozenGrade
+        } else {
+            cell.detailTextLabel?.text = ""
+        }
+    }
     return cell
   }
     
 }
 // MARK: - UITableViewDelegate
-extension DaylyCatchVC: UITableViewDelegate {
+extension DailyCatchVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
             performSegue(withIdentifier: toDateIdentifier, sender: nil)
+            
         default:
             performSegue(withIdentifier: toGradeIdentifier, sender: nil)
         }
     }
 }
+// MARK: - DateVC Delegate
+extension DailyCatchVC: DateVCDelegate {
+    func dateDidChanged(to date: Date) {
+        self.choozenDate = date
+        self.tableView.reloadData()
+    }
+}
+// MARK: - GradeTVC Delegate
+extension DailyCatchVC: GradeTVCDelegate {
+    func gradeDidChanged(to grade: String) {
+        self.choozenGrade = grade
+        self.tableView.reloadData()
+    }
+}
+
 // MARK: - Date
 extension Date {
     static var yesterday: Date { return Date().dayBefore }
+    static var dayBeforeYesterday: Date { return Date()}
     
     var dayBefore: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
+    }
+    var dayBeforeYesterday: Date {
+        return Calendar.current.date(byAdding: .day, value: -2, to: noon)!
     }
     var noon: Date {
             return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
