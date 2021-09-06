@@ -58,7 +58,7 @@ class DailyCatchVC: UIViewController {
     private let toDateIdentifier = "toDateVC"
     private let toGradeIdentifier = "toGradeVC"
     
-    private var choozenDate: Date?
+    private var choozenDate = Date()
     private var choozenGrade: String?
     
     //MARK: - Override Methods
@@ -84,16 +84,14 @@ class DailyCatchVC: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == toDateIdentifier {
-            let dateVC = segue.destination as? DateVC
-            dateVC!.delegate = self
-            print("123")
+            if let dateVC = segue.destination as? DateVC {
+                dateVC.delegate = self
+            }
         } else  {
-            if segue.identifier == toGradeIdentifier {
-                let navController = segue.destination as? GradeTVCNC
-                let gradeTVC = navController?.topViewController as? GradeTVC
-                gradeTVC!.delegate = self
-                print("123")
-                
+            if let navController = segue.destination as? GradeTVCNC {
+                if let gradeTVC = navController.topViewController as? GradeTVC {
+                    gradeTVC.delegate = self
+                }
             }
         }
     }
@@ -142,8 +140,9 @@ class DailyCatchVC: UIViewController {
         }
         
         fishCatch.name = fishName
-        fishCatch.grade = fishGrade
-        fishCatch.date = Date()
+        fishCatch.grade = choozenGrade
+        print("Навеска внесенной рыбы - \(fishCatch.grade!)")
+        fishCatch.date = choozenDate
         print("Дата внесенной рыбы - \(fishCatch.date!)")
         
         switch fishName {
@@ -163,6 +162,7 @@ class DailyCatchVC: UIViewController {
         fishCatch.rawPerDay = fishCatch.rawBoard - (yesterdayCatch?.rawBoard ?? 0)
 
         
+        print(fishCatch)
         coreDataStack.saveContext()
         
         // вызывать аларм контроллер
@@ -241,8 +241,8 @@ extension DailyCatchVC: UITableViewDataSource {
     cell.textLabel?.text = object
     switch object {
     case "Дата":
-        if choozenDate != nil {
-            let convertedDate = dateFormatter.string(from: choozenDate!)
+        if choozenDate != Date() {
+            let convertedDate = dateFormatter.string(from: choozenDate)
             cell.detailTextLabel?.text = String(describing: convertedDate)
         } else {
             cell.detailTextLabel?.text = "Сегодня"
