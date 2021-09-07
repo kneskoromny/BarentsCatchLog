@@ -6,22 +6,57 @@
 //
 
 import UIKit
+import CoreData
 
 class ReportTVC: UITableViewController {
     
-    let toDateChoiceID = "toDateChoiceTVC"
-    let toReportDescriptionID = "toReportDecriptionTVC"
+    // MARK: - Public Properties
+    lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
+    var fetchRequest: NSFetchRequest<Fish>?
+    
+    
+    // MARK: - Private Properties
+    private let toDateChoiceID = "toDateChoiceTVC"
+    private let toReportDescriptionID = "toReportDecriptionTVC"
+    private var caughtFishes: [Fish] = []
+    private var totalCatch: Double = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reportCell")
-
+        fetchRequest = Fish.fetchRequest()
+        fetchAndReload()
     }
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == toDateChoiceID,
+              let navController = segue.destination as? DateChoiceTVCNC,
+              let dateChoiceTVC = navController.topViewController as? DateChoiceTVC else { return }
+        dateChoiceTVC.coreDataStack = coreDataStack
+        dateChoiceTVC.delegate = self
+    }
+    // MARK: - Private Methods
+    private func fetchAndReload() {
+        guard let fetchRequest = fetchRequest else { return }
+        print(fetchRequest.predicate ?? "1 no predicate")
+        do {
+            caughtFishes = try coreDataStack.managedContext.fetch(fetchRequest)
+            print(caughtFishes.count)
+            totalCatch = 0
+            caughtFishes.forEach { totalCatch += $0.rawPerDay }
+            print(totalCatch)
+            tableView.reloadData()
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+    }
+}
+// MARK: - Navigation
 
-    // MARK: - Table view data source
 
-    
+// MARK: - UITableViewDataSource, UITableViewDelegate
+extension ReportTVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "reportCell", for: indexPath)
         cell = UITableViewCell(style: .value1, reuseIdentifier: "reportCell")
@@ -29,15 +64,14 @@ class ReportTVC: UITableViewController {
         switch indexPath.section {
         case 0:
             cell.textLabel?.text = "Отчет"
-            cell.detailTextLabel?.text = "Сегодня"
+            cell.detailTextLabel?.text = "Всего"
         default:
-            cell.textLabel?.text = "Вылов"
+            cell.textLabel?.text = String(format: "%.0f", totalCatch) + " кг"
+            cell.textLabel?.textColor = .systemGreen
             cell.detailTextLabel?.text = "Количество тралов"
         }
-
         return cell
     }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -46,51 +80,18 @@ class ReportTVC: UITableViewController {
             performSegue(withIdentifier: toReportDescriptionID, sender: nil)
         }
     }
+}
+// MARK: - DateChoiceTVCDelegate
+extension ReportTVC: DateChoiceTVCDelegate {
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func getNewPredicate(filter: DateChoiceTVC, didSelectPredicate predicate: NSCompoundPredicate?) {
+        guard let fetchRequest = fetchRequest else { return }
+        print(fetchRequest.predicate ?? "2 no predicate")
+        fetchRequest.predicate = nil
+        print(fetchRequest.predicate ?? "3 no predicate")
+        fetchRequest.predicate = predicate
+        print(fetchRequest.predicate ?? "4 no predicate")
+        
+        fetchAndReload()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

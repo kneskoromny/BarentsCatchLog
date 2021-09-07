@@ -196,13 +196,13 @@ extension DailyCatchVC: UITableViewDataSource {
         if choozenFish != nil {
             cell.detailTextLabel?.text = choozenFish
         } else {
-            cell.detailTextLabel?.text = ">"
+            cell.detailTextLabel?.text = ""
         }
     default:
         if choozenGrade != nil {
             cell.detailTextLabel?.text = choozenGrade
         } else {
-            cell.detailTextLabel?.text = ">"
+            cell.detailTextLabel?.text = ""
         }
     }
     return cell

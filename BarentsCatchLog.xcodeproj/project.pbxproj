@@ -31,6 +31,7 @@
 		F7946DF426E74A0600241C16 /* ReportTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF326E74A0600241C16 /* ReportTVC.swift */; };
 		F7946DF626E74CD200241C16 /* DateChoiceTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF526E74CD200241C16 /* DateChoiceTVC.swift */; };
 		F7946DF826E74D0F00241C16 /* ReportDescriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */; };
+		F7946DFA26E782ED00241C16 /* DateChoiceTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF926E782ED00241C16 /* DateChoiceTVCNC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		F7946DF326E74A0600241C16 /* ReportTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTVC.swift; sourceTree = "<group>"; };
 		F7946DF526E74CD200241C16 /* DateChoiceTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChoiceTVC.swift; sourceTree = "<group>"; };
 		F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDescriptionTVC.swift; sourceTree = "<group>"; };
+		F7946DF926E782ED00241C16 /* DateChoiceTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChoiceTVCNC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				F7946DEF26E681B900241C16 /* FishTVCNC.swift */,
 				F7946DF126E681E300241C16 /* FishTVC.swift */,
 				F7946DF326E74A0600241C16 /* ReportTVC.swift */,
+				F7946DF926E782ED00241C16 /* DateChoiceTVCNC.swift */,
 				F7946DF526E74CD200241C16 /* DateChoiceTVC.swift */,
 				F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */,
 				F7703C0626DD23ED00D7DAFB /* DailyReportTableVC.swift */,
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */,
+				F7946DFA26E782ED00241C16 /* DateChoiceTVCNC.swift in Sources */,
 				F7946DF226E681E300241C16 /* FishTVC.swift in Sources */,
 				F7703BE326D7874500D7DAFB /* DailyCatchVC.swift in Sources */,
 				F7703C0726DD23ED00D7DAFB /* DailyReportTableVC.swift in Sources */,

@@ -6,84 +6,69 @@
 //
 
 import UIKit
+import CoreData
+
+protocol DateChoiceTVCDelegate: AnyObject {
+    func getNewPredicate(
+        filter: DateChoiceTVC,
+        didSelectPredicate predicate: NSCompoundPredicate?
+    )
+}
 
 class DateChoiceTVC: UITableViewController {
-
+    
+    // MARK: - Дата Секция
+    @IBOutlet weak var todayChoiceCell: UITableViewCell!
+    @IBOutlet weak var yesterdayChoiceCell: UITableViewCell!
+    
+    // MARK: - Properties
+    // передать в препер
+    var coreDataStack: CoreDataStack!
+    weak var delegate: DateChoiceTVCDelegate?
+    var selectedPredicate: NSCompoundPredicate?
+    
+    // MARK: - Private Properties
+    var dateFrom: Date?
+    var dateTo: Date?
+    
+    // MARK: - Date Predicates
+   
+    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    // MARK: - IB Actions
+    @IBAction func getReportBtnPressed(_ sender: UIBarButtonItem) {
+        delegate?.getNewPredicate(filter: self, didSelectPredicate: selectedPredicate)
+        dismiss(animated: true)    }
+    
+}
+// MARK: - UITableViewDelegate
+extension DateChoiceTVC {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell =  tableView.cellForRow(at: indexPath) else { return }
+        
+        switch cell {
+        // определяем сегодня
+        case todayChoiceCell:
+            dateFrom = Calendar.current.startOfDay(for: Date())
+            print(dateFrom!)
+            dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom!)
+            let fromPredicate = NSPredicate(format: "date >= %@", dateFrom! as NSDate)
+            let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
+            selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+            
+        default:
+            // определяем вчера
+            dateFrom = Calendar.current.startOfDay(for: Date.yesterday)
+            print(dateFrom!)
+            dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom!)
+            let fromPredicate = NSPredicate(format: "date >= %@", dateFrom! as NSDate)
+            let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
+            selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+        }
+        cell.accessoryType = .checkmark
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
