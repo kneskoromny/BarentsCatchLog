@@ -21,12 +21,8 @@ protocol FishTVCDelegate {
 class DailyCatchVC: UIViewController {
     
     //MARK: - IB Outlets
-    //@IBOutlet weak var fishTypeTF: UITextField!
-    //@IBOutlet weak var fishGradeTF: UITextField!
     @IBOutlet weak var frozenOnBoardTF: UITextField!
-    
     @IBOutlet weak var tableView: UITableView!
-    
     
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
@@ -43,18 +39,8 @@ class DailyCatchVC: UIViewController {
                           FishTypes.catfish.rawValue,
                           FishTypes.redfish.rawValue]
     
-    let arrayForGradePicker = ["",
-                               FishGrades.lessThanHalf.rawValue,
-                               FishGrades.fromHalfToKilo.rawValue,
-                               FishGrades.fromKiloToTwo.rawValue,
-                               FishGrades.fromTwoToThree.rawValue,
-                               FishGrades.fromThreeToFive.rawValue,
-                               FishGrades.moreThanFive.rawValue]
-    
     let arrayForTableView = ["Дата", "Рыба", "Навеска"]
     
-    private let pickerView = UIPickerView()
-    private let toolbar = UIToolbar()
     private var yesterdayCatch: Fish?
     
     private let cellIdentifier = "Cell"
@@ -69,20 +55,10 @@ class DailyCatchVC: UIViewController {
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolbar.sizeToFit()
-        toolbar.setItems([flexSpace, doneBtn], animated: true)
-        
-//        pickerView.delegate = self
-//        pickerView.dataSource = self
         
         frozenOnBoardTF.keyboardType = .decimalPad
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        tableView.reloadData()
-    }
+    // передаем делегатов в контроллеры
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == toDateIdentifier {
             if let dateVC = segue.destination as? DateVC {
@@ -113,9 +89,15 @@ class DailyCatchVC: UIViewController {
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.system
         
-        // получаем начало и окончание вчерашнего дня
-        let dateFrom = calendar.startOfDay(for: Date.yesterday)
+        // получаем начало и окончание дня внесения улова
+        guard let dayBeforeCurrentDay = calendar.date(
+                byAdding: .day,
+                value: -1,
+                to: choozenDate
+        ) else { return }
+        let dateFrom = calendar.startOfDay(for: dayBeforeCurrentDay)
         let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
+        
         // создаем экземпляр класса в контексте
         let fishCatch = Fish(context: coreDataStack.managedContext)
         guard let fishName = choozenFish,
@@ -189,42 +171,9 @@ class DailyCatchVC: UIViewController {
     }
     
     //MARK: - Public Methods
-    @objc func doneAction() {
-        view.endEditing(true)
-    }  
+   
 }
 
-//MARK: - Picker View Data Source, Delegate
-//extension DailyCatchVC: UIPickerViewDelegate, UIPickerViewDataSource {
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        if fishTypeTF.isFirstResponder {
-//            return arrayForFishTypePicker.count
-//        } else {
-//            return arrayForGradePicker.count
-//        }
-//    }
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        if fishTypeTF.isFirstResponder {
-//            return arrayForFishTypePicker[row]
-//        } else {
-//            return arrayForGradePicker[row]
-//        }
-//    }
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//            switch row {
-//            case 0: fishTypeTF.text = arrayForFishTypePicker[0]
-//            case 1: fishTypeTF.text = arrayForFishTypePicker[1]
-//            case 2: fishTypeTF.text = arrayForFishTypePicker[2]
-//            case 3: fishTypeTF.text = arrayForFishTypePicker[3]
-//            default: fishTypeTF.text = arrayForFishTypePicker[4]
-//            }
-//
-//
-//    }
-//}
 // MARK: - UITableViewDataSource
 extension DailyCatchVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -247,13 +196,13 @@ extension DailyCatchVC: UITableViewDataSource {
         if choozenFish != nil {
             cell.detailTextLabel?.text = choozenFish
         } else {
-            cell.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = ">"
         }
     default:
         if choozenGrade != nil {
             cell.detailTextLabel?.text = choozenGrade
         } else {
-            cell.detailTextLabel?.text = ""
+            cell.detailTextLabel?.text = ">"
         }
     }
     return cell
@@ -274,6 +223,7 @@ extension DailyCatchVC: UITableViewDelegate {
     }
 }
 // MARK: - DateVC Delegate
+// ПОДУМАТЬ КАК СДЕЛАТЬ ЧЕРЕЗ <T>
 extension DailyCatchVC: DateVCDelegate {
     func dateDidChanged(to date: Date) {
         self.choozenDate = date
@@ -298,8 +248,9 @@ extension DailyCatchVC: FishTVCDelegate {
 
 // MARK: - Date
 extension Date {
+    
     static var yesterday: Date { return Date().dayBefore }
-    static var dayBeforeYesterday: Date { return Date()}
+    static var dayBeforeYesterday: Date { return Date().dayBeforeYesterday }
     
     var dayBefore: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
