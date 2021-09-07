@@ -8,6 +8,9 @@
 import UIKit
 
 class ReportTVC: UITableViewController {
+    
+    let toDateChoiceID = "toDateChoiceTVC"
+    let toReportDescriptionID = "toReportDecriptionTVC"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,15 @@ class ReportTVC: UITableViewController {
         }
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            performSegue(withIdentifier: toDateChoiceID, sender: nil)
+        default:
+            performSegue(withIdentifier: toReportDescriptionID, sender: nil)
+        }
     }
     
 

@@ -492,7 +492,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Fur-ti-g0L" kind="show" id="sVx-EZ-4Wq"/>
+                                            <segue destination="Fur-ti-g0L" kind="show" identifier="toDateChoiceTVC" id="sVx-EZ-4Wq"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -523,7 +523,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ywU-1J-tca" kind="show" id="igI-At-lyT"/>
+                                            <segue destination="ywU-1J-tca" kind="show" identifier="toReportDecriptionTVC" id="igI-At-lyT"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
