@@ -32,6 +32,8 @@
 		F7946DF626E74CD200241C16 /* DateChoiceTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF526E74CD200241C16 /* DateChoiceTVC.swift */; };
 		F7946DF826E74D0F00241C16 /* ReportDescriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */; };
 		F7946DFA26E782ED00241C16 /* DateChoiceTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF926E782ED00241C16 /* DateChoiceTVCNC.swift */; };
+		F7946DFC26E89A0E00241C16 /* ReportDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */; };
+		F7946DFE26E8AB8600241C16 /* FormulaStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFD26E8AB8600241C16 /* FormulaStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		F7946DF526E74CD200241C16 /* DateChoiceTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChoiceTVC.swift; sourceTree = "<group>"; };
 		F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDescriptionTVC.swift; sourceTree = "<group>"; };
 		F7946DF926E782ED00241C16 /* DateChoiceTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChoiceTVCNC.swift; sourceTree = "<group>"; };
+		F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDescriptionCell.swift; sourceTree = "<group>"; };
+		F7946DFD26E8AB8600241C16 /* FormulaStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 				F7703BE926D7874700D7DAFB /* LaunchScreen.storyboard */,
 				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
 				F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */,
+				F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
 				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
 				F7703C0426DA1FAE00D7DAFB /* Helpers.swift */,
+				F7946DFD26E8AB8600241C16 /* FormulaStack.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */,
+				F7946DFE26E8AB8600241C16 /* FormulaStack.swift in Sources */,
 				F7946DFA26E782ED00241C16 /* DateChoiceTVCNC.swift in Sources */,
 				F7946DF226E681E300241C16 /* FishTVC.swift in Sources */,
 				F7703BE326D7874500D7DAFB /* DailyCatchVC.swift in Sources */,
@@ -229,6 +236,7 @@
 				F7946DE226DE511300241C16 /* TrawlDescriptionVC.swift in Sources */,
 				F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */,
 				F7946DF826E74D0F00241C16 /* ReportDescriptionTVC.swift in Sources */,
+				F7946DFC26E89A0E00241C16 /* ReportDescriptionCell.swift in Sources */,
 				F7946DE026DE4EA100241C16 /* TrawlsReportTableVC.swift in Sources */,
 				F7946DEC26E4F34A00241C16 /* GradeTVC.swift in Sources */,
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,

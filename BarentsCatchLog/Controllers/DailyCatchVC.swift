@@ -41,7 +41,7 @@ class DailyCatchVC: UIViewController {
     
     let arrayForTableView = ["Дата", "Рыба", "Навеска"]
     
-    private var yesterdayCatch: Fish?
+    private var catchForDayBeforeInput: Fish?
     
     private let cellIdentifier = "Cell"
     private let toDateIdentifier = "toDateVC"
@@ -85,43 +85,30 @@ class DailyCatchVC: UIViewController {
     
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
-        // календарь с системной временной зоной
-        var calendar = Calendar.current
-        calendar.timeZone = NSTimeZone.system
         
         // получаем начало и окончание дня внесения улова
-        guard let dayBeforeCurrentDay = calendar.date(
+        guard let dayBeforeCurrentDay = Calendar.current.date(
                 byAdding: .day,
                 value: -1,
                 to: choozenDate
         ) else { return }
-        let dateFrom = calendar.startOfDay(for: dayBeforeCurrentDay)
-        let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
         
         // создаем экземпляр класса в контексте
         let fishCatch = Fish(context: coreDataStack.managedContext)
+        
         guard let fishName = choozenFish,
               let fishGrade = choozenGrade,
               let fishWeight = frozenOnBoardTF.text else { return }
-        
-        // запрос на существ рыбу для получения кол-ва готовой и сырой на вчерашний день
+        // запрос на существ рыбу с предикатами
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
-        // предикаты по названию и градации
-        let namePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
-        let gradePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.grade), fishGrade)
-        // предикаты по дате
-        let fromPredicate = NSPredicate(format: "date >= %@", dateFrom as NSDate)
-        let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
-        // массив с предикатами
-        let generalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, gradePredicate, fromPredicate, toPredicate])
-       
-        fetchRequest.predicate = generalPredicate
+        fetchRequest.predicate = FormulaStack().getNameGradeDatePredicate(for: fishName, grade: fishGrade, date: dayBeforeCurrentDay)
+        
         do {
-            yesterdayCatch = try coreDataStack.managedContext.fetch(fetchRequest).first
+            catchForDayBeforeInput = try coreDataStack.managedContext.fetch(fetchRequest).first
             print("""
-                Вчерашняя рыба - это \(yesterdayCatch?.name ?? "Вчера рыбы не было")
-                Дата вчерашней рыбы - \(yesterdayCatch?.date)
-                Навеска - \(yesterdayCatch?.grade ?? "Вчера рыбы не было")
+                Вчерашняя рыба - это \(catchForDayBeforeInput?.name ?? "За день до внесения рыбы не было")
+                Дата вчерашней рыбы - \(String(describing: catchForDayBeforeInput?.date!))
+                Навеска - \(catchForDayBeforeInput?.grade ?? "За день до внесения рыбы не было")
                 """
             )
         } catch let error as NSError {
@@ -147,9 +134,9 @@ class DailyCatchVC: UIViewController {
         }
         
         fishCatch.frozenBoard = Double(fishWeight)!
-        fishCatch.frozenPerDay = fishCatch.frozenBoard - (yesterdayCatch?.frozenBoard ?? 0)
+        fishCatch.frozenPerDay = fishCatch.frozenBoard - (catchForDayBeforeInput?.frozenBoard ?? 0)
         fishCatch.rawBoard = (Double(fishCatch.frozenBoard) * fishCatch.ratio).rounded()
-        fishCatch.rawPerDay = fishCatch.rawBoard - (yesterdayCatch?.rawBoard ?? 0)
+        fishCatch.rawPerDay = fishCatch.rawBoard - (catchForDayBeforeInput?.rawBoard ?? 0)
 
         
         print(fishCatch)

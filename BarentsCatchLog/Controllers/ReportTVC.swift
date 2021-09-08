@@ -20,6 +20,7 @@ class ReportTVC: UITableViewController {
     private let toReportDescriptionID = "toReportDecriptionTVC"
     private var caughtFishes: [Fish] = []
     private var totalCatch: Double = 0
+    private var detailTextLabel = "Всего"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +31,20 @@ class ReportTVC: UITableViewController {
     }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == toDateChoiceID,
-              let navController = segue.destination as? DateChoiceTVCNC,
-              let dateChoiceTVC = navController.topViewController as? DateChoiceTVC else { return }
-        dateChoiceTVC.coreDataStack = coreDataStack
-        dateChoiceTVC.delegate = self
+        if segue.identifier == toDateChoiceID {
+           guard let navController = segue.destination as? DateChoiceTVCNC,
+                let dateChoiceTVC = navController.topViewController as? DateChoiceTVC else { return
+                }
+            dateChoiceTVC.coreDataStack = coreDataStack
+            dateChoiceTVC.delegate = self
+        } else if segue.identifier == toReportDescriptionID {
+            guard let reportDecriptionTVC = segue.destination as? ReportDescriptionTVC else {
+                return
+            }
+            reportDecriptionTVC.caughtFishes = caughtFishes
+            print("123")
+            
+        }
     }
     // MARK: - Private Methods
     private func fetchAndReload() {
@@ -45,7 +55,6 @@ class ReportTVC: UITableViewController {
             print(caughtFishes.count)
             totalCatch = 0
             caughtFishes.forEach { totalCatch += $0.rawPerDay }
-            print(totalCatch)
             tableView.reloadData()
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -64,11 +73,11 @@ extension ReportTVC {
         switch indexPath.section {
         case 0:
             cell.textLabel?.text = "Отчет"
-            cell.detailTextLabel?.text = "Всего"
+            cell.detailTextLabel?.text = detailTextLabel
         default:
             cell.textLabel?.text = String(format: "%.0f", totalCatch) + " кг"
             cell.textLabel?.textColor = .systemGreen
-            cell.detailTextLabel?.text = "Количество тралов"
+            cell.detailTextLabel?.text = "Количество записей: \(caughtFishes.count)"
         }
         return cell
     }
@@ -84,13 +93,13 @@ extension ReportTVC {
 // MARK: - DateChoiceTVCDelegate
 extension ReportTVC: DateChoiceTVCDelegate {
     
-    func getNewPredicate(filter: DateChoiceTVC, didSelectPredicate predicate: NSCompoundPredicate?) {
+    func getNewPredicate(filter: DateChoiceTVC,
+                         didSelectPredicate predicate: NSCompoundPredicate?,
+                         and textLabel: String) {
         guard let fetchRequest = fetchRequest else { return }
-        print(fetchRequest.predicate ?? "2 no predicate")
         fetchRequest.predicate = nil
-        print(fetchRequest.predicate ?? "3 no predicate")
         fetchRequest.predicate = predicate
-        print(fetchRequest.predicate ?? "4 no predicate")
+        detailTextLabel = textLabel
         
         fetchAndReload()
     }

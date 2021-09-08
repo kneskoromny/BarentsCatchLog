@@ -11,7 +11,8 @@ import CoreData
 protocol DateChoiceTVCDelegate: AnyObject {
     func getNewPredicate(
         filter: DateChoiceTVC,
-        didSelectPredicate predicate: NSCompoundPredicate?
+        didSelectPredicate predicate: NSCompoundPredicate?,
+        and textLabel: String
     )
 }
 
@@ -26,6 +27,7 @@ class DateChoiceTVC: UITableViewController {
     var coreDataStack: CoreDataStack!
     weak var delegate: DateChoiceTVCDelegate?
     var selectedPredicate: NSCompoundPredicate?
+    var selectedTextLabel: String?
     
     // MARK: - Private Properties
     var dateFrom: Date?
@@ -36,11 +38,15 @@ class DateChoiceTVC: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        todayChoiceCell.textLabel?.text = "Сегодня"
+        yesterdayChoiceCell.textLabel?.text = "Вчера"
     }
     
     // MARK: - IB Actions
     @IBAction func getReportBtnPressed(_ sender: UIBarButtonItem) {
-        delegate?.getNewPredicate(filter: self, didSelectPredicate: selectedPredicate)
+        delegate?.getNewPredicate(filter: self,
+                                  didSelectPredicate: selectedPredicate,
+                                  and: selectedTextLabel!)
         dismiss(animated: true)    }
     
 }
@@ -50,23 +56,12 @@ extension DateChoiceTVC {
         guard let cell =  tableView.cellForRow(at: indexPath) else { return }
         
         switch cell {
-        // определяем сегодня
         case todayChoiceCell:
-            dateFrom = Calendar.current.startOfDay(for: Date())
-            print(dateFrom!)
-            dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom!)
-            let fromPredicate = NSPredicate(format: "date >= %@", dateFrom! as NSDate)
-            let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
-            selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
-            
+            selectedPredicate = FormulaStack().getDatePredicate(for: Date())
+            selectedTextLabel = todayChoiceCell.textLabel?.text
         default:
-            // определяем вчера
-            dateFrom = Calendar.current.startOfDay(for: Date.yesterday)
-            print(dateFrom!)
-            dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom!)
-            let fromPredicate = NSPredicate(format: "date >= %@", dateFrom! as NSDate)
-            let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
-            selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+            selectedPredicate = FormulaStack().getDatePredicate(for: Date.yesterday)
+            selectedTextLabel = yesterdayChoiceCell.textLabel?.text
         }
         cell.accessoryType = .checkmark
     }
