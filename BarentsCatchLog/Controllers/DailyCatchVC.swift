@@ -52,6 +52,8 @@ class DailyCatchVC: UIViewController {
         
         frozenOnBoardTF.keyboardType = .decimalPad
     }
+    
+    //MARK: - Navigation
     // передаем делегатов в контроллеры
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == toDateIdentifier {

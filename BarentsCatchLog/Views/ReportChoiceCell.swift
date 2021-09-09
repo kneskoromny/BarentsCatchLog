@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReportDescriptionCell: UITableViewCell {
+class ReportChoiceCell: UITableViewCell {
 
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!

@@ -73,7 +73,7 @@ extension ReportDescriptionTVC {
         }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReportDescriptionCell", for: indexPath) as! ReportDescriptionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReportDescriptionCell", for: indexPath) as! ReportChoiceCell
         switch indexPath.section {
         case 0:
             let fish = convertedCaughtFishes[indexPath.row]
