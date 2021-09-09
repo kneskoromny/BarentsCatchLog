@@ -89,16 +89,21 @@ class DailyCatchVC: UIViewController {
         
         // создаем экземпляр класса в контексте
         let fishCatch = Fish(context: coreDataStack.managedContext)
-        if frozenOnBoardTF.text == "" {
-            showAlertIfNoData()
-            return
-        }
+//        if frozenOnBoardTF.text == "" {
+//            showAlertIfNoData()
+//            return
+//        }
         guard let fishName = choozenFish,
               let fishGrade = choozenGrade,
               let fishWeight = frozenOnBoardTF.text else {
-            showAlertIfNoData()
+            showAlert(title: "Пустые поля!",
+                      message: "Необходимо заполнить все поля перед сохранением.")
             return }
-        
+        if fishWeight == "" {
+            showAlert(title: "Пустые поля!",
+                      message: "Необходимо заполнить все поля перед сохранением.")
+            return
+        }
         // запрос на существ рыбу с предикатами
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
         fetchRequest.predicate = FormulaStack().getNameGradeDatePredicate(for: fishName, grade: fishGrade, date: dayBeforeCurrentDay)
@@ -113,6 +118,16 @@ class DailyCatchVC: UIViewController {
             )
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
+        }
+        if let lastCatch = catchForDayBeforeInput?.onBoard,
+           let doubleFishWeight = Double(fishWeight) {
+            if doubleFishWeight < lastCatch {
+                showAlert(title: "Внимание!",
+                          message: "Количество вносимой продукции на борту меньше ранее внесенного.") {
+                    self.frozenOnBoardTF.becomeFirstResponder()
+                    self.frozenOnBoardTF.text = ""
+                }
+            }
         }
         
         fishCatch.name = choozenFish
@@ -252,14 +267,16 @@ extension DailyCatchVC {
         
         present(alert, animated: true)
     }
-    func showAlertIfNoData() {
-        let alert = UIAlertController(title: "Пустые поля!",
-                                      message: """
-                                        Необходимо заполнить все поля перед сохранением
-                                        """,
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
                                       preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "ОК",
-                                       style: .default)
+        let doneAction = UIAlertAction(title: "OK",
+                                       style: .default) { action in
+            if let completion = completion {
+                completion()
+            }
+        }
         alert.addAction(doneAction)
         
         present(alert, animated: true)
