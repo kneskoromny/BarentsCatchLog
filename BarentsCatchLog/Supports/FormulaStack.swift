@@ -31,5 +31,7 @@ struct FormulaStack {
         let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, gradePredicate, fromPredicate, toPredicate])
     }
+    
+    
 }
 

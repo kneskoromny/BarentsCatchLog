@@ -19,7 +19,7 @@ class ReportTVC: UITableViewController {
     private let toDateChoiceID = "toDateChoiceTVC"
     private let toReportDescriptionID = "toReportDecriptionTVC"
     private var caughtFishes: [Fish] = []
-    private var totalCatch: Double = 0
+    private var totalFrz: Double = 0
     private var detailTextLabel = "Всего"
 
     override func viewDidLoad() {
@@ -53,8 +53,8 @@ class ReportTVC: UITableViewController {
         do {
             caughtFishes = try coreDataStack.managedContext.fetch(fetchRequest)
             print(caughtFishes.count)
-            totalCatch = 0
-            caughtFishes.forEach { totalCatch += $0.rawPerDay }
+            totalFrz = 0
+            caughtFishes.forEach { totalFrz += $0.perDay }
             tableView.reloadData()
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -75,7 +75,7 @@ extension ReportTVC {
             cell.textLabel?.text = "Отчет"
             cell.detailTextLabel?.text = detailTextLabel
         default:
-            cell.textLabel?.text = String(format: "%.0f", totalCatch) + " кг"
+            cell.textLabel?.text = String(format: "%.0f", totalFrz) + " кг"
             cell.textLabel?.textColor = .systemGreen
             cell.detailTextLabel?.text = "Количество записей: \(caughtFishes.count)"
         }

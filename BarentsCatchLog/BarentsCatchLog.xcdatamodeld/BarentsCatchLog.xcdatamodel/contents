@@ -2,32 +2,13 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Fish" representedClassName="Fish" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="frozenBoard" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="frozenPerDay" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="grade" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="onBoard" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="perDay" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="ratio" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="rawBoard" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="rawPerDay" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-    </entity>
-    <entity name="Trawl" representedClassName="Trawl" syncable="YES" codeGenerationType="class">
-        <attribute name="catRaw" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="codRaw" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="dateHoist" optional="YES" attributeType="String"/>
-        <attribute name="dateShoot" optional="YES" attributeType="String"/>
-        <attribute name="hadRaw" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="latitudeHoist" optional="YES" attributeType="String"/>
-        <attribute name="latitudeShoot" optional="YES" attributeType="String"/>
-        <attribute name="longitudeHoist" optional="YES" attributeType="String"/>
-        <attribute name="longitudeShoot" optional="YES" attributeType="String"/>
-        <attribute name="redRaw" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="timeHoist" optional="YES" attributeType="String"/>
-        <attribute name="timeShoot" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Fish" positionX="-36" positionY="9" width="128" height="149"/>
-        <element name="Trawl" positionX="-36" positionY="63" width="128" height="239"/>
+        <element name="Fish" positionX="-36" positionY="9" width="128" height="119"/>
     </elements>
 </model>

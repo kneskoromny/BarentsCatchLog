@@ -29,6 +29,13 @@ class ReportDescriptionTVC: UITableViewController {
         
         convertedCaughtFishes = caughtFishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending})
     }
+    
+    //MARK: - Private Methods
+    // получаем вылов на борту из готовой на борту из переданного массива
+    private func getRawFish(from array: [Fish]) {
+        
+    }
+    
 }
 // MARK: - UITableViewDataSource, Delegate
 extension ReportDescriptionTVC {
@@ -67,12 +74,17 @@ extension ReportDescriptionTVC {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReportDescriptionCell", for: indexPath) as! ReportDescriptionCell
-        let fish = convertedCaughtFishes[indexPath.row]
-        let convertedDate = dateFormatter.string(from: fish.date!)
-        cell.dateLabel.text = convertedDate
-        cell.nameLabel.text = fish.name
-        cell.gradeLabel.text = fish.grade
-        cell.frzPerDayLabel.text = String(format: "%.0f", fish.frozenPerDay) + " кг"
+        switch indexPath.section {
+        case 0:
+            let fish = convertedCaughtFishes[indexPath.row]
+            let convertedDate = dateFormatter.string(from: fish.date!)
+            cell.dateLabel.text = convertedDate
+            cell.nameLabel.text = fish.name
+            cell.gradeLabel.text = fish.grade
+            cell.frzPerDayLabel.text = String(format: "%.0f", fish.perDay) + " кг"
+        default:
+            print("123")
+        }
 
         return cell
     }

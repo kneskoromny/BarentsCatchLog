@@ -33,12 +33,6 @@ class DailyCatchVC: UIViewController {
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     
     //MARK: - Private Properties
-    let arrayForFishTypePicker = ["",
-                          FishTypes.cod.rawValue,
-                          FishTypes.haddock.rawValue,
-                          FishTypes.catfish.rawValue,
-                          FishTypes.redfish.rawValue]
-    
     let arrayForTableView = ["Дата", "Рыба", "Навеска"]
     
     private var catchForDayBeforeInput: Fish?
@@ -95,10 +89,16 @@ class DailyCatchVC: UIViewController {
         
         // создаем экземпляр класса в контексте
         let fishCatch = Fish(context: coreDataStack.managedContext)
-        
+        if frozenOnBoardTF.text == "" {
+            showAlertIfNoData()
+            return
+        }
         guard let fishName = choozenFish,
               let fishGrade = choozenGrade,
-              let fishWeight = frozenOnBoardTF.text else { return }
+              let fishWeight = frozenOnBoardTF.text else {
+            showAlertIfNoData()
+            return }
+        
         // запрос на существ рыбу с предикатами
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
         fetchRequest.predicate = FormulaStack().getNameGradeDatePredicate(for: fishName, grade: fishGrade, date: dayBeforeCurrentDay)
@@ -133,17 +133,10 @@ class DailyCatchVC: UIViewController {
             fishCatch.ratio = Ratios.redfish.rawValue
         }
         
-        fishCatch.frozenBoard = Double(fishWeight)!
-        fishCatch.frozenPerDay = fishCatch.frozenBoard - (catchForDayBeforeInput?.frozenBoard ?? 0)
-        fishCatch.rawBoard = (Double(fishCatch.frozenBoard) * fishCatch.ratio).rounded()
-        fishCatch.rawPerDay = fishCatch.rawBoard - (catchForDayBeforeInput?.rawBoard ?? 0)
+        fishCatch.onBoard = Double(fishWeight)!
+        fishCatch.perDay = fishCatch.onBoard - (catchForDayBeforeInput?.onBoard ?? 0)
 
-        
-        print(fishCatch)
-        coreDataStack.saveContext()
-        
-        // вызывать аларм контроллер
-        
+        showAlertBeforeSave(fishName: fishName, fishGrade: fishGrade, fishWeight: fishWeight)
     }
     // очищает Core Data
     @IBAction func deleteDataBtnPressed() {
@@ -231,6 +224,47 @@ extension DailyCatchVC: FishTVCDelegate {
         self.choozenFish = fish
         self.tableView.reloadData()
     }
+}
+
+// MARK: - AlertController {
+extension DailyCatchVC {
+    func showAlertBeforeSave(fishName: String, fishGrade: String, fishWeight: String) {
+        let alert = UIAlertController(title: "Подтвердите",
+                                      message: """
+                                        Вы вносите:
+                                        \(fishName),
+                                        навеска \(fishGrade)
+                                        в количестве \(fishWeight) кг.
+                                        """,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "Верно",
+                                       style: .default) { action in
+            self.coreDataStack.saveContext()
+            self.choozenDate = Date()
+            self.choozenFish = nil
+            self.choozenGrade = nil
+            self.frozenOnBoardTF.text = nil
+            self.tableView.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
+        alert.addAction(doneAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    func showAlertIfNoData() {
+        let alert = UIAlertController(title: "Пустые поля!",
+                                      message: """
+                                        Необходимо заполнить все поля перед сохранением
+                                        """,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "ОК",
+                                       style: .default)
+        alert.addAction(doneAction)
+        
+        present(alert, animated: true)
+    }
+    
 }
 
 // MARK: - Date
