@@ -1,13 +1,13 @@
 //
-//  DateChoiceTVCNC.swift
+//  AddReportNC.swift
 //  BarentsCatchLog
 //
-//  Created by Кирилл Нескоромный on 07.09.2021.
+//  Created by Кирилл Нескоромный on 09.09.2021.
 //
 
 import UIKit
 
-class DateChoiceTVCNC: UINavigationController {
+class AddReportTVCNC: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

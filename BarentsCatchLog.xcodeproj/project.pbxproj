@@ -25,11 +25,13 @@
 		F7946DF026E681B900241C16 /* FishTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DEF26E681B900241C16 /* FishTVCNC.swift */; };
 		F7946DF226E681E300241C16 /* FishTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF126E681E300241C16 /* FishTVC.swift */; };
 		F7946DF426E74A0600241C16 /* ReportTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF326E74A0600241C16 /* ReportTVC.swift */; };
-		F7946DF626E74CD200241C16 /* DateChoiceTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF526E74CD200241C16 /* DateChoiceTVC.swift */; };
+		F7946DF626E74CD200241C16 /* ReportChoiceTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF526E74CD200241C16 /* ReportChoiceTVC.swift */; };
 		F7946DF826E74D0F00241C16 /* ReportDescriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */; };
-		F7946DFA26E782ED00241C16 /* DateChoiceTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF926E782ED00241C16 /* DateChoiceTVCNC.swift */; };
+		F7946DFA26E782ED00241C16 /* ReportChoiceTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */; };
 		F7946DFC26E89A0E00241C16 /* ReportDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */; };
 		F7946DFE26E8AB8600241C16 /* FormulaStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFD26E8AB8600241C16 /* FormulaStack.swift */; };
+		F7946E0026E9F13800241C16 /* AddReportTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFF26E9F13800241C16 /* AddReportTVC.swift */; };
+		F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,11 +55,13 @@
 		F7946DEF26E681B900241C16 /* FishTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishTVCNC.swift; sourceTree = "<group>"; };
 		F7946DF126E681E300241C16 /* FishTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishTVC.swift; sourceTree = "<group>"; };
 		F7946DF326E74A0600241C16 /* ReportTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTVC.swift; sourceTree = "<group>"; };
-		F7946DF526E74CD200241C16 /* DateChoiceTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChoiceTVC.swift; sourceTree = "<group>"; };
+		F7946DF526E74CD200241C16 /* ReportChoiceTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChoiceTVC.swift; sourceTree = "<group>"; };
 		F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDescriptionTVC.swift; sourceTree = "<group>"; };
-		F7946DF926E782ED00241C16 /* DateChoiceTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChoiceTVCNC.swift; sourceTree = "<group>"; };
+		F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChoiceTVCNC.swift; sourceTree = "<group>"; };
 		F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDescriptionCell.swift; sourceTree = "<group>"; };
 		F7946DFD26E8AB8600241C16 /* FormulaStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaStack.swift; sourceTree = "<group>"; };
+		F7946DFF26E9F13800241C16 /* AddReportTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVC.swift; sourceTree = "<group>"; };
+		F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVCNC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +115,10 @@
 				F7946DEF26E681B900241C16 /* FishTVCNC.swift */,
 				F7946DF126E681E300241C16 /* FishTVC.swift */,
 				F7946DF326E74A0600241C16 /* ReportTVC.swift */,
-				F7946DF926E782ED00241C16 /* DateChoiceTVCNC.swift */,
-				F7946DF526E74CD200241C16 /* DateChoiceTVC.swift */,
+				F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */,
+				F7946DF526E74CD200241C16 /* ReportChoiceTVC.swift */,
+				F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */,
+				F7946DFF26E9F13800241C16 /* AddReportTVC.swift */,
 				F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */,
 			);
 			path = Controllers;
@@ -214,7 +220,7 @@
 			files = (
 				F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */,
 				F7946DFE26E8AB8600241C16 /* FormulaStack.swift in Sources */,
-				F7946DFA26E782ED00241C16 /* DateChoiceTVCNC.swift in Sources */,
+				F7946DFA26E782ED00241C16 /* ReportChoiceTVCNC.swift in Sources */,
 				F7946DF226E681E300241C16 /* FishTVC.swift in Sources */,
 				F7703BE326D7874500D7DAFB /* DailyCatchVC.swift in Sources */,
 				F7946DF026E681B900241C16 /* FishTVCNC.swift in Sources */,
@@ -228,8 +234,10 @@
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
 				F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */,
 				F7946DEE26E6773300241C16 /* GradeTVCNC.swift in Sources */,
+				F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */,
 				F7946DF426E74A0600241C16 /* ReportTVC.swift in Sources */,
-				F7946DF626E74CD200241C16 /* DateChoiceTVC.swift in Sources */,
+				F7946DF626E74CD200241C16 /* ReportChoiceTVC.swift in Sources */,
+				F7946E0026E9F13800241C16 /* AddReportTVC.swift in Sources */,
 				F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */,
 				F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */,
 			);

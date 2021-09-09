@@ -345,7 +345,7 @@
         <!--Filter-->
         <scene sceneID="V1s-2E-KTO">
             <objects>
-                <tableViewController title="Filter" id="Fur-ti-g0L" customClass="DateChoiceTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Filter" id="Fur-ti-g0L" customClass="ReportChoiceTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="uee-BN-rcJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -410,6 +410,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Фильтр" id="pze-kf-qMR">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="hH9-gB-Yl1">
+                            <connections>
+                                <segue destination="hP5-Ge-blz" kind="show" id="LKh-Vw-qCE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Составить" id="TXc-bE-q8W">
                             <connections>
                                 <action selector="getReportBtnPressed:" destination="Fur-ti-g0L" id="yXW-7S-nRb"/>
@@ -424,6 +429,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oha-Yq-Vwm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3208.6956521739135" y="-644.19642857142856"/>
+        </scene>
+        <!--Новый отчет-->
+        <scene sceneID="Yu8-WU-573">
+            <objects>
+                <tableViewController id="udI-PY-efZ" customClass="AddReportTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xnx-CO-gQL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="Jt9-wr-O2U">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ak3-CI-5P6">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ak3-CI-5P6" id="tX9-Jm-BXs">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="axF-Od-Y6s">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="QEO-vz-kzF">
+                                        <rect key="frame" x="0.0" y="117.00000034679067" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QEO-vz-kzF" id="Coq-Tg-0YB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="pBF-Xa-sub">
+                                        <rect key="frame" x="0.0" y="160.50000034679067" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pBF-Xa-sub" id="l1i-k6-P5g">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gUu-cU-5fN">
+                                        <rect key="frame" x="0.0" y="204.00000034679067" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gUu-cU-5fN" id="Sdg-LX-5gJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Qcy-ET-eNQ">
+                                        <rect key="frame" x="0.0" y="247.50000034679067" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qcy-ET-eNQ" id="bhc-Vq-GXZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="udI-PY-efZ" id="rIt-Na-7El"/>
+                            <outlet property="delegate" destination="udI-PY-efZ" id="PW5-lt-H7j"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Новый отчет" id="v25-TF-A5M"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rag-Hl-bRG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4057" y="-1323"/>
         </scene>
         <!--DateVC-->
         <scene sceneID="7bg-JL-qhb">
@@ -547,10 +621,10 @@
             </objects>
             <point key="canvasLocation" x="651" y="9"/>
         </scene>
-        <!--Date ChoiceTVCNC-->
+        <!--Report ChoiceTVCNC-->
         <scene sceneID="pT2-1g-ssF">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tQg-qy-FrN" customClass="DateChoiceTVCNC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tQg-qy-FrN" customClass="ReportChoiceTVCNC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="U1u-I9-V1J">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -564,6 +638,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3z-1f-bnb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2298.5507246376815" y="-644.19642857142856"/>
+        </scene>
+        <!--Add ReportTVCNC-->
+        <scene sceneID="IkZ-jO-JIu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hP5-Ge-blz" customClass="AddReportTVCNC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="eJa-D0-073"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0pb-I4-Dva">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="udI-PY-efZ" kind="relationship" relationship="rootViewController" id="s7F-yD-a5b"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IUp-Ss-Ihb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3209" y="-1323"/>
         </scene>
     </scenes>
     <resources>

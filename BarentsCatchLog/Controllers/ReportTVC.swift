@@ -32,8 +32,8 @@ class ReportTVC: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == toDateChoiceID {
-           guard let navController = segue.destination as? DateChoiceTVCNC,
-                let dateChoiceTVC = navController.topViewController as? DateChoiceTVC else { return
+           guard let navController = segue.destination as? ReportChoiceTVCNC,
+                let dateChoiceTVC = navController.topViewController as? ReportChoiceTVC else { return
                 }
             dateChoiceTVC.coreDataStack = coreDataStack
             dateChoiceTVC.delegate = self
@@ -93,7 +93,7 @@ extension ReportTVC {
 // MARK: - DateChoiceTVCDelegate
 extension ReportTVC: DateChoiceTVCDelegate {
     
-    func getNewPredicate(filter: DateChoiceTVC,
+    func getNewPredicate(filter: ReportChoiceTVC,
                          didSelectPredicate predicate: NSCompoundPredicate?,
                          and textLabel: String) {
         guard let fetchRequest = fetchRequest else { return }

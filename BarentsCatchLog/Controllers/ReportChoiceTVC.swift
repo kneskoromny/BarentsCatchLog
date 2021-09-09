@@ -10,13 +10,13 @@ import CoreData
 
 protocol DateChoiceTVCDelegate: AnyObject {
     func getNewPredicate(
-        filter: DateChoiceTVC,
+        filter: ReportChoiceTVC,
         didSelectPredicate predicate: NSCompoundPredicate?,
         and textLabel: String
     )
 }
 
-class DateChoiceTVC: UITableViewController {
+class ReportChoiceTVC: UITableViewController {
     
     // MARK: - Дата Секция
     @IBOutlet weak var todayChoiceCell: UITableViewCell!
@@ -51,7 +51,7 @@ class DateChoiceTVC: UITableViewController {
     
 }
 // MARK: - UITableViewDelegate
-extension DateChoiceTVC {
+extension ReportChoiceTVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell =  tableView.cellForRow(at: indexPath) else { return }
         
