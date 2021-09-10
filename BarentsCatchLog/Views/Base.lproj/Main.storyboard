@@ -575,8 +575,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Новый отчет" id="v25-TF-A5M">
-                        <barButtonItem key="leftBarButtonItem" title="Отмена" id="0Ek-pB-Qpy"/>
-                        <barButtonItem key="rightBarButtonItem" title="Сохранить" id="An9-eS-foF"/>
+                        <barButtonItem key="leftBarButtonItem" title="Отмена" id="0Ek-pB-Qpy">
+                            <connections>
+                                <action selector="cancelBtnPressed:" destination="udI-PY-efZ" id="ejF-0G-zHO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Сохранить" id="An9-eS-foF">
+                            <connections>
+                                <action selector="saveBtnPressed:" destination="udI-PY-efZ" id="gWj-cj-Eho"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateFromCell" destination="gUu-cU-5fN" id="Cx2-v0-KoZ"/>

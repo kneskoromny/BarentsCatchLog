@@ -25,6 +25,5 @@ class DateVC: UIViewController {
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         delegate.dateDidChanged(to: sender.date)
         dismiss(animated: true)
-        
     }
 }

@@ -77,6 +77,12 @@ class AddReportTVC: UITableViewController {
             }
         }
     }
+    @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
+    }
+    @IBAction func cancelBtnPressed(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
 }
     // MARK: - UITableViewDelegate
 extension AddReportTVC {
