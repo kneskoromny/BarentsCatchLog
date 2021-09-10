@@ -592,6 +592,7 @@
                         <outlet property="fishNameCell" destination="QEO-vz-kzF" id="bSn-i4-PIz"/>
                         <outlet property="gradeCell" destination="pBF-Xa-sub" id="ggY-pB-ohb"/>
                         <outlet property="nameCell" destination="ak3-CI-5P6" id="tze-hA-egc"/>
+                        <outlet property="reportIdTF" destination="jg3-fc-pZf" id="1Ab-AY-54p"/>
                         <segue destination="Ghl-Za-XcT" kind="show" identifier="toFishNamesIdentifier" id="J9o-ij-3cC"/>
                         <segue destination="kW3-Xw-ArO" kind="show" identifier="toGradeArrayIdentifier" id="zFF-pq-wsb"/>
                         <segue destination="JJi-xC-COe" kind="presentation" identifier="toDateToIdentifier" id="FmF-AT-Bk9"/>

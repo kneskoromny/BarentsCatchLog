@@ -82,7 +82,6 @@ class DailyCatchVC: UIViewController {
     
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
-        
         // получаем начало и окончание дня внесения улова
         guard let dayBeforeCurrentDay = Calendar.current.date(
                 byAdding: .day,
@@ -92,10 +91,7 @@ class DailyCatchVC: UIViewController {
         
         // создаем экземпляр класса в контексте
         let fishCatch = Fish(context: coreDataStack.managedContext)
-//        if frozenOnBoardTF.text == "" {
-//            showAlertIfNoData()
-//            return
-//        }
+
         guard let fishName = choozenFish,
               let fishGrade = choozenGrade,
               let fishWeight = frozenOnBoardTF.text else {

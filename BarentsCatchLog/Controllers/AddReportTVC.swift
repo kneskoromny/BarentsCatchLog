@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class AddReportTVC: UITableViewController {
     
     // MARK: - IB Outlets
     @IBOutlet weak var nameCell: UITableViewCell!
+    @IBOutlet weak var reportIdTF: UITextField!
     
     @IBOutlet weak var fishNameCell: UITableViewCell!
     @IBOutlet weak var gradeCell: UITableViewCell!
@@ -23,6 +25,8 @@ class AddReportTVC: UITableViewController {
         formatter.dateFormat = "dd-MM-YYYY"
         return formatter
     }()
+    lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
+    
     // MARK: - Private properties
     private let toFishArrayIdentifier = "toFishNamesIdentifier"
     private let toGradeArrayIdentifier = "toGradeArrayIdentifier"
@@ -77,7 +81,30 @@ class AddReportTVC: UITableViewController {
             }
         }
     }
+    // MARK: - IB Actions
     @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
+        // показывать алерт
+        let report = Report(context: coreDataStack.managedContext)
+        
+        guard let id = reportIdTF.text else {
+            showAlert(title: "Внимание!", message: "У отчета должно быть название.")
+            return }
+        if id == "" {
+            showAlert(title: "Внимание!", message: "Название должно состоять из символов.")
+            return
+        }
+        report.id = id
+        if let fish = choozenFish {
+            report.fish = fish
+        }
+        if let grade = choozenGrade {
+            report.grade = grade
+        }
+        report.dateFrom = choozenDateFrom
+        report.dateTo = choozenDateTo
+        
+        print(report)
+        showAlertBeforeSaveReport(id: id, fish: choozenFish ?? "вся рыба", grade: choozenGrade ?? "любая навеска", dateFrom: choozenDateFrom, dateTo: choozenDateTo)
     }
     @IBAction func cancelBtnPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
@@ -100,6 +127,57 @@ extension AddReportTVC {
             performSegue(withIdentifier: toDateToIdentifier, sender: nil)
             dateToDidChanged.toggle()
         }
+    }
+}
+// MARK: - AlertController {
+extension AddReportTVC {
+    func showAlertBeforeSaveReport(id: String,
+                                   fish: String,
+                                   grade: String,
+                                   dateFrom: Date,
+                                   dateTo: Date) {
+        let convertedDateFrom = dateFormatter.string(from: dateFrom)
+        let convertedDateTo = dateFormatter.string(from: dateTo)
+        
+        let alert = UIAlertController(title: "Подтвердите создание отчета.",
+                                      message: """
+                                        Название: \(id),
+                                        Рыба: \(fish),
+                                        Навеска: \(grade),
+                                        с \(convertedDateFrom) по \(convertedDateTo).
+                                        """,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "Верно",
+                                       style: .default) { action in
+            self.coreDataStack.saveContext()
+            
+            self.reportIdTF.text = nil
+            self.choozenFish = nil
+            self.choozenGrade = nil
+            self.choozenDateFrom = Date()
+            self.choozenDateTo = Date()
+            
+            self.tableView.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
+        alert.addAction(doneAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "OK",
+                                       style: .default) { action in
+            if let completion = completion {
+                completion()
+            }
+        }
+        alert.addAction(doneAction)
+
+        present(alert, animated: true)
     }
 }
 // MARK: - GradeTVC Delegate
@@ -136,5 +214,6 @@ extension AddReportTVC: FishTVCDelegate {
         self.tableView.reloadData()
     }
 }
+
 
 
