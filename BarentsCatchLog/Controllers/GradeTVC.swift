@@ -44,7 +44,7 @@ class GradeTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let grade = grades[indexPath.row]
-        delegate.gradeDidChanged(to: grade)
+        delegate.valueDidChanged(to: grade)
         dismiss(animated: true)
     }
     

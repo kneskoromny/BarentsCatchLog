@@ -12,7 +12,7 @@ protocol DateVCDelegate {
     func dateDidChanged(to date: Date)
 }
 protocol GradeTVCDelegate {
-    func gradeDidChanged(to grade: String)
+    func valueDidChanged(to grade: String)
 }
 protocol FishTVCDelegate {
     func fishDidChanged(to fish: String)
@@ -58,6 +58,7 @@ class DailyCatchVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == toDateIdentifier {
             if let dateVC = segue.destination as? DateVC {
+                dateVC.choozenDate = choozenDate
                 dateVC.delegate = self
             }
         } else if segue.identifier == toGradeIdentifier {
@@ -229,7 +230,7 @@ extension DailyCatchVC: DateVCDelegate {
 }
 // MARK: - GradeTVC Delegate
 extension DailyCatchVC: GradeTVCDelegate {
-    func gradeDidChanged(to grade: String) {
+    func valueDidChanged(to grade: String) {
         self.choozenGrade = grade
         self.tableView.reloadData()
     }
