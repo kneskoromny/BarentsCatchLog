@@ -8,6 +8,14 @@
 import UIKit
 import CoreData
 
+protocol ReportChoiceTVCDelegate: AnyObject {
+    func getNewPredicate(
+        filter: ReportChoiceTVC,
+        didSelectPredicate predicate: NSCompoundPredicate?,
+        and textLabel: String
+    )
+}
+
 class ReportTVC: UITableViewController {
     
     // MARK: - Public Properties
@@ -91,7 +99,7 @@ extension ReportTVC {
     }
 }
 // MARK: - DateChoiceTVCDelegate
-extension ReportTVC: DateChoiceTVCDelegate {
+extension ReportTVC: ReportChoiceTVCDelegate {
     
     func getNewPredicate(filter: ReportChoiceTVC,
                          didSelectPredicate predicate: NSCompoundPredicate?,

@@ -26,6 +26,7 @@ class AddReportTVC: UITableViewController {
         return formatter
     }()
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
+    var delegate: AddReportTVCDelegate!
     
     // MARK: - Private properties
     private let toFishArrayIdentifier = "toFishNamesIdentifier"
@@ -104,7 +105,17 @@ class AddReportTVC: UITableViewController {
         report.dateTo = choozenDateTo
         
         print(report)
-        showAlertBeforeSaveReport(id: id, fish: choozenFish ?? "вся рыба", grade: choozenGrade ?? "любая навеска", dateFrom: choozenDateFrom, dateTo: choozenDateTo)
+//        showAlertBeforeSaveReport(id: id,
+//                                  fish: choozenFish ?? "вся рыба",
+//                                  grade: choozenGrade ?? "любая навеска",
+//                                  dateFrom: choozenDateFrom,
+//                                  dateTo: choozenDateTo) {
+//            self.delegate.newReportDidCreated(report: report)
+//        }
+        coreDataStack.saveContext()
+        delegate.newReportDidCreated(report: report)
+        dismiss(animated: true)
+        
     }
     @IBAction func cancelBtnPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
@@ -135,7 +146,8 @@ extension AddReportTVC {
                                    fish: String,
                                    grade: String,
                                    dateFrom: Date,
-                                   dateTo: Date) {
+                                   dateTo: Date,
+                                   completion: @escaping() -> Void) {
         let convertedDateFrom = dateFormatter.string(from: dateFrom)
         let convertedDateTo = dateFormatter.string(from: dateTo)
         
@@ -150,7 +162,7 @@ extension AddReportTVC {
         let doneAction = UIAlertAction(title: "Верно",
                                        style: .default) { action in
             self.coreDataStack.saveContext()
-            
+            completion()
             self.reportIdTF.text = nil
             self.choozenFish = nil
             self.choozenGrade = nil
@@ -158,6 +170,7 @@ extension AddReportTVC {
             self.choozenDateTo = Date()
             
             self.tableView.reloadData()
+            self.dismiss(animated: true)
         }
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
         alert.addAction(doneAction)
@@ -193,7 +206,7 @@ extension AddReportTVC: GradeTVCDelegate {
 extension AddReportTVC: DateVCDelegate {
     func dateDidChanged(to date: Date) {
         let convertedDate = dateFormatter.string(from: date)
-        
+        // все равно косяк
         if !dateFromDidChanged {
             choozenDateFrom = date
             dateFromCell.detailTextLabel?.text = convertedDate
