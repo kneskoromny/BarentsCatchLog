@@ -12,7 +12,8 @@ class ReportChoiceCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var gradeLabel: UILabel!
-    @IBOutlet weak var frzPerDayLabel: UILabel!
+    @IBOutlet weak var perDayQuantityLabel: UILabel!
+    @IBOutlet weak var perDayTypeLabel: UILabel!
     
 
 }

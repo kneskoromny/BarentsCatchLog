@@ -21,6 +21,7 @@ class ReportDescriptionTVC: UITableViewController {
     var caughtFishes: [Fish]!
     var convertedCaughtFishes: [Fish]!
     var flag: Bool!
+    var rawFish: Double?
     
     //MARK: - Private Properties
     private var sections = ["Готовая продукция"]
@@ -31,15 +32,20 @@ class ReportDescriptionTVC: UITableViewController {
         convertedCaughtFishes = caughtFishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending})
         if flag {
             sections.append("Вылов")
+            getRawFish(from: caughtFishes)
         }
+        
     }
     
     //MARK: - Private Methods
     // получаем вылов на борту из готовой на борту из переданного массива
-    private func getRawFish(from array: [Fish]) {
-        
+    private func getRawFish(from fishes: [Fish]) {
+        if let fish = caughtFishes.first {
+            rawFish = (fishes.reduce(0) { sum, fish in
+                sum + fish.perDay
+            } * fish.ratio).rounded()
+        }
     }
-    
 }
 // MARK: - UITableViewDataSource, Delegate
 extension ReportDescriptionTVC {
@@ -85,9 +91,17 @@ extension ReportDescriptionTVC {
             cell.dateLabel.text = convertedDate
             cell.nameLabel.text = fish.name
             cell.gradeLabel.text = fish.grade
-            cell.frzPerDayLabel.text = String(format: "%.0f", fish.perDay) + " кг"
+            cell.perDayQuantityLabel.text = String(format: "%.0f", fish.perDay) + " кг"
+            cell.perDayTypeLabel.text = "готовой"
         default:
-            print("123")
+            let fish = caughtFishes.first
+            cell.dateLabel.isHidden = true
+            cell.nameLabel.text = fish?.name
+            if let fishRatio = fish?.ratio {
+                cell.gradeLabel.text = "Коэффициент: \(fishRatio)"
+            }
+            cell.perDayQuantityLabel.text = String(format: "%.0f", rawFish!) + " кг"
+            cell.perDayTypeLabel.text = "вылова"
         }
 
         return cell
