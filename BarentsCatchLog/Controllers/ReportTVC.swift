@@ -50,17 +50,15 @@ class ReportTVC: UITableViewController {
                 return
             }
             reportDecriptionTVC.caughtFishes = caughtFishes
-            print("123")
             
         }
     }
     // MARK: - Private Methods
     private func fetchAndReload() {
         guard let fetchRequest = fetchRequest else { return }
-        print(fetchRequest.predicate ?? "1 no predicate")
+        print("Working predicate is: \(String(describing: fetchRequest.predicate))")
         do {
             caughtFishes = try coreDataStack.managedContext.fetch(fetchRequest)
-            print(caughtFishes.count)
             totalFrz = 0
             caughtFishes.forEach { totalFrz += $0.perDay }
             tableView.reloadData()

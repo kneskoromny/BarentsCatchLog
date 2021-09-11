@@ -103,15 +103,7 @@ class AddReportTVC: UITableViewController {
         }
         report.dateFrom = choozenDateFrom
         report.dateTo = choozenDateTo
-        
-        print(report)
-//        showAlertBeforeSaveReport(id: id,
-//                                  fish: choozenFish ?? "вся рыба",
-//                                  grade: choozenGrade ?? "любая навеска",
-//                                  dateFrom: choozenDateFrom,
-//                                  dateTo: choozenDateTo) {
-//            self.delegate.newReportDidCreated(report: report)
-//        }
+
         coreDataStack.saveContext()
         delegate.newReportDidCreated(report: report)
         dismiss(animated: true)
