@@ -29,6 +29,7 @@ class ReportTVC: UITableViewController {
     private var caughtFishes: [Fish] = []
     private var totalFrz: Double = 0
     private var detailTextLabel = "Всего"
+    private var flag: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +50,9 @@ class ReportTVC: UITableViewController {
             guard let reportDecriptionTVC = segue.destination as? ReportDescriptionTVC else {
                 return
             }
+            flag = isOneFishType(fishes: caughtFishes)
             reportDecriptionTVC.caughtFishes = caughtFishes
-            
+            reportDecriptionTVC.flag = flag
         }
     }
     // MARK: - Private Methods
@@ -66,10 +68,15 @@ class ReportTVC: UITableViewController {
             print("Could not fetch \(error), \(error.userInfo)")
         }
     }
+    private func isOneFishType(fishes: [Fish]) -> Bool {
+        let fishFromCatch = fishes.first
+        let filteredFishes = fishes.filter { fish in
+            fish.name == fishFromCatch?.name
+        }
+        return filteredFishes.count == fishes.count ? true : false
+        
+    }
 }
-// MARK: - Navigation
-
-
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension ReportTVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

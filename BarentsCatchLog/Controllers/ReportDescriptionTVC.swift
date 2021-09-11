@@ -20,13 +20,16 @@ class ReportDescriptionTVC: UITableViewController {
     }()
     var caughtFishes: [Fish]!
     var convertedCaughtFishes: [Fish]!
+    var flag: Bool!
     
-    private let sections = ["Готовая продукция", "Вылов"]
+    //MARK: - Private Properties
+    private let sections = ["Готовая продукция"]
 
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         convertedCaughtFishes = caughtFishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending})
+        print(flag)
     }
     
     //MARK: - Private Methods

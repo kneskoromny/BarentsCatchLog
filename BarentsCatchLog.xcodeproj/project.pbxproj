@@ -119,9 +119,9 @@
 				F7946DF326E74A0600241C16 /* ReportTVC.swift */,
 				F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */,
 				F7946DF526E74CD200241C16 /* ReportChoiceTVC.swift */,
+				F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */,
 				F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */,
 				F7946DFF26E9F13800241C16 /* AddReportTVC.swift */,
-				F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
