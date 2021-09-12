@@ -166,6 +166,7 @@
                     <connections>
                         <segue destination="4t9-p1-WJe" kind="relationship" relationship="viewControllers" id="8Ar-3Q-kgY"/>
                         <segue destination="cHp-eJ-WX7" kind="relationship" relationship="viewControllers" id="pjN-Un-EWv"/>
+                        <segue destination="xOP-sF-Vca" kind="relationship" relationship="viewControllers" id="ukj-zD-IM0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZP-QI-lko" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -701,6 +702,51 @@
             </objects>
             <point key="canvasLocation" x="651" y="9"/>
         </scene>
+        <!--Журнал-->
+        <scene sceneID="tqw-dY-Yjo">
+            <objects>
+                <tableViewController id="c9T-0c-ZLa" customClass="LogTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2ln-Ib-QrP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="logCell" textLabel="l8B-gr-k7Z" detailTextLabel="cUg-dV-Yen" style="IBUITableViewCellStyleValue1" id="rtt-nJ-Xqt">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="52.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rtt-nJ-Xqt" id="yXg-bM-rd8">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="52.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l8B-gr-k7Z">
+                                            <rect key="frame" x="20" y="18" width="30" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cUg-dV-Yen">
+                                            <rect key="frame" x="366" y="23" width="28" height="12"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="c9T-0c-ZLa" id="KPb-TW-j1T"/>
+                            <outlet property="delegate" destination="c9T-0c-ZLa" id="0hs-CI-YvA"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Журнал" id="wIR-MQ-Az4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eIH-ey-dcu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1483" y="739"/>
+        </scene>
         <!--Report ChoiceTVCNC-->
         <scene sceneID="pT2-1g-ssF">
             <objects>
@@ -738,6 +784,25 @@
             </objects>
             <point key="canvasLocation" x="3209" y="-1323"/>
         </scene>
+        <!--Журнал-->
+        <scene sceneID="fHy-Ak-VAh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xOP-sF-Vca" customClass="LogTVCNC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Журнал" image="newspaper" catalog="system" id="DXd-Ah-Sij"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LW6-S2-QaQ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="c9T-0c-ZLa" kind="relationship" relationship="rootViewController" id="68e-vZ-1U0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j8X-ot-Rv9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="651" y="739"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="J9o-ij-3cC"/>
@@ -746,6 +811,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
+        <image name="newspaper" catalog="system" width="128" height="108"/>
         <image name="play" catalog="system" width="120" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="trash" catalog="system" width="121" height="128"/>
