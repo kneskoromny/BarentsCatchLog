@@ -35,6 +35,7 @@
 		F7946E0026E9F13800241C16 /* AddReportTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFF26E9F13800241C16 /* AddReportTVC.swift */; };
 		F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */; };
 		F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0326EA300400241C16 /* AddReportNameCell.swift */; };
+		F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AE361D26EF2CFD007693CF /* LogCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		F7946DFF26E9F13800241C16 /* AddReportTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVC.swift; sourceTree = "<group>"; };
 		F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVCNC.swift; sourceTree = "<group>"; };
 		F7946E0326EA300400241C16 /* AddReportNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportNameCell.swift; sourceTree = "<group>"; };
+		F7AE361D26EF2CFD007693CF /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */,
 				F7946DFB26E89A0E00241C16 /* ReportChoiceCell.swift */,
 				F7946E0326EA300400241C16 /* AddReportNameCell.swift */,
+				F7AE361D26EF2CFD007693CF /* LogCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */,
 				F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */,
 				F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */,
+				F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */,
 				F7946DF826E74D0F00241C16 /* ReportDescriptionTVC.swift in Sources */,
 				F7946DFC26E89A0E00241C16 /* ReportChoiceCell.swift in Sources */,
 				F7946DEC26E4F34A00241C16 /* GradeTVC.swift in Sources */,
