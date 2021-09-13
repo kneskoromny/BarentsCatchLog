@@ -11,7 +11,7 @@ import CoreData
 class DailyCatch {
     let date: String?
     let month: String?
-    let fishes: [Fish]?
+    var fishes: [Fish]?
     
     init(date: String, month: String, fishes: [Fish]) {
         self.date = date
@@ -42,7 +42,7 @@ class LogTVC: UITableViewController {
         }
         print("Its a fishes count - \(fishes.count)")
         let convertedFishes = fishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending})
-    
+
         divideByDate(from: convertedFishes)
         print("Its a dailyCatch count - \(dailyCatch.count)")
         
@@ -134,7 +134,31 @@ extension LogTVC {
 extension LogTVC {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let fish = dailyCatch[indexPath.section].fishes?[indexPath.row]
+            guard let fish = dailyCatch[indexPath.section].fishes?[indexPath.row] else { return }
+            let daily = dailyCatch[indexPath.section]
+            let indexSet = IndexSet(arrayLiteral: indexPath.section)
+            
+            if let index = dailyCatch[indexPath.section].fishes?.firstIndex(of: fish) {
+                if dailyCatch[indexPath.section].fishes!.count > 1 {
+                    dailyCatch[indexPath.section].fishes?.remove(at: index)
+                    tableView.deleteRows(at: [indexPath], with: .left)
+                } else {
+                    if let index2 = dailyCatch.firstIndex(where: { dailyCatch in
+                        dailyCatch === daily
+                    }) {
+                        dailyCatch[indexPath.section].fishes?.remove(at: index)
+                        print("1")
+                        tableView.deleteRows(at: [indexPath], with: .left)
+                        print("3")
+                        dailyCatch.remove(at: index2)
+                        print("2")
+                        tableView.deleteSections(indexSet, with: .left)
+                        print("4")
+                    }
+                }
+                coreDataStack.managedContext.delete(fish)
+                coreDataStack.saveContext()
+            }
             
         }
     }
