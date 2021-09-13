@@ -11,4 +11,5 @@ class LogCell: UITableViewCell {
 
     @IBOutlet weak var fishlabel: UILabel!
     @IBOutlet weak var frzBoardLabel: UILabel!
+    @IBOutlet weak var gradeLabel: UILabel!
 }

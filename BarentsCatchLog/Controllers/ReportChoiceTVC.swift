@@ -95,7 +95,7 @@ class ReportChoiceTVC: UITableViewController {
         
     }
 }
-// MARK: -UITableViewDatasource
+// MARK: - TableViewDatasource
 extension ReportChoiceTVC {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         reports.count
@@ -109,7 +109,7 @@ extension ReportChoiceTVC {
         return cell
     }
 }
-// MARK: - UITableViewDelegate
+// MARK: - TableViewDelegate
 extension ReportChoiceTVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let fetchRequest: NSFetchRequest<Report> = Report.fetchRequest()

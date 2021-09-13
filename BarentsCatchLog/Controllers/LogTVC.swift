@@ -28,9 +28,7 @@ class LogTVC: UITableViewController {
     
     // MARK: - Private Properties
     private var fishes: [Fish] = []
-    private var monthSymbols = Calendar.current.monthSymbols
-    private let month = Calendar.current.dateComponents([.month], from: Date()).month!
-    private var reversedMonthSymbols: [String]?
+//    private let month = Calendar.current.dateComponents([.month], from: Date()).month!
     private var months = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн",
                           "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
     // MARK: - View Life Cycle
@@ -47,9 +45,6 @@ class LogTVC: UITableViewController {
     
         divideByDate(from: convertedFishes)
         print("Its a dailyCatch count - \(dailyCatch.count)")
-        
-        monthSymbols.removeSubrange(month..<monthSymbols.count)
-        reversedMonthSymbols = monthSymbols.reversed()
         
     }
     
@@ -83,10 +78,11 @@ class LogTVC: UITableViewController {
             }
         }
     }
+}
 
     // MARK: - TableViewDataSource
+extension LogTVC {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        //reversedMonthSymbols?.count ?? 1
         dailyCatch.count
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -98,9 +94,7 @@ class LogTVC: UITableViewController {
         figureLabel.textAlignment = .center
         figureLabel.font = .systemFont(ofSize: 16)
         figureLabel.textColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
-        //figureLabel.backgroundColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
-        
-        
+    
         let textLabel = UILabel()
         textLabel.frame = CGRect(x: 5, y: 20, width: 30, height: 20)
         if let monthFigure = Int(dailyCatch[section].month!) {
@@ -109,7 +103,6 @@ class LogTVC: UITableViewController {
         textLabel.textAlignment = .center
         textLabel.font = .systemFont(ofSize: 14)
         textLabel.textColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
-        //textLabel.backgroundColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
         
         headerView.addSubview(textLabel)
         headerView.addSubview(figureLabel)
@@ -127,11 +120,22 @@ class LogTVC: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "logCell", for: indexPath) as! LogCell
-        cell.fishlabel?.text = dailyCatch[indexPath.section].fishes?[indexPath.row].name
-        if let perDay = dailyCatch[indexPath.section].fishes?[indexPath.row].perDay {
+        let fish = dailyCatch[indexPath.section].fishes?[indexPath.row]
+        cell.fishlabel?.text = fish?.name
+        if let perDay = fish?.perDay {
             cell.frzBoardLabel.text = String(format: "%.0f", perDay) + " кг"
         }
+        cell.gradeLabel.text = fish?.grade
         
         return cell
+    }
+}
+// MARK: - TableViewDelegate
+extension LogTVC {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let fish = dailyCatch[indexPath.section].fishes?[indexPath.row]
+            
+        }
     }
 }
