@@ -150,7 +150,13 @@ class DailyCatchVC: UIViewController {
         fishCatch.onBoard = Double(fishWeight)!
         fishCatch.perDay = fishCatch.onBoard - (catchForDayBeforeInput?.onBoard ?? 0)
 
-        showAlertBeforeSave(fishName: fishName, fishGrade: fishGrade, fishWeight: fishWeight)
+        //showAlertBeforeSave(fishName: fishName, fishGrade: fishGrade, fishWeight: fishWeight)
+        self.coreDataStack.saveContext()
+        self.choozenDate = Date()
+        self.choozenFish = nil
+        self.choozenGrade = nil
+        self.frozenOnBoardTF.text = nil
+        self.tableView.reloadData()
     }
     // очищает Core Data
     @IBAction func deleteDataBtnPressed() {
