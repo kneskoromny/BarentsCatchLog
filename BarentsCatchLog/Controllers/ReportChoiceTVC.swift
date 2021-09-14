@@ -54,10 +54,17 @@ class ReportChoiceTVC: UITableViewController {
     }
     // MARK: - IB Actions
     @IBAction func getReportBtnPressed(_ sender: UIBarButtonItem) {
+        guard let selectedPredicate = selectedPredicate,
+              let selectedTextLabel = selectedTextLabel else {
+            showAlert(title: "Внимание!", message: "Не выбран тип отчета.")
+            return
+        }
         delegate?.getNewPredicate(filter: self,
                                   didSelectPredicate: selectedPredicate,
-                                  and: selectedTextLabel!)
-        dismiss(animated: true)    }
+                                  and: selectedTextLabel)
+        dismiss(animated: true)
+        
+    }
     
     @IBAction func deleteReportsBtnPressed(_ sender: UIBarButtonItem) {
         tableView.setEditing(isEditingTableView, animated: true)
@@ -142,5 +149,22 @@ extension ReportChoiceTVC: AddReportTVCDelegate {
         reports.append(report)
         tableView.insertRows(at: [IndexPath(row: reports.count - 1, section: 0)],
                              with: .automatic)
+    }
+}
+// MARK: - AlertController
+extension ReportChoiceTVC {
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "OK",
+                                       style: .default) { action in
+            if let completion = completion {
+                completion()
+            }
+        }
+        alert.addAction(doneAction)
+        
+        present(alert, animated: true)
     }
 }

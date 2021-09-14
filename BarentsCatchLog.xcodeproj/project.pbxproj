@@ -18,7 +18,7 @@
 		F7703BF426D78F9400D7DAFB /* StartTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BF326D78F9400D7DAFB /* StartTBC.swift */; };
 		F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */; };
 		F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */; };
-		F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0426DA1FAE00D7DAFB /* Helpers.swift */; };
+		F7703C0526DA1FAE00D7DAFB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0426DA1FAE00D7DAFB /* Enums.swift */; };
 		F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */; };
 		F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */; };
 		F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE726E4EE4B00241C16 /* DateVC.swift */; };
@@ -36,6 +36,7 @@
 		F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */; };
 		F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0326EA300400241C16 /* AddReportNameCell.swift */; };
 		F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AE361D26EF2CFD007693CF /* LogCell.swift */; };
+		F7AE362226F0C0A4007693CF /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AE362126F0C0A4007693CF /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +53,7 @@
 		F7703BF326D78F9400D7DAFB /* StartTBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTBC.swift; sourceTree = "<group>"; };
 		F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F7703C0026D7956200D7DAFB /* BarentsCatchLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarentsCatchLog.xcdatamodel; sourceTree = "<group>"; };
-		F7703C0426DA1FAE00D7DAFB /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		F7703C0426DA1FAE00D7DAFB /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCatchCell.swift; sourceTree = "<group>"; };
 		F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlDescriptionCell.swift; sourceTree = "<group>"; };
 		F7946DE726E4EE4B00241C16 /* DateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateVC.swift; sourceTree = "<group>"; };
@@ -70,6 +71,7 @@
 		F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVCNC.swift; sourceTree = "<group>"; };
 		F7946E0326EA300400241C16 /* AddReportNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportNameCell.swift; sourceTree = "<group>"; };
 		F7AE361D26EF2CFD007693CF /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
+		F7AE362126F0C0A4007693CF /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			children = (
 				F7703BFC26D7913C00D7DAFB /* Supports */,
 				F7703BF226D78EE900D7DAFB /* Controllers */,
+				F7AE361F26F0BD37007693CF /* CustomClasses */,
 				F7703BFB26D7911900D7DAFB /* Views */,
 				F7703BEC26D7874700D7DAFB /* Info.plist */,
 				F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */,
@@ -115,20 +118,16 @@
 		F7703BF226D78EE900D7DAFB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F7AE362026F0BD76007693CF /* NavControllers */,
 				F7703BF326D78F9400D7DAFB /* StartTBC.swift */,
 				F7703BE226D7874500D7DAFB /* DailyCatchVC.swift */,
 				F7946DE726E4EE4B00241C16 /* DateVC.swift */,
-				F7946DED26E6773300241C16 /* GradeTVCNC.swift */,
 				F7946DEB26E4F34900241C16 /* GradeTVC.swift */,
-				F7946DEF26E681B900241C16 /* FishTVCNC.swift */,
 				F7946DF126E681E300241C16 /* FishTVC.swift */,
 				F7946DF326E74A0600241C16 /* ReportTVC.swift */,
-				F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */,
 				F7946DF526E74CD200241C16 /* ReportChoiceTVC.swift */,
 				F7946DF726E74D0F00241C16 /* ReportDescriptionTVC.swift */,
-				F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */,
 				F7946DFF26E9F13800241C16 /* AddReportTVC.swift */,
-				F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */,
 				F759FD6F26EE0A95001E3D1A /* LogTVC.swift */,
 			);
 			path = Controllers;
@@ -139,11 +138,6 @@
 			children = (
 				F7703BE426D7874500D7DAFB /* Main.storyboard */,
 				F7703BE926D7874700D7DAFB /* LaunchScreen.storyboard */,
-				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
-				F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */,
-				F7946DFB26E89A0E00241C16 /* ReportChoiceCell.swift */,
-				F7946E0326EA300400241C16 /* AddReportNameCell.swift */,
-				F7AE361D26EF2CFD007693CF /* LogCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,10 +148,35 @@
 				F7703BDE26D7874500D7DAFB /* AppDelegate.swift */,
 				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
 				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
-				F7703C0426DA1FAE00D7DAFB /* Helpers.swift */,
+				F7703C0426DA1FAE00D7DAFB /* Enums.swift */,
 				F7946DFD26E8AB8600241C16 /* FormulaStack.swift */,
 			);
 			path = Supports;
+			sourceTree = "<group>";
+		};
+		F7AE361F26F0BD37007693CF /* CustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+				F7AE362126F0C0A4007693CF /* AlertController.swift */,
+				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
+				F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */,
+				F7946DFB26E89A0E00241C16 /* ReportChoiceCell.swift */,
+				F7946E0326EA300400241C16 /* AddReportNameCell.swift */,
+				F7AE361D26EF2CFD007693CF /* LogCell.swift */,
+			);
+			path = CustomClasses;
+			sourceTree = "<group>";
+		};
+		F7AE362026F0BD76007693CF /* NavControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F7946DED26E6773300241C16 /* GradeTVCNC.swift */,
+				F7946DEF26E681B900241C16 /* FishTVCNC.swift */,
+				F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */,
+				F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */,
+				F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */,
+			);
+			path = NavControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,7 +258,7 @@
 				F7946DF026E681B900241C16 /* FishTVCNC.swift in Sources */,
 				F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */,
 				F759FD7026EE0A95001E3D1A /* LogTVC.swift in Sources */,
-				F7703C0526DA1FAE00D7DAFB /* Helpers.swift in Sources */,
+				F7703C0526DA1FAE00D7DAFB /* Enums.swift in Sources */,
 				F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */,
 				F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */,
 				F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */,
@@ -249,6 +268,7 @@
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
 				F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */,
+				F7AE362226F0C0A4007693CF /* AlertController.swift in Sources */,
 				F7946DEE26E6773300241C16 /* GradeTVCNC.swift in Sources */,
 				F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */,
 				F7946DF426E74A0600241C16 /* ReportTVC.swift in Sources */,

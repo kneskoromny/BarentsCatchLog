@@ -28,7 +28,6 @@ class LogTVC: UITableViewController {
     
     // MARK: - Private Properties
     private var fishes: [Fish] = []
-//    private let month = Calendar.current.dateComponents([.month], from: Date()).month!
     private var months = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн",
                           "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
     // MARK: - View Life Cycle
@@ -37,6 +36,7 @@ class LogTVC: UITableViewController {
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
         do {
             fishes = try coreDataStack.managedContext.fetch(fetchRequest)
+            print("fishes in LOG \(fishes.count)")
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
@@ -45,40 +45,53 @@ class LogTVC: UITableViewController {
 
         divideByDate(from: convertedFishes)
         print("Its a dailyCatch count - \(dailyCatch.count)")
-        
+        tableView.reloadData()
+        dailyCatch.forEach { dailyCatch in
+            print("Its a dailyCatch  - \(dailyCatch.fishes?.first)")
+
+        }
     }
     
     // MARK: - Private Methods
     private func divideByDate(from fishes: [Fish]) {
         var dividedFishes: [Fish] = []
         var fishDate: String?, fishMonth: String?
+        var isFishDidAdded = false
         if let date = fishes.first?.date {
             let components = Calendar.current.dateComponents([.day,.month], from: date)
             fishDate = String(describing: components.day!)
             fishMonth = String(describing: components.month!)
         }
-        for fish in fishes {
-            var currentFishDate: String?, currentFishMonth: String?
-            if let date = fish.date {
-                let components = Calendar.current.dateComponents([.day, .month], from: date)
-                currentFishDate = String(describing: components.day!)
-                currentFishMonth = String(describing: components.month!)
+        // не работает если вносишь один тип рыбы
+            for fish in fishes {
+                var currentFishDate: String?, currentFishMonth: String?
+                if let date = fish.date {
+                    let components = Calendar.current.dateComponents([.day, .month], from: date)
+                    currentFishDate = String(describing: components.day!)
+                    currentFishMonth = String(describing: components.month!)
+                }
+                print("Inside forIn - fishDate \(String(describing: fishDate))")
+                print("Inside forIn - fish.date \(String(describing: currentFishDate))")
+                if currentFishDate == fishDate {
+                    dividedFishes.append(fish)
+                } else {
+                    let catchDaily = DailyCatch(date: fishDate!, month: fishMonth!, fishes: dividedFishes)
+                    dailyCatch.append(catchDaily)
+                    isFishDidAdded.toggle()
+                    dividedFishes.removeAll()
+                    dividedFishes.append(fish)
+                    isFishDidAdded.toggle()
+                    fishDate = currentFishDate
+                    fishMonth = currentFishMonth
+                }
             }
-            print("Inside forIn - fishDate \(String(describing: fishDate))")
-            print("Inside forIn - fish.date \(String(describing: currentFishDate))")
-            if currentFishDate == fishDate {
-                dividedFishes.append(fish)
-            } else {
-                let catchDaily = DailyCatch(date: fishDate!, month: fishMonth!, fishes: dividedFishes)
-                dailyCatch.append(catchDaily)
-                dividedFishes.removeAll()
-                dividedFishes.append(fish)
-                fishDate = currentFishDate
-                fishMonth = currentFishMonth
-            }
+        if !dividedFishes.isEmpty && !isFishDidAdded {
+            let catchDaily = DailyCatch(date: fishDate!, month: fishMonth!, fishes: dividedFishes)
+            dailyCatch.append(catchDaily)
+        }
         }
     }
-}
+
 
     // MARK: - TableViewDataSource
 extension LogTVC {

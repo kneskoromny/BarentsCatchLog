@@ -105,7 +105,17 @@ class DailyCatchVC: UIViewController {
         }
         // запрос на существ рыбу с предикатами
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
-        fetchRequest.predicate = FormulaStack().getNameGradeDatePredicate(for: fishName, grade: fishGrade, date: dayBeforeCurrentDay)
+        
+        let namePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
+        let gradePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.grade), fishGrade)
+        
+        let dateFrom = Calendar.current.startOfDay(for: dayBeforeCurrentDay)
+        let dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom)
+        let fromPredicate = NSPredicate(format: "date >= %@", dateFrom as NSDate)
+        let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
+        let generalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, gradePredicate, fromPredicate, toPredicate])
+        fetchRequest.predicate = generalPredicate
+        //fetchRequest.predicate = FormulaStack().getNameGradeDatePredicate(for: fishName, grade: fishGrade, date: dayBeforeCurrentDay)
         
         do {
             catchForDayBeforeInput = try coreDataStack.managedContext.fetch(fetchRequest).first
@@ -148,9 +158,9 @@ class DailyCatchVC: UIViewController {
         }
         
         fishCatch.onBoard = Double(fishWeight)!
+        // изменить логику, проверять ранее внесенные данные
         fishCatch.perDay = fishCatch.onBoard - (catchForDayBeforeInput?.onBoard ?? 0)
 
-        //showAlertBeforeSave(fishName: fishName, fishGrade: fishGrade, fishWeight: fishWeight)
         self.coreDataStack.saveContext()
         self.choozenDate = Date()
         self.choozenFish = nil
@@ -246,32 +256,8 @@ extension DailyCatchVC: FishTVCDelegate {
     }
 }
 
-// MARK: - AlertController {
+// MARK: - AlertController 
 extension DailyCatchVC {
-    func showAlertBeforeSave(fishName: String, fishGrade: String, fishWeight: String) {
-        let alert = UIAlertController(title: "Подтвердите",
-                                      message: """
-                                        Вы вносите:
-                                        \(fishName),
-                                        навеска \(fishGrade)
-                                        в количестве \(fishWeight) кг.
-                                        """,
-                                      preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Верно",
-                                       style: .default) { action in
-            self.coreDataStack.saveContext()
-            self.choozenDate = Date()
-            self.choozenFish = nil
-            self.choozenGrade = nil
-            self.frozenOnBoardTF.text = nil
-            self.tableView.reloadData()
-        }
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
-        alert.addAction(doneAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
-    }
     func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title,
                                       message: message,
@@ -286,7 +272,6 @@ extension DailyCatchVC {
         
         present(alert, animated: true)
     }
-    
 }
 
 // MARK: - Date

@@ -110,10 +110,28 @@ extension ReportTVC: ReportChoiceTVCDelegate {
                          didSelectPredicate predicate: NSCompoundPredicate?,
                          and textLabel: String) {
         guard let fetchRequest = fetchRequest else { return }
-        fetchRequest.predicate = nil
-        fetchRequest.predicate = predicate
-        detailTextLabel = textLabel
         
-        fetchAndReload()
+            fetchRequest.predicate = nil
+            fetchRequest.predicate = predicate
+            detailTextLabel = textLabel
+            
+            fetchAndReload()
+    }
+}
+// MARK: - AlertController
+extension ReportTVC {
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "OK",
+                                       style: .default) { action in
+            if let completion = completion {
+                completion()
+            }
+        }
+        alert.addAction(doneAction)
+        
+        present(alert, animated: true)
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Кирилл Нескоромный on 28.08.2021.
 //
 
-import Foundation
 
 enum FishTypes: String {
     case cod = "Треска б/г мороженая"
