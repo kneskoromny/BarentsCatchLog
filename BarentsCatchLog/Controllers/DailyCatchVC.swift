@@ -274,21 +274,4 @@ extension DailyCatchVC {
     }
 }
 
-// MARK: - Date
-extension Date {
-    
-    static var yesterday: Date { return Date().dayBefore }
-    static var dayBeforeYesterday: Date { return Date().dayBeforeYesterday }
-    
-    var dayBefore: Date {
-        return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
-    }
-    var dayBeforeYesterday: Date {
-        return Calendar.current.date(byAdding: .day, value: -2, to: noon)!
-    }
-    var noon: Date {
-            return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
-        }
-}
-
 

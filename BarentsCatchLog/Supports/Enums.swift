@@ -29,6 +29,3 @@ enum FishGrades: String {
     case moreThanFive = "5.0+"
 }
 
-enum ReportTemplate {
-    case template(id: String, grade: String, fish: String, dateFrom: Date, dateTo: Date)
-}

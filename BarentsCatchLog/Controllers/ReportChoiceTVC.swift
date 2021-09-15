@@ -11,6 +11,13 @@ import CoreData
 protocol AddReportTVCDelegate {
     func newReportDidCreated(report: Report)
 }
+
+struct ReportTemplate {
+    let id: String
+    let dateFrom: Date
+    let dateTo: Date
+}
+
 class ReportChoiceTVC: UITableViewController {
     
     // MARK: - Properties
@@ -21,8 +28,12 @@ class ReportChoiceTVC: UITableViewController {
     
     // MARK: - Private Properties
     private var reports: [Report] = []
-    private var reportTemplates: [Report] = []
+    private var reportTemplates: [ReportTemplate] = []
+    private var sections = ["Шаблоны", "Пользовательские"]
     private var isEditingTableView = true
+    
+    var dateFrom: Date?
+    var dateTo: Date?
     
     // MARK: - Data For Predicates
     var fishPredicate: NSPredicate?
@@ -35,15 +46,22 @@ class ReportChoiceTVC: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let todayReport = Report(context: coreDataStack.managedContext)
-        let dateFrom = Calendar.current.startOfDay(for: Date())
-        let dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom)
-        todayReport.dateFrom = dateFrom
-        todayReport.dateTo = dateTo
-        reportTemplates.append(todayReport)
-        
-        
+        let todayTemplate = ReportTemplate(id: "Вся рыба за сегодня",
+                                           dateFrom: Date(),
+                                           dateTo: Date())
+        reportTemplates.append(todayTemplate)
+        let yesterdayTemplate = ReportTemplate(id: "Вся рыба за вчера",
+                                               dateFrom: Date.yesterday,
+                                               dateTo: Date.yesterday)
+        reportTemplates.append(yesterdayTemplate)
+        let monday = Date.today().previous(.monday)
+        let sunday = Date.today().next(.sunday)
+        let thisWeekTemplate = ReportTemplate(id: "Вся рыба за эту неделю",
+                                              dateFrom: monday,
+                                              dateTo: sunday)
+        reportTemplates.append(thisWeekTemplate)
+
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -53,7 +71,8 @@ class ReportChoiceTVC: UITableViewController {
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
-        print("\(reports.count) in viewWillAppear")
+        print("\(reports.count) reports in viewWillAppear")
+        print("\(reportTemplates.count) templates in viewWillAppear")
     }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,7 +100,6 @@ class ReportChoiceTVC: UITableViewController {
     }
     // MARK: - Private Methods
     private func getPredicates(from report: Report) {
-        print(report)
         var totalPredicates: [NSPredicate] = []
         
         if let fishFromReport = report.fish {
@@ -105,23 +123,53 @@ class ReportChoiceTVC: UITableViewController {
         }
         selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: totalPredicates)
         selectedTextLabel = report.id
-        
-        print("Total predicates count - \(totalPredicates.count)")
-        print("Predicates: fish - \(String(describing: fishPredicate)), grade - \(String(describing: gradePredicate)), dateFrom - \(String(describing: dateFromPredicate)), dateTo - \(String(describing: dateToPredicate))")
-        
     }
+    
+    private func getPredicatesFromTemplate(from template: ReportTemplate) {
+        var totalPredicates: [NSPredicate] = []
+       
+        let dateFrom = template.dateFrom
+            let startOfDateFrom = Calendar.current.startOfDay(for: dateFrom)
+            dateFromPredicate = NSPredicate(format: "date >= %@", startOfDateFrom as NSDate)
+            totalPredicates.append(dateFromPredicate!)
+        
+        let dateTo = template.dateTo
+            let startOfDateTo = Calendar.current.startOfDay(for: dateTo)
+            let endOfDayTo = Calendar.current.date(byAdding: .day, value: 1, to: startOfDateTo)
+            dateToPredicate = NSPredicate(format: "date < %@", endOfDayTo! as NSDate)
+            totalPredicates.append(dateToPredicate!)
+        
+        selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: totalPredicates)
+        selectedTextLabel = template.id
+    }
+    
 }
 // MARK: - TableViewDatasource
 extension ReportChoiceTVC {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        sections.count
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        sections[section]
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        reports.count
+        switch section {
+        case 0:
+            return reportTemplates.count
+        default:
+            return reports.count
+        }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reportCell", for: indexPath)
-        let report = reports[indexPath.row]
-        
-        cell.textLabel?.text = report.id
-
+        switch indexPath.section {
+        case 0:
+            let reportTemplate = reportTemplates[indexPath.row]
+            cell.textLabel?.text = reportTemplate.id
+        default:
+            let reportUser = reports[indexPath.row]
+            cell.textLabel?.text = reportUser.id
+        }
         return cell
     }
 }
@@ -134,21 +182,32 @@ extension ReportChoiceTVC {
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
-        
         guard let cell =  tableView.cellForRow(at: indexPath) else { return }
-        let report = reports[indexPath.row]
-        print("report in didSelectRow: \(report)")
-        getPredicates(from: report)
+        
+        switch indexPath.section {
+        case 0:
+            let reportTemplate = reportTemplates[indexPath.row]
+            getPredicatesFromTemplate(from: reportTemplate)
+        default:
+            let reportUser = reports[indexPath.row]
+            getPredicates(from: reportUser)
+        }
 
         cell.accessoryType = .checkmark
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let report = reports[indexPath.row]
-            reports.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .left)
-            coreDataStack.managedContext.delete(report)
-            coreDataStack.saveContext()
+            
+            switch indexPath.section {
+            case 0:
+                showAlert(title: "Внимание!", message: "Этот тип отчета удалить нельзя.")
+            default:
+                let report = reports[indexPath.row]
+                reports.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+                coreDataStack.managedContext.delete(report)
+                coreDataStack.saveContext()
+            }
         }
     }
 }
@@ -156,7 +215,7 @@ extension ReportChoiceTVC {
 extension ReportChoiceTVC: AddReportTVCDelegate {
     func newReportDidCreated(report: Report) {
         reports.append(report)
-        tableView.insertRows(at: [IndexPath(row: reports.count - 1, section: 0)],
+        tableView.insertRows(at: [IndexPath(row: reports.count - 1, section: 1)],
                              with: .automatic)
     }
 }
