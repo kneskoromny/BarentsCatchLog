@@ -36,7 +36,6 @@
 		F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */; };
 		F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0326EA300400241C16 /* AddReportNameCell.swift */; };
 		F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AE361D26EF2CFD007693CF /* LogCell.swift */; };
-		F7AE362226F0C0A4007693CF /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AE362126F0C0A4007693CF /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,7 +70,6 @@
 		F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVCNC.swift; sourceTree = "<group>"; };
 		F7946E0326EA300400241C16 /* AddReportNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportNameCell.swift; sourceTree = "<group>"; };
 		F7AE361D26EF2CFD007693CF /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
-		F7AE362126F0C0A4007693CF /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +155,6 @@
 		F7AE361F26F0BD37007693CF /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
-				F7AE362126F0C0A4007693CF /* AlertController.swift */,
 				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
 				F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */,
 				F7946DFB26E89A0E00241C16 /* ReportChoiceCell.swift */,
@@ -268,7 +265,6 @@
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
 				F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */,
-				F7AE362226F0C0A4007693CF /* AlertController.swift in Sources */,
 				F7946DEE26E6773300241C16 /* GradeTVCNC.swift in Sources */,
 				F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */,
 				F7946DF426E74A0600241C16 /* ReportTVC.swift in Sources */,

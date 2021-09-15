@@ -46,6 +46,9 @@ class DailyCatchVC: UIViewController {
     private var choozenGrade: String?
     private var choozenFish: String?
     
+    // нужен для подсчета суммы мороженой за день, если в пред день не было внесения
+    private var sumFrzPerDay: Int?
+    
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,7 +118,6 @@ class DailyCatchVC: UIViewController {
         let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
         let generalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, gradePredicate, fromPredicate, toPredicate])
         fetchRequest.predicate = generalPredicate
-        //fetchRequest.predicate = FormulaStack().getNameGradeDatePredicate(for: fishName, grade: fishGrade, date: dayBeforeCurrentDay)
         
         do {
             catchForDayBeforeInput = try coreDataStack.managedContext.fetch(fetchRequest).first
@@ -156,10 +158,48 @@ class DailyCatchVC: UIViewController {
         default:
             fishCatch.ratio = Ratios.redfish.rawValue
         }
-        
         fishCatch.onBoard = Double(fishWeight)!
-        // изменить логику, проверять ранее внесенные данные
-        fishCatch.perDay = fishCatch.onBoard - (catchForDayBeforeInput?.onBoard ?? 0)
+        
+        
+        // логика по подсчету frzPerDay
+        let countRequest =
+          NSFetchRequest<NSDictionary>(entityName: "Fish")
+        // добавляем предикат по имени и навеске
+        let predicateForCount = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, gradePredicate])
+        countRequest.predicate = predicateForCount
+        // указываем тип результата
+        countRequest.resultType = .dictionaryResultType
+      // создаем экземпляр NSExpressionDescription для запроса суммы
+        let sumExpressionDesc = NSExpressionDescription()
+        // даем имя, чтобы можно было прочитать его результат из словаря результатов
+        sumExpressionDesc.name = "sumFrz"
+      // создаем аргумент для подсчета по ключу Venue.specialCount
+        let specialCountExp =
+            NSExpression(forKeyPath: #keyPath(Fish.perDay))
+        // указываем тип выражения - сумма, какой аргумент считать - specialCountExp
+        sumExpressionDesc.expression =
+          NSExpression(forFunction: "sum:",
+                       arguments: [specialCountExp])
+        // задаем тип возвращаемого значения - Int32
+        sumExpressionDesc.expressionResultType =
+          .integer32AttributeType
+      // в свойство начального запроса ставим созданный запрос суммы
+        countRequest.propertiesToFetch = [sumExpressionDesc]
+      // выполняем запрос
+        do {
+          let results =
+            try coreDataStack.managedContext.fetch(countRequest)
+          // возвращаемое значение массив, получаем первый элемент из него
+          let resultDict = results.first
+          // вытаскиваем значение из словаря по ключу и кастим до Int
+          sumFrzPerDay = resultDict?["sumFrz"] as? Int ?? 0
+            print("This is sumFrzPerDay: \(String(describing: sumFrzPerDay))")
+          
+        } catch let error as NSError {
+          print("count not fetched \(error), \(error.userInfo)")
+        }
+        
+        fishCatch.perDay = fishCatch.onBoard - (catchForDayBeforeInput?.onBoard ?? Double(sumFrzPerDay ?? 0))
 
         self.coreDataStack.saveContext()
         self.choozenDate = Date()
@@ -269,7 +309,7 @@ extension DailyCatchVC {
             }
         }
         alert.addAction(doneAction)
-        
+
         present(alert, animated: true)
     }
 }

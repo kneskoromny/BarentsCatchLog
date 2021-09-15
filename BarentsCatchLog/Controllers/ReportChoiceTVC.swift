@@ -14,6 +14,7 @@ protocol AddReportTVCDelegate {
 
 struct ReportTemplate {
     let id: String
+    let fish: String?
     let dateFrom: Date
     let dateTo: Date
 }
@@ -47,19 +48,48 @@ class ReportChoiceTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let todayTemplate = ReportTemplate(id: "Вся рыба за сегодня",
+                                           fish: nil,
                                            dateFrom: Date(),
                                            dateTo: Date())
         reportTemplates.append(todayTemplate)
+        
         let yesterdayTemplate = ReportTemplate(id: "Вся рыба за вчера",
+                                               fish: nil,
                                                dateFrom: Date.yesterday,
                                                dateTo: Date.yesterday)
         reportTemplates.append(yesterdayTemplate)
+        
         let monday = Date.today().previous(.monday)
         let sunday = Date.today().next(.sunday)
         let thisWeekTemplate = ReportTemplate(id: "Вся рыба за эту неделю",
+                                              fish: nil,
                                               dateFrom: monday,
                                               dateTo: sunday)
         reportTemplates.append(thisWeekTemplate)
+        
+        let todayCodTemplate = ReportTemplate(id: "Вся треска за сегодня",
+                                              fish: FishTypes.cod.rawValue,
+                                              dateFrom: Date(),
+                                              dateTo: Date())
+        reportTemplates.append(todayCodTemplate)
+        
+        let yesterdayCodTemplate = ReportTemplate(id: "Вся треска за вчера",
+                                               fish: FishTypes.cod.rawValue,
+                                               dateFrom: Date.yesterday,
+                                               dateTo: Date.yesterday)
+        reportTemplates.append(yesterdayCodTemplate)
+        
+        let todayHaddockTemplate = ReportTemplate(id: "Вся пикша за сегодня",
+                                              fish: FishTypes.haddock.rawValue,
+                                              dateFrom: Date(),
+                                              dateTo: Date())
+        reportTemplates.append(todayHaddockTemplate)
+        
+        let yesterdayHaddockTemplate = ReportTemplate(id: "Вся пикша за вчера",
+                                               fish: FishTypes.haddock.rawValue,
+                                               dateFrom: Date.yesterday,
+                                               dateTo: Date.yesterday)
+        reportTemplates.append(yesterdayHaddockTemplate)
 
 
     }
@@ -128,6 +158,11 @@ class ReportChoiceTVC: UITableViewController {
     private func getPredicatesFromTemplate(from template: ReportTemplate) {
         var totalPredicates: [NSPredicate] = []
        
+        if let fishFromTemplate = template.fish {
+            fishPredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishFromTemplate)
+            totalPredicates.append(fishPredicate!)
+        }
+        
         let dateFrom = template.dateFrom
             let startOfDateFrom = Calendar.current.startOfDay(for: dateFrom)
             dateFromPredicate = NSPredicate(format: "date >= %@", startOfDateFrom as NSDate)
