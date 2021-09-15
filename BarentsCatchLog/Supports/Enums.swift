@@ -4,7 +4,7 @@
 //
 //  Created by Кирилл Нескоромный on 28.08.2021.
 //
-
+import Foundation
 
 enum FishTypes: String {
     case cod = "Треска б/г мороженая"
@@ -27,4 +27,8 @@ enum FishGrades: String {
     case fromTwoToThree = "2.0-3.0"
     case fromThreeToFive = "3.0-5.0"
     case moreThanFive = "5.0+"
+}
+
+enum ReportTemplate {
+    case template(id: String, grade: String, fish: String, dateFrom: Date, dateTo: Date)
 }

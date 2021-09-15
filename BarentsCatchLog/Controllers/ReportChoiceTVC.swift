@@ -21,6 +21,7 @@ class ReportChoiceTVC: UITableViewController {
     
     // MARK: - Private Properties
     private var reports: [Report] = []
+    private var reportTemplates: [Report] = []
     private var isEditingTableView = true
     
     // MARK: - Data For Predicates
@@ -34,6 +35,14 @@ class ReportChoiceTVC: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let todayReport = Report(context: coreDataStack.managedContext)
+        let dateFrom = Calendar.current.startOfDay(for: Date())
+        let dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom)
+        todayReport.dateFrom = dateFrom
+        todayReport.dateTo = dateTo
+        reportTemplates.append(todayReport)
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
