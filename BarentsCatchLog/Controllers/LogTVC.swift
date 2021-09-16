@@ -61,14 +61,12 @@ class LogTVC: UITableViewController {
         tableView.refreshControl = tableRefreshControl
         
     }
-    // MARK: - IB Actions
-    
-    
     // MARK: - Private Methods
+    // добавил 4 рыбы за сегодня, рефрешнул, добавил еще 2 рефрешнул и они добавились и отдельной секцией с числом и в число к другим
     private func divideByDate(from fishes: [Fish]) {
         var dividedFishes: [Fish] = []
         var fishDate: String?, fishMonth: String?
-        var isFishDidAdded = false
+        //var isFishDidAdded = false
         if let date = fishes.first?.date {
             let components = Calendar.current.dateComponents([.day,.month], from: date)
             fishDate = String(describing: components.day!)
@@ -84,25 +82,59 @@ class LogTVC: UITableViewController {
             }
             print("Inside forIn - fishDate \(String(describing: fishDate))")
             print("Inside forIn - fish.date \(String(describing: currentFishDate))")
+            // даты 2х последующих рыб совпадают
             if currentFishDate == fishDate {
                 dividedFishes.append(fish)
-            } else {
-                let catchDaily = DailyCatch(date: fishDate!, month: fishMonth!, fishes: dividedFishes)
-                dailyCatch.append(catchDaily)
-                isFishDidAdded.toggle()
+                // появляется другая дата
+               } else {
+                // первое внесение, dailyCatch пустой
+                if dailyCatch.isEmpty {
+                    guard let date = fishDate, let month = fishMonth else { return }
+                    let catchDaily = DailyCatch(date: date, month: month, fishes: dividedFishes)
+                    dailyCatch.append(catchDaily)
+                    // рыба уже вносилась, dailyCatch содержит данные
+                } else {
+                    for element in dailyCatch {
+                        // есть такая же дата
+                        if element.date == fishDate {
+                            element.fishes?.append(fish)
+                            // такой даты нет
+                        } else {
+                            guard let date = fishDate, let month = fishMonth else { return }
+                            let catchDaily = DailyCatch(date: date, month: month, fishes: dividedFishes)
+                            dailyCatch.append(catchDaily)
+                        }
+                    }
+                }
                 dividedFishes.removeAll()
                 dividedFishes.append(fish)
-                isFishDidAdded.toggle()
                 fishDate = currentFishDate
                 fishMonth = currentFishMonth
             }
         }
         print("Divided fishes count - \(dividedFishes.count)")
-        if !dividedFishes.isEmpty && !isFishDidAdded {
-            // добавить проверку на nil
-            let catchDaily = DailyCatch(date: fishDate!, month: fishMonth!, fishes: dividedFishes)
+        // внесение последнего элемента массива fishes
+        var iteration = 0
+        var isAdded = false
+        while iteration < dailyCatch.count {
+            if dailyCatch[iteration].date == fishDate {
+                isAdded = true
+                for fish in dividedFishes {
+                    dailyCatch[iteration].fishes?.append(fish)
+                }
+                break
+            } else {
+                iteration += 1
+            }
+            
+        }
+        if !isAdded {
+            guard let date = fishDate, let month = fishMonth else { return }
+            let catchDaily = DailyCatch(date: date, month: month, fishes: dividedFishes)
             dailyCatch.append(catchDaily)
         }
+        
+        
         sortedDailyCatch = dailyCatch.sorted { catch1, catch2 in
             let date1 = Int(catch1.date!), date2 = Int(catch2.date!)
             return date1! > date2!
@@ -210,6 +242,23 @@ extension LogTVC {
             }
             
         }
+    }
+}
+// MARK: - AlertController
+extension LogTVC {
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "OK",
+                                       style: .default) { action in
+            if let completion = completion {
+                completion()
+            }
+        }
+        alert.addAction(doneAction)
+
+        present(alert, animated: true)
     }
 }
 
