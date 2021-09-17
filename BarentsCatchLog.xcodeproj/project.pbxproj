@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F747DB9826F23E3B00B3F68A /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9726F23E3B00B3F68A /* Extension+Date.swift */; };
 		F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9926F46D7900B3F68A /* Predicates.swift */; };
+		F747DB9E26F4C6C400B3F68A /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9D26F4C6C400B3F68A /* Requests.swift */; };
 		F759FD6E26EE0A7F001E3D1A /* LogTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */; };
 		F759FD7026EE0A95001E3D1A /* LogTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F759FD6F26EE0A95001E3D1A /* LogTVC.swift */; };
 		F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BDE26D7874500D7DAFB /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		F747DB9726F23E3B00B3F68A /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		F747DB9926F46D7900B3F68A /* Predicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicates.swift; sourceTree = "<group>"; };
+		F747DB9D26F4C6C400B3F68A /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTVCNC.swift; sourceTree = "<group>"; };
 		F759FD6F26EE0A95001E3D1A /* LogTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTVC.swift; sourceTree = "<group>"; };
 		F7703BDB26D7874500D7DAFB /* BarentsCatchLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarentsCatchLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +153,7 @@
 				F7703C0426DA1FAE00D7DAFB /* Enums.swift */,
 				F747DB9726F23E3B00B3F68A /* Extension+Date.swift */,
 				F747DB9926F46D7900B3F68A /* Predicates.swift */,
+				F747DB9D26F4C6C400B3F68A /* Requests.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				F7946DFA26E782ED00241C16 /* ReportChoiceTVCNC.swift in Sources */,
 				F7946DF226E681E300241C16 /* FishTVC.swift in Sources */,
 				F7703BE326D7874500D7DAFB /* DailyCatchVC.swift in Sources */,
+				F747DB9E26F4C6C400B3F68A /* Requests.swift in Sources */,
 				F7946DF026E681B900241C16 /* FishTVCNC.swift in Sources */,
 				F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */,
 				F759FD7026EE0A95001E3D1A /* LogTVC.swift in Sources */,

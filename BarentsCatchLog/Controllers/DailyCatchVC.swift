@@ -35,42 +35,32 @@ class DailyCatchVC: UIViewController {
     //MARK: - Private Properties
     let arrayForTableView = ["Дата", "Рыба", "Навеска"]
     
-    private var catchForDayBeforeInput: Fish?
-    
     private let cellIdentifier = "Cell"
     private let toDateIdentifier = "toDateVC"
     private let toGradeIdentifier = "toGradeTVC"
     private let toFishIdentifier = "toFishTVC"
     
+    private var isOnBoardWeightGreater = false
     private var choozenDate = Date()
     private var choozenGrade: String?
     private var choozenFish: String?
-    
-    // нужен для подсчета суммы мороженой за день, если в пред день не было внесения
     private var sumFrzPerDay: Int?
     
-    //MARK: - Override Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        frozenOnBoardTF.keyboardType = .decimalPad
-    }
-    
     //MARK: - Navigation
-    // передаем делегатов в контроллеры
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == toDateIdentifier {
+        switch segue.identifier {
+        case toDateIdentifier:
             if let dateVC = segue.destination as? DateVC {
                 dateVC.choozenDate = choozenDate
                 dateVC.delegate = self
             }
-        } else if segue.identifier == toGradeIdentifier {
+        case toGradeIdentifier:
             if let navController = segue.destination as? GradeTVCNC {
                 if let gradeTVC = navController.topViewController as? GradeTVC {
                     gradeTVC.delegate = self
                 }
             }
-        } else {
+        default:
             if let navController = segue.destination as? FishTVCNC {
                 if let fishTVC = navController.topViewController as? FishTVC {
                     fishTVC.delegate = self
@@ -78,117 +68,36 @@ class DailyCatchVC: UIViewController {
             }
         }
     }
-    // убирает окна при нажатии на экран
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
-        // получаем предыдущий день внесения улова
-        guard let dayBeforeInputDay = Calendar.current.date(byAdding: .day,
-                                                              value: -1,
-                                                              to: choozenDate) else { return }
-        
-        // создаем экземпляр класса в контексте
-        let fishCatch = Fish(context: coreDataStack.managedContext)
-
-        guard let fishName = choozenFish,
-              let fishGrade = choozenGrade,
-              let fishWeight = frozenOnBoardTF.text else {
+        guard let fishName = choozenFish, let fishGrade = choozenGrade, let fishWeight = frozenOnBoardTF.text else {
             showAlert(title: "Пустые поля!",
                       message: "Необходимо заполнить все поля перед сохранением.")
-            return }
+            return
+        }
         if fishWeight == "" {
             showAlert(title: "Пустые поля!",
                       message: "Необходимо заполнить все поля перед сохранением.")
             return
         }
-        // запрос на существ рыбу с предикатами
-        let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
-        let predicatesForCatchBeforeInput = Predicates().getPredicateFrom(name: fishName,
-                                                       grade: fishGrade,
-                                                       dateFrom: dayBeforeInputDay,
-                                                       dateTo: dayBeforeInputDay)
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCatchBeforeInput)
-        fetchRequest.predicate = predicate
+        sumFrzPerDay = Requests().getAttributeCountRequest(for: fishName, and: fishGrade)
         
-        do {
-            catchForDayBeforeInput = try coreDataStack.managedContext.fetch(fetchRequest).first
-        } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
-        }
-        if let lastCatch = catchForDayBeforeInput?.onBoard,
-           let doubleFishWeight = Double(fishWeight) {
-            if doubleFishWeight < lastCatch {
-                showAlert(title: "Внимание!",
-                          message: "Количество вносимой продукции на борту меньше ранее внесенного.") {
-                    self.frozenOnBoardTF.becomeFirstResponder()
-                    self.frozenOnBoardTF.text = ""
-                }
+        checkOnBoardWeight(between: sumFrzPerDay, and: fishWeight)
+        if isOnBoardWeightGreater {
+            showAlert(title: "Что-то не так!",
+                      message: "Проверьте данные. Вносимое количество не может быть меньше, чем внесено ранее.") {
+                self.frozenOnBoardTF.becomeFirstResponder()
+                self.frozenOnBoardTF.text = ""
             }
+            return
         }
         
-        fishCatch.name = choozenFish
-        fishCatch.grade = choozenGrade
-        fishCatch.date = choozenDate
-        
-        switch fishName {
-        case FishTypes.cod.rawValue:
-            fishCatch.ratio = Ratios.cod.rawValue
-        case FishTypes.haddock.rawValue:
-            fishCatch.ratio = Ratios.haddock.rawValue
-        case FishTypes.catfish.rawValue:
-            fishCatch.ratio = Ratios.catfish.rawValue
-        default:
-            fishCatch.ratio = Ratios.redfish.rawValue
-        }
-        fishCatch.onBoard = Double(fishWeight)!
-        
-        
-        // логика по подсчету frzPerDay по внесенному типу рыбы, на тот случай, если вчера внесения не было
-        let countRequest = NSFetchRequest<NSDictionary>(entityName: "Fish")
-        // добавляем предикат по имени и навеске
-        let predicatesForCount = Predicates().getPredicateFrom(name: fishName, grade: fishGrade)
-        let predicateForCount = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCount)
-        countRequest.predicate = predicateForCount
-        // указываем тип результата
-        countRequest.resultType = .dictionaryResultType
-      // создаем экземпляр NSExpressionDescription для запроса суммы
-        let sumExpressionDesc = NSExpressionDescription()
-        // даем имя, чтобы можно было прочитать его результат из словаря результатов
-        sumExpressionDesc.name = "sumFrz"
-      // создаем аргумент для подсчета по ключу Fish.perDay
-        let specialCountExp = NSExpression(forKeyPath: #keyPath(Fish.perDay))
-        // указываем тип выражения - сумма, какой аргумент считать - specialCountExp
-        sumExpressionDesc.expression = NSExpression(forFunction: "sum:",
-                                                    arguments: [specialCountExp])
-        // задаем тип возвращаемого значения - Int32
-        sumExpressionDesc.expressionResultType = .integer32AttributeType
-      // в свойство начального запроса ставим созданный запрос суммы
-        countRequest.propertiesToFetch = [sumExpressionDesc]
-      
-        do {
-          let results =
-            try coreDataStack.managedContext.fetch(countRequest)
-          // возвращаемое значение массив, получаем первый элемент из него
-          let resultDict = results.first
-          // вытаскиваем значение из словаря по ключу и кастим до Int
-          sumFrzPerDay = resultDict?["sumFrz"] as? Int ?? 0
-            print("This is sumFrzPerDay: \(String(describing: sumFrzPerDay))")
-          
-        } catch let error as NSError {
-          print("count not fetched \(error), \(error.userInfo)")
-        }
-        
-        fishCatch.perDay = fishCatch.onBoard - (catchForDayBeforeInput?.onBoard ?? Double(sumFrzPerDay ?? 0))
-
-        self.coreDataStack.saveContext()
-        self.choozenDate = Date()
-        self.choozenFish = nil
-        self.choozenGrade = nil
-        self.frozenOnBoardTF.text = nil
-        self.tableView.reloadData()
+        createInstance(name: fishName, grade: fishGrade, date: choozenDate, weight: fishWeight)
+        refreshUI()
     }
     // очищает Core Data
     @IBAction func deleteDataBtnPressed() {
@@ -202,44 +111,84 @@ class DailyCatchVC: UIViewController {
         }
     }
     
-    //MARK: - Public Methods
-   
+    //MARK: - Private Methods
+    private func checkOnBoardWeight(between onBoardFish: Int?, and inputFish: String) {
+        if let onBoardFish = onBoardFish {
+            let doubleOnBoard = Double(onBoardFish)
+            let doubleInputFish = Double(inputFish)
+            if let doubleInputFish = doubleInputFish {
+                isOnBoardWeightGreater = doubleOnBoard > doubleInputFish ? true : false
+            }
+        }
+    }
+    private func getRatio(for fish: FishTypes.RawValue) -> Ratios.RawValue {
+        var ratio = Ratios.cod.rawValue
+        switch fish {
+        case FishTypes.cod.rawValue:
+            ratio = Ratios.cod.rawValue
+        case FishTypes.haddock.rawValue:
+            ratio = Ratios.haddock.rawValue
+        case FishTypes.catfish.rawValue:
+            ratio = Ratios.catfish.rawValue
+        default:
+            ratio = Ratios.redfish.rawValue
+        }
+        return ratio
+    }
+    private func createInstance(name: String, grade: String, date: Date, weight: String) {
+        let fishCatch = Fish(context: coreDataStack.managedContext)
+        fishCatch.name = name
+        fishCatch.grade = grade
+        fishCatch.date = date
+        fishCatch.ratio = getRatio(for: name)
+        if let doubleWeight = Double(weight) {
+            fishCatch.onBoard = doubleWeight
+        }
+        fishCatch.perDay = fishCatch.onBoard - (Double(sumFrzPerDay ?? 0))
+        coreDataStack.saveContext()
+    }
+    private func refreshUI() {
+        choozenDate = Date()
+        choozenFish = nil
+        choozenGrade = nil
+        frozenOnBoardTF.text = nil
+        tableView.reloadData()
+    }
 }
 
 // MARK: - UITableViewDataSource
 extension DailyCatchVC: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    arrayForTableView.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-    let object = arrayForTableView[indexPath.row]
-    cell.textLabel?.text = object
-    switch object {
-    case "Дата":
-        if choozenDate != Date() {
-            let convertedDate = dateFormatter.string(from: choozenDate)
-            cell.detailTextLabel?.text = String(describing: convertedDate)
-        } else {
-            cell.detailTextLabel?.text = "Сегодня"
-        }
-    case "Рыба":
-        if choozenFish != nil {
-            cell.detailTextLabel?.text = choozenFish
-        } else {
-            cell.detailTextLabel?.text = ""
-        }
-    default:
-        if choozenGrade != nil {
-            cell.detailTextLabel?.text = choozenGrade
-        } else {
-            cell.detailTextLabel?.text = ""
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        arrayForTableView.count
     }
-    return cell
-  }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let object = arrayForTableView[indexPath.row]
+        cell.textLabel?.text = object
+        switch object {
+        case "Дата":
+            if choozenDate != Date() {
+                let convertedDate = dateFormatter.string(from: choozenDate)
+                cell.detailTextLabel?.text = String(describing: convertedDate)
+            } else {
+                cell.detailTextLabel?.text = "Сегодня"
+            }
+        case "Рыба":
+            if choozenFish != nil {
+                cell.detailTextLabel?.text = choozenFish
+            } else {
+                cell.detailTextLabel?.text = ""
+            }
+        default:
+            if choozenGrade != nil {
+                cell.detailTextLabel?.text = choozenGrade
+            } else {
+                cell.detailTextLabel?.text = ""
+            }
+        }
+        return cell
+    }
 }
 // MARK: - UITableViewDelegate
 extension DailyCatchVC: UITableViewDelegate {
@@ -291,7 +240,6 @@ extension DailyCatchVC {
             }
         }
         alert.addAction(doneAction)
-
         present(alert, animated: true)
     }
 }

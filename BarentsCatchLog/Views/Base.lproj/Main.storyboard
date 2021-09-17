@@ -101,7 +101,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Готовой на борту" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcB-04-yaE">
                                         <rect key="frame" x="0.0" y="220" width="382" height="49.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                 </subviews>
                             </stackView>
