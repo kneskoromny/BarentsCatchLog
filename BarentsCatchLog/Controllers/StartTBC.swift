@@ -9,7 +9,4 @@ import UIKit
 
 class StartTBC: UITabBarController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }
