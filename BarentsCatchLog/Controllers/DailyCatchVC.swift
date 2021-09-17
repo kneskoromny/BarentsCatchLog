@@ -85,12 +85,10 @@ class DailyCatchVC: UIViewController {
     
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
-        // получаем начало и окончание дня внесения улова
-        guard let dayBeforeCurrentDay = Calendar.current.date(
-                byAdding: .day,
-                value: -1,
-                to: choozenDate
-        ) else { return }
+        // получаем предыдущий день внесения улова
+        guard let dayBeforeInputDay = Calendar.current.date(byAdding: .day,
+                                                              value: -1,
+                                                              to: choozenDate) else { return }
         
         // создаем экземпляр класса в контексте
         let fishCatch = Fish(context: coreDataStack.managedContext)
@@ -108,20 +106,12 @@ class DailyCatchVC: UIViewController {
         }
         // запрос на существ рыбу с предикатами
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
-        
-//        let namePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
-//        let gradePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.grade), fishGrade)
-//
-//        let dateFrom = Calendar.current.startOfDay(for: dayBeforeCurrentDay)
-//        let dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom)
-//        let fromPredicate = NSPredicate(format: "date >= %@", dateFrom as NSDate)
-//        let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
         let predicatesForCatchBeforeInput = Predicates().getPredicateFrom(name: fishName,
                                                        grade: fishGrade,
-                                                       dateFrom: dayBeforeCurrentDay,
-                                                       dateTo: dayBeforeCurrentDay)
-        let generalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCatchBeforeInput)
-        fetchRequest.predicate = generalPredicate
+                                                       dateFrom: dayBeforeInputDay,
+                                                       dateTo: dayBeforeInputDay)
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCatchBeforeInput)
+        fetchRequest.predicate = predicate
         
         do {
             catchForDayBeforeInput = try coreDataStack.managedContext.fetch(fetchRequest).first
@@ -156,9 +146,8 @@ class DailyCatchVC: UIViewController {
         fishCatch.onBoard = Double(fishWeight)!
         
         
-        // логика по подсчету frzPerDay
-        let countRequest =
-          NSFetchRequest<NSDictionary>(entityName: "Fish")
+        // логика по подсчету frzPerDay по внесенному типу рыбы, на тот случай, если вчера внесения не было
+        let countRequest = NSFetchRequest<NSDictionary>(entityName: "Fish")
         // добавляем предикат по имени и навеске
         let predicatesForCount = Predicates().getPredicateFrom(name: fishName, grade: fishGrade)
         let predicateForCount = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCount)
@@ -170,18 +159,15 @@ class DailyCatchVC: UIViewController {
         // даем имя, чтобы можно было прочитать его результат из словаря результатов
         sumExpressionDesc.name = "sumFrz"
       // создаем аргумент для подсчета по ключу Fish.perDay
-        let specialCountExp =
-            NSExpression(forKeyPath: #keyPath(Fish.perDay))
+        let specialCountExp = NSExpression(forKeyPath: #keyPath(Fish.perDay))
         // указываем тип выражения - сумма, какой аргумент считать - specialCountExp
-        sumExpressionDesc.expression =
-          NSExpression(forFunction: "sum:",
-                       arguments: [specialCountExp])
+        sumExpressionDesc.expression = NSExpression(forFunction: "sum:",
+                                                    arguments: [specialCountExp])
         // задаем тип возвращаемого значения - Int32
-        sumExpressionDesc.expressionResultType =
-          .integer32AttributeType
+        sumExpressionDesc.expressionResultType = .integer32AttributeType
       // в свойство начального запроса ставим созданный запрос суммы
         countRequest.propertiesToFetch = [sumExpressionDesc]
-      // выполняем запрос
+      
         do {
           let results =
             try coreDataStack.managedContext.fetch(countRequest)

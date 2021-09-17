@@ -61,6 +61,7 @@ class ReportTVC: UITableViewController {
         print("Working predicate is: \(String(describing: fetchRequest.predicate))")
         do {
             caughtFishes = try coreDataStack.managedContext.fetch(fetchRequest)
+            print("caught fishes count from fetch \(caughtFishes.count)")
             totalFrz = 0
             caughtFishes.forEach { totalFrz += $0.perDay }
             tableView.reloadData()

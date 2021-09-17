@@ -45,13 +45,16 @@ class ReportDescriptionTVC: UITableViewController {
             getRawFish(from: caughtFishes)
         } else {
             sections.append("Готовая по видам за период")
+            print("caught fishes count from REPDES \(caughtFishes.count)")
             convertedCaughtFishes = caughtFishes.sorted(by: { $0.name! > $1.name! })
+            print("converted caught fishes count from REPDES \(convertedCaughtFishes.count)")
             divideByName(from: convertedCaughtFishes)
             print(totalCatch.count)
             totalCatch.forEach { total in
                 print(total.name)
                 print(total.onBoard)
             }
+            sections.append("Записи за период")
         }
     }
     
@@ -127,7 +130,12 @@ extension ReportDescriptionTVC {
                 rows = 1
             }
         } else {
-            rows = totalCatch.count
+            switch section {
+            case 0:
+                rows = totalCatch.count
+            default:
+                rows = convertedCaughtFishes.count
+            }
         }
         return rows
     }
@@ -164,12 +172,23 @@ extension ReportDescriptionTVC {
                 cell.perDayTypeLabel.text = "вылова"
             }
         } else {
-            let fish = totalCatch[indexPath.row]
-            cell.dateLabel.isHidden = true
-            cell.nameLabel.text = fish.name
-            cell.gradeLabel.isHidden = true
-            cell.perDayQuantityLabel.text = String(format: "%.0f", fish.onBoard!) + " кг"
-            cell.perDayTypeLabel.text = "готовой"
+            switch indexPath.section {
+            case 0:
+                let fish = totalCatch[indexPath.row]
+                cell.dateLabel.isHidden = true
+                cell.nameLabel.text = fish.name
+                cell.gradeLabel.isHidden = true
+                cell.perDayQuantityLabel.text = String(format: "%.0f", fish.onBoard!) + " кг"
+                cell.perDayTypeLabel.text = "готовой"
+            default:
+                let fish = convertedCaughtFishes[indexPath.row]
+                let convertedDate = dateFormatter.string(from: fish.date!)
+                cell.dateLabel.text = convertedDate
+                cell.nameLabel.text = fish.name
+                cell.gradeLabel.text = fish.grade
+                cell.perDayQuantityLabel.text = String(format: "%.0f", fish.perDay) + " кг"
+                cell.perDayTypeLabel.text = "готовой"
+            }
         }
 
         return cell
