@@ -109,24 +109,22 @@ class DailyCatchVC: UIViewController {
         // запрос на существ рыбу с предикатами
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
         
-        let namePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
-        let gradePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.grade), fishGrade)
-        
-        let dateFrom = Calendar.current.startOfDay(for: dayBeforeCurrentDay)
-        let dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom)
-        let fromPredicate = NSPredicate(format: "date >= %@", dateFrom as NSDate)
-        let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
-        let generalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, gradePredicate, fromPredicate, toPredicate])
+//        let namePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.name), fishName)
+//        let gradePredicate = NSPredicate(format: "%K == %@", #keyPath(Fish.grade), fishGrade)
+//
+//        let dateFrom = Calendar.current.startOfDay(for: dayBeforeCurrentDay)
+//        let dateTo = Calendar.current.date(byAdding: .day, value: 1, to: dateFrom)
+//        let fromPredicate = NSPredicate(format: "date >= %@", dateFrom as NSDate)
+//        let toPredicate = NSPredicate(format: "date < %@",  dateTo! as NSDate)
+        let predicatesForCatchBeforeInput = Predicates().getPredicateFrom(name: fishName,
+                                                       grade: fishGrade,
+                                                       dateFrom: dayBeforeCurrentDay,
+                                                       dateTo: dayBeforeCurrentDay)
+        let generalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCatchBeforeInput)
         fetchRequest.predicate = generalPredicate
         
         do {
             catchForDayBeforeInput = try coreDataStack.managedContext.fetch(fetchRequest).first
-            print("""
-                Вчерашняя рыба - это \(catchForDayBeforeInput?.name ?? "За день до внесения рыбы не было")
-                Дата вчерашней рыбы - \(String(describing: catchForDayBeforeInput?.date!))
-                Навеска - \(catchForDayBeforeInput?.grade ?? "За день до внесения рыбы не было")
-                """
-            )
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
@@ -142,11 +140,8 @@ class DailyCatchVC: UIViewController {
         }
         
         fishCatch.name = choozenFish
-        print("Название внесенной рыбы - \(fishCatch.name!)")
         fishCatch.grade = choozenGrade
-        print("Навеска внесенной рыбы - \(fishCatch.grade!)")
         fishCatch.date = choozenDate
-        print("Дата внесенной рыбы - \(fishCatch.date!)")
         
         switch fishName {
         case FishTypes.cod.rawValue:
@@ -165,7 +160,8 @@ class DailyCatchVC: UIViewController {
         let countRequest =
           NSFetchRequest<NSDictionary>(entityName: "Fish")
         // добавляем предикат по имени и навеске
-        let predicateForCount = NSCompoundPredicate(andPredicateWithSubpredicates: [namePredicate, gradePredicate])
+        let predicatesForCount = Predicates().getPredicateFrom(name: fishName, grade: fishGrade)
+        let predicateForCount = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCount)
         countRequest.predicate = predicateForCount
         // указываем тип результата
         countRequest.resultType = .dictionaryResultType
@@ -173,7 +169,7 @@ class DailyCatchVC: UIViewController {
         let sumExpressionDesc = NSExpressionDescription()
         // даем имя, чтобы можно было прочитать его результат из словаря результатов
         sumExpressionDesc.name = "sumFrz"
-      // создаем аргумент для подсчета по ключу Venue.specialCount
+      // создаем аргумент для подсчета по ключу Fish.perDay
         let specialCountExp =
             NSExpression(forKeyPath: #keyPath(Fish.perDay))
         // указываем тип выражения - сумма, какой аргумент считать - specialCountExp

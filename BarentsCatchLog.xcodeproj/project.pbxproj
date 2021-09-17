@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F747DB9826F23E3B00B3F68A /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9726F23E3B00B3F68A /* Extension+Date.swift */; };
+		F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9926F46D7900B3F68A /* Predicates.swift */; };
 		F759FD6E26EE0A7F001E3D1A /* LogTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */; };
 		F759FD7026EE0A95001E3D1A /* LogTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F759FD6F26EE0A95001E3D1A /* LogTVC.swift */; };
 		F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BDE26D7874500D7DAFB /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		F747DB9726F23E3B00B3F68A /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
+		F747DB9926F46D7900B3F68A /* Predicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicates.swift; sourceTree = "<group>"; };
 		F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTVCNC.swift; sourceTree = "<group>"; };
 		F759FD6F26EE0A95001E3D1A /* LogTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTVC.swift; sourceTree = "<group>"; };
 		F7703BDB26D7874500D7DAFB /* BarentsCatchLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarentsCatchLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
 				F7703C0426DA1FAE00D7DAFB /* Enums.swift */,
 				F747DB9726F23E3B00B3F68A /* Extension+Date.swift */,
+				F747DB9926F46D7900B3F68A /* Predicates.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
 				F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */,
 				F7946DEE26E6773300241C16 /* GradeTVCNC.swift in Sources */,
+				F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */,
 				F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */,
 				F7946DF426E74A0600241C16 /* ReportTVC.swift in Sources */,
 				F7946DF626E74CD200241C16 /* ReportChoiceTVC.swift in Sources */,
