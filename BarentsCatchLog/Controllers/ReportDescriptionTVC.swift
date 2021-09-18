@@ -13,10 +13,6 @@ struct TotalCatchByPeriod {
 }
 
 class ReportDescriptionTVC: UITableViewController {
-    
-    //MARK: - IB Outlets
-    
-    
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -24,42 +20,39 @@ class ReportDescriptionTVC: UITableViewController {
         return formatter
     }()
     var caughtFishes: [Fish]!
-    var convertedCaughtFishes: [Fish]!
-    var flag: Bool!
-    var rawFish: Double?
-    var frzFish: Double?
+    var isOneTypeFish: Bool!
     
     //MARK: - Private Properties
     private var sections: [String] = []
     private var totalCatch = [TotalCatchByPeriod]()
+    private var convertedCaughtFishes: [Fish] = []
+    private var rawFish: Double?
+    private var frzFish: Double?
 
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        if flag {
+        
+        prepareTableViewDependingInputData()
+    }
+    
+    //MARK: - Private Methods
+    private func prepareTableViewDependingInputData() {
+        switch isOneTypeFish {
+        case true:
             sections.append("Готовая по навескам")
             convertedCaughtFishes = caughtFishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending})
             sections.append("Готовая всего")
             getTotalFrzFish(from: caughtFishes)
             sections.append("Вылов")
             getRawFish(from: caughtFishes)
-        } else {
+        default:
             sections.append("Готовая по видам за период")
-            print("caught fishes count from REPDES \(caughtFishes.count)")
             convertedCaughtFishes = caughtFishes.sorted(by: { $0.name! > $1.name! })
-            print("converted caught fishes count from REPDES \(convertedCaughtFishes.count)")
             divideByName(from: convertedCaughtFishes)
-            print(totalCatch.count)
-            totalCatch.forEach { total in
-                print(total.name)
-                print(total.onBoard)
-            }
             sections.append("Записи за период")
         }
     }
-    
-    //MARK: - Private Methods
-    // получаем вылов на борту из готовой на борту из переданного массива
     private func getRawFish(from fishes: [Fish]) {
         if let fish = caughtFishes.first {
             rawFish = (fishes.reduce(0) { sum, fish in
@@ -90,7 +83,6 @@ class ReportDescriptionTVC: UITableViewController {
             let totalCatchByPeriod = TotalCatchByPeriod(name: name, onBoard: total)
             totalCatch.append(totalCatchByPeriod)
         }
-        
     }
 }
 // MARK: - UITableViewDataSource, Delegate
@@ -102,7 +94,6 @@ extension ReportDescriptionTVC {
         let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40)
         let headerView = UIView(frame: frame)
         
-        // название в секции
         let nameLabel = UILabel()
         nameLabel.frame = CGRect(x: 0,
                                  y: 0,
@@ -122,19 +113,16 @@ extension ReportDescriptionTVC {
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rows: Int
-        if flag {
+        switch isOneTypeFish {
+        case true:
             switch section {
-            case 0:
-                rows = convertedCaughtFishes.count
-            default:
-                rows = 1
+            case 0: rows = convertedCaughtFishes.count
+            default: rows = 1
             }
-        } else {
+        default:
             switch section {
-            case 0:
-                rows = totalCatch.count
-            default:
-                rows = convertedCaughtFishes.count
+            case 0: rows = totalCatch.count
+            default: rows = convertedCaughtFishes.count
             }
         }
         return rows
@@ -144,7 +132,8 @@ extension ReportDescriptionTVC {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReportDescriptionCell", for: indexPath) as! ReportChoiceCell
-        if flag {
+        switch isOneTypeFish {
+        case true:
             switch indexPath.section {
             case 0:
                 let fish = convertedCaughtFishes[indexPath.row]
@@ -171,7 +160,7 @@ extension ReportDescriptionTVC {
                 cell.perDayQuantityLabel.text = String(format: "%.0f", rawFish!) + " кг"
                 cell.perDayTypeLabel.text = "вылова"
             }
-        } else {
+        default:
             switch indexPath.section {
             case 0:
                 let fish = totalCatch[indexPath.row]
@@ -190,7 +179,6 @@ extension ReportDescriptionTVC {
                 cell.perDayTypeLabel.text = "готовой"
             }
         }
-
         return cell
     }
     

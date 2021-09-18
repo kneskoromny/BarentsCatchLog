@@ -42,17 +42,18 @@ class ReportTVC: UITableViewController {
         switch segue.identifier {
         case toReportChoiceID:
             guard let navController = segue.destination as? ReportChoiceTVCNC,
-                 let dateChoiceTVC = navController.topViewController as? ReportChoiceTVC else { return
-                 }
-             dateChoiceTVC.coreDataStack = coreDataStack
-             dateChoiceTVC.delegate = self
+                  let dateChoiceTVC = navController.topViewController as? ReportChoiceTVC else {
+                return
+            }
+            dateChoiceTVC.coreDataStack = coreDataStack
+            dateChoiceTVC.delegate = self
         default:
             guard let reportDecriptionTVC = segue.destination as? ReportDescriptionTVC else {
                 return
             }
             flag = isOneFishType(fishes: caughtFishes)
             reportDecriptionTVC.caughtFishes = caughtFishes
-            reportDecriptionTVC.flag = flag
+            reportDecriptionTVC.isOneTypeFish = flag
         }
     }
     // MARK: - Private Methods
