@@ -29,3 +29,13 @@ enum FishGrades: String {
     case moreThanFive = "5.0+"
 }
 
+enum ReportTemplateIDs: String {
+    case allFishForToday = "Все позиции за сегодня"
+    case allFishForYesterday = "Вся позиции за вчера"
+    case allFishForThisWeek = "Все позиции за эту неделю"
+    case allCodForToday = "Вся треска за сегодня"
+    case allCodForYesterday = "Вся треска за вчера"
+    case allHaddockForToday = "Вся пикша за сегодня"
+    case allHaddockForYesterday = "Вся пикша за вчера"
+    
+}
