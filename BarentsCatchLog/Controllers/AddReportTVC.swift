@@ -29,11 +29,6 @@ class AddReportTVC: UITableViewController {
     var delegate: AddReportTVCDelegate!
     
     // MARK: - Private properties
-    private let toFishArrayIdentifier = "toFishNamesIdentifier"
-    private let toGradeArrayIdentifier = "toGradeArrayIdentifier"
-    private let toDateFromIdentifier = "toDateFromIdentifier"
-    private let toDateToIdentifier = "toDateToIdentifier"
-    
     private var choozenFish: String?
     private var choozenGrade: String?
     private var choozenDateFrom = Date()
@@ -45,37 +40,31 @@ class AddReportTVC: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        fishNameCell.textLabel?.text = "Рыба"
-        fishNameCell.detailTextLabel?.text = "Все"
-        gradeCell.textLabel?.text = "Навеска"
-        gradeCell.detailTextLabel?.text = "Все"
-        dateFromCell.textLabel?.text = "Начало"
-        dateFromCell.detailTextLabel?.text = dateFormatter.string(from: choozenDateFrom)
-        dateToCell.textLabel?.text = "Конец"
-        dateToCell.detailTextLabel?.text = dateFormatter.string(from: choozenDateTo)
         
+        configureLabels()
     }
   
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == toFishArrayIdentifier {
+        switch segue.identifier {
+        case SegueIDs.toFishChoice.rawValue:
             if let navController = segue.destination as? FishTVCNC {
                 if let fishTVC = navController.topViewController as? FishTVC {
                     fishTVC.delegate = self
                 }
             }
-        } else if segue.identifier == toGradeArrayIdentifier {
+        case SegueIDs.toGradeChoice.rawValue:
             if let navController = segue.destination as? GradeTVCNC {
                 if let gradeTVC = navController.topViewController as? GradeTVC {
                     gradeTVC.delegate = self
                 }
             }
-        } else if segue.identifier == toDateFromIdentifier {
+        case SegueIDs.toDateFromChoice.rawValue:
             if let dateVC = segue.destination as? DateVC {
                 dateVC.choozenDate = choozenDateFrom
                 dateVC.delegate = self
             }
-        } else {
+        default:
             if let dateVC = segue.destination as? DateVC {
                 dateVC.choozenDate = choozenDateTo
                 dateVC.delegate = self
@@ -84,9 +73,6 @@ class AddReportTVC: UITableViewController {
     }
     // MARK: - IB Actions
     @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
-        // показывать алерт
-        let report = Report(context: coreDataStack.managedContext)
-        
         guard let id = reportIdTF.text else {
             showAlert(title: "Внимание!", message: "У отчета должно быть название.")
             return }
@@ -94,25 +80,45 @@ class AddReportTVC: UITableViewController {
             showAlert(title: "Внимание!", message: "Название должно состоять из символов.")
             return
         }
+        let report = createReport(id: id,
+                                  fish: choozenFish,
+                                  grade: choozenGrade,
+                                  dateFrom: choozenDateFrom,
+                                  dateTo: choozenDateTo)
+        delegate.newReportDidCreated(report: report)
+        dismiss(animated: true)
+    }
+    @IBAction func cancelBtnPressed(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    // MARK: - Private methods
+    private func configureLabels() {
+        fishNameCell.textLabel?.text = "Рыба"
+        fishNameCell.detailTextLabel?.text = "Все"
+        gradeCell.textLabel?.text = "Навеска"
+        gradeCell.detailTextLabel?.text = "Все"
+        dateFromCell.textLabel?.text = "Начало"
+        dateFromCell.detailTextLabel?.text = dateFormatter.string(from: choozenDateFrom)
+        dateToCell.textLabel?.text = "Конец"
+        dateToCell.detailTextLabel?.text = dateFormatter.string(from: choozenDateTo)
+    }
+    private func createReport(id: String, fish: String?, grade: String?, dateFrom: Date, dateTo: Date) -> Report {
+        let report = Report(context: coreDataStack.managedContext)
+        
         report.id = id
-        if let fish = choozenFish {
+        if let fish = fish {
             report.fish = fish
         }
-        if let grade = choozenGrade {
+        if let grade = grade {
             report.grade = grade
         }
         report.dateFrom = choozenDateFrom
         report.dateTo = choozenDateTo
 
         coreDataStack.saveContext()
-        delegate.newReportDidCreated(report: report)
-        dismiss(animated: true)
-        
+        return report
     }
-    @IBAction func cancelBtnPressed(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
-    }
-    
 }
     // MARK: - UITableViewDelegate
 extension AddReportTVC {
@@ -120,56 +126,20 @@ extension AddReportTVC {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         switch cell {
         case fishNameCell:
-            performSegue(withIdentifier: toFishArrayIdentifier, sender: nil)
+            performSegue(withIdentifier: SegueIDs.toFishChoice.rawValue, sender: nil)
         case gradeCell:
-            performSegue(withIdentifier: toGradeArrayIdentifier, sender: nil)
+            performSegue(withIdentifier: SegueIDs.toGradeChoice.rawValue, sender: nil)
         case dateFromCell:
-            performSegue(withIdentifier: toDateFromIdentifier, sender: nil)
+            performSegue(withIdentifier: SegueIDs.toDateFromChoice.rawValue, sender: nil)
             dateFromDidChanged.toggle()
         default:
-            performSegue(withIdentifier: toDateToIdentifier, sender: nil)
+            performSegue(withIdentifier: SegueIDs.toDateToChoice.rawValue, sender: nil)
             dateToDidChanged.toggle()
         }
     }
 }
 // MARK: - AlertController {
 extension AddReportTVC {
-    func showAlertBeforeSaveReport(id: String,
-                                   fish: String,
-                                   grade: String,
-                                   dateFrom: Date,
-                                   dateTo: Date,
-                                   completion: @escaping() -> Void) {
-        let convertedDateFrom = dateFormatter.string(from: dateFrom)
-        let convertedDateTo = dateFormatter.string(from: dateTo)
-        
-        let alert = UIAlertController(title: "Подтвердите создание отчета.",
-                                      message: """
-                                        Название: \(id),
-                                        Рыба: \(fish),
-                                        Навеска: \(grade),
-                                        с \(convertedDateFrom) по \(convertedDateTo).
-                                        """,
-                                      preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Верно",
-                                       style: .default) { action in
-            self.coreDataStack.saveContext()
-            completion()
-            self.reportIdTF.text = nil
-            self.choozenFish = nil
-            self.choozenGrade = nil
-            self.choozenDateFrom = Date()
-            self.choozenDateTo = Date()
-            
-            self.tableView.reloadData()
-            self.dismiss(animated: true)
-        }
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
-        alert.addAction(doneAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
-    }
     func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title,
                                       message: message,
@@ -181,7 +151,6 @@ extension AddReportTVC {
             }
         }
         alert.addAction(doneAction)
-
         present(alert, animated: true)
     }
 }
@@ -198,7 +167,6 @@ extension AddReportTVC: GradeTVCDelegate {
 extension AddReportTVC: DateVCDelegate {
     func dateDidChanged(to date: Date) {
         let convertedDate = dateFormatter.string(from: date)
-        // все равно косяк
         if !dateFromDidChanged {
             choozenDateFrom = date
             dateFromCell.detailTextLabel?.text = convertedDate

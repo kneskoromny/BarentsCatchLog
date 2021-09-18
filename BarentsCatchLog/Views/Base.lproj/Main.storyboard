@@ -144,9 +144,9 @@
                     <connections>
                         <outlet property="frozenOnBoardTF" destination="XcB-04-yaE" id="InR-yC-cic"/>
                         <outlet property="tableView" destination="US2-oD-o5j" id="tKe-73-EE1"/>
-                        <segue destination="JJi-xC-COe" kind="presentation" identifier="toDateVC" id="Y6S-qH-vgU"/>
-                        <segue destination="kW3-Xw-ArO" kind="presentation" identifier="toGradeTVC" id="YaX-bK-37G"/>
-                        <segue destination="Ghl-Za-XcT" kind="presentation" identifier="toFishTVC" id="MAb-sJ-dJD"/>
+                        <segue destination="JJi-xC-COe" kind="presentation" identifier="toDateFromIdentifier" id="Y6S-qH-vgU"/>
+                        <segue destination="kW3-Xw-ArO" kind="presentation" identifier="toGradeArrayIdentifier" id="YaX-bK-37G"/>
+                        <segue destination="Ghl-Za-XcT" kind="presentation" identifier="toFishNamesIdentifier" id="MAb-sJ-dJD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUS-ko-B9q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

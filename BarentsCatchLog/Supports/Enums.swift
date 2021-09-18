@@ -37,5 +37,11 @@ enum ReportTemplateIDs: String {
     case allCodForYesterday = "Вся треска за вчера"
     case allHaddockForToday = "Вся пикша за сегодня"
     case allHaddockForYesterday = "Вся пикша за вчера"
-    
+}
+
+enum SegueIDs: String {
+    case toFishChoice = "toFishNamesIdentifier"
+    case toGradeChoice = "toGradeArrayIdentifier"
+    case toDateFromChoice = "toDateFromIdentifier"
+    case toDateToChoice = "toDateToIdentifier"
 }

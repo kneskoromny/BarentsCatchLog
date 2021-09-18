@@ -36,9 +36,6 @@ class DailyCatchVC: UIViewController {
     let arrayForTableView = ["Дата", "Рыба", "Навеска"]
     
     private let cellIdentifier = "Cell"
-    private let toDateIdentifier = "toDateVC"
-    private let toGradeIdentifier = "toGradeTVC"
-    private let toFishIdentifier = "toFishTVC"
     
     private var isOnBoardWeightGreater = false
     private var choozenDate = Date()
@@ -49,12 +46,12 @@ class DailyCatchVC: UIViewController {
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case toDateIdentifier:
+        case SegueIDs.toDateFromChoice.rawValue:
             if let dateVC = segue.destination as? DateVC {
                 dateVC.choozenDate = choozenDate
                 dateVC.delegate = self
             }
-        case toGradeIdentifier:
+        case SegueIDs.toGradeChoice.rawValue:
             if let navController = segue.destination as? GradeTVCNC {
                 if let gradeTVC = navController.topViewController as? GradeTVC {
                     gradeTVC.delegate = self
@@ -195,11 +192,11 @@ extension DailyCatchVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            performSegue(withIdentifier: toDateIdentifier, sender: nil)
+            performSegue(withIdentifier: SegueIDs.toDateFromChoice.rawValue, sender: nil)
         case 1:
-            performSegue(withIdentifier: toFishIdentifier, sender: nil)
+            performSegue(withIdentifier: SegueIDs.toFishChoice.rawValue, sender: nil)
         default:
-            performSegue(withIdentifier: toGradeIdentifier, sender: nil)
+            performSegue(withIdentifier: SegueIDs.toGradeChoice.rawValue, sender: nil)
         }
     }
 }
