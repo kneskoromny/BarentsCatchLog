@@ -9,7 +9,6 @@ import UIKit
 import CoreData
 
 class DailyCatch {
-    
     let date: String?
     let month: String?
     var fishes: [Fish]?
@@ -22,7 +21,6 @@ class DailyCatch {
 }
 
 class LogTVC: UITableViewController {
-    
     // MARK: - Public Properties
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     var dailyCatch = [DailyCatch]()
@@ -240,7 +238,6 @@ extension LogTVC {
                 coreDataStack.managedContext.delete(fish)
                 coreDataStack.saveContext()
             }
-            
         }
     }
 }
