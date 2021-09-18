@@ -17,14 +17,13 @@ protocol ReportChoiceTVCDelegate: AnyObject {
 }
 
 class ReportTVC: UITableViewController {
-    
     // MARK: - Public Properties
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     var fetchRequest: NSFetchRequest<Fish>?
     
     
     // MARK: - Private Properties
-    private let toDateChoiceID = "toDateChoiceTVC"
+    private let toReportChoiceID = "toReportChoiceTVC"
     private let toReportDescriptionID = "toReportDecriptionTVC"
     private var caughtFishes: [Fish] = []
     private var totalFrz: Double = 0
@@ -40,13 +39,14 @@ class ReportTVC: UITableViewController {
     }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == toDateChoiceID {
-           guard let navController = segue.destination as? ReportChoiceTVCNC,
-                let dateChoiceTVC = navController.topViewController as? ReportChoiceTVC else { return
-                }
-            dateChoiceTVC.coreDataStack = coreDataStack
-            dateChoiceTVC.delegate = self
-        } else if segue.identifier == toReportDescriptionID {
+        switch segue.identifier {
+        case toReportChoiceID:
+            guard let navController = segue.destination as? ReportChoiceTVCNC,
+                 let dateChoiceTVC = navController.topViewController as? ReportChoiceTVC else { return
+                 }
+             dateChoiceTVC.coreDataStack = coreDataStack
+             dateChoiceTVC.delegate = self
+        default:
             guard let reportDecriptionTVC = segue.destination as? ReportDescriptionTVC else {
                 return
             }
@@ -98,7 +98,7 @@ extension ReportTVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            performSegue(withIdentifier: toDateChoiceID, sender: nil)
+            performSegue(withIdentifier: toReportChoiceID, sender: nil)
         default:
             performSegue(withIdentifier: toReportDescriptionID, sender: nil)
         }

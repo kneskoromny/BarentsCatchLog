@@ -208,7 +208,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="tQg-qy-FrN" kind="presentation" identifier="toDateChoiceTVC" id="sVx-EZ-4Wq"/>
+                                            <segue destination="tQg-qy-FrN" kind="presentation" identifier="toReportChoiceTVC" id="sVx-EZ-4Wq"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
