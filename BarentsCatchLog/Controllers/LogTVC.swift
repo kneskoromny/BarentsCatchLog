@@ -51,71 +51,42 @@ class LogTVC: UITableViewController {
     // MARK: - Private Methods
     private func divideByDate(from fishes: [Fish]) {
         var dividedFishes: [Fish] = []
+//        var iteration = 0
+//        var isAdded = false
 
         guard let firstFish = fishes.first else { return }
         var dateForComparsion = getDayForComparsion(from: firstFish)
-        print("StartDateForComparsion: \(dateForComparsion)")
         var monthForComparsion = getMonthForComparsion(from: firstFish)
-        print("StartMmonthForComparsion: \(monthForComparsion)")
         
-        fishes.forEach { fish in
-            
+        // оставил for in для пошагового отслеживания ошибок
+        for fish in fishes {
             let currentFishDate = getDayForComparsion(from: fish)
-            print("currentFishDate: \(currentFishDate)")
             let currentFishMonth = getMonthForComparsion(from: fish)
-            print("currentFishMonth: \(currentFishMonth)")
-            // даты 2х последующих рыб совпадают
+            
             if currentFishDate == dateForComparsion {
                 dividedFishes.append(fish)
-                // появляется другая дата
             } else {
                 switch dailyCatch.isEmpty {
-                // первое внесение, dailyCatch пустой
                 case true:
                     createDailyCatch(with: dateForComparsion, month: monthForComparsion, and: dividedFishes)
-                // рыба уже вносилась, dailyCatch содержит данные
                 default:
-                    dailyCatch.forEach { dailyCatch in
-                        // есть такая же дата
-                        if dailyCatch.date == dateForComparsion {
-                            dailyCatch.fishes?.append(fish)
-                            print("dailyCatchFishesCount: \(dailyCatch.fishes?.count)")
-                            // такой даты нет
+                    for dictionary in dailyCatch {
+                        if dictionary.date == dateForComparsion {
+                            dictionary.fishes?.append(fish)
                         } else {
                             createDailyCatch(with: dateForComparsion, month: monthForComparsion, and: dividedFishes)
+                            break
                         }
                     }
                 }
                 dividedFishes.removeAll()
                 dividedFishes.append(fish)
                 dateForComparsion = currentFishDate
-                print("NewDateForComparsion: \(dateForComparsion)")
                 monthForComparsion = currentFishMonth
-                print("NewMmonthForComparsion: \(monthForComparsion)")
             }
         }
-        // внесение последнего элемента массива fishes
-        var iteration = 0
-        var isAdded = false
-        while iteration < dailyCatch.count {
-            if dailyCatch[iteration].date == dateForComparsion {
-                isAdded = true
-                for fish in dividedFishes {
-                    dailyCatch[iteration].fishes?.append(fish)
-                }
-                break
-            } else {
-                iteration += 1
-            }
-            
-        }
-        if !isAdded {
-            createDailyCatch(with: dateForComparsion, month: monthForComparsion, and: dividedFishes)
-        }
-        sortedDailyCatch = dailyCatch.sorted { catch1, catch2 in
-            let date1 = Int(catch1.date!), date2 = Int(catch2.date!)
-            return date1! > date2!
-        }
+        addLastElement(with: dateForComparsion, month: monthForComparsion, and: dividedFishes, to: dailyCatch)
+        sortedDailyCatch = createSortedByDateArray(from: dailyCatch)
     }
     
     private func getDayForComparsion(from element: Fish) -> String? {
@@ -143,18 +114,48 @@ class LogTVC: UITableViewController {
         let newDailyCatch = DailyCatch(date: date, month: month, fishes: fishes)
         dailyCatch.append(newDailyCatch)
     }
-    // обновляет table view при свайпе вниз
+    
+    private func addLastElement(with date: String?, month: String?, and fishes: [Fish], to dailyCatch: [DailyCatch]) {
+        var iteration = 0
+        var isAdded = false
+        while iteration < dailyCatch.count {
+                  if dailyCatch[iteration].date == date {
+                      isAdded = true
+                      for fish in fishes {
+                          dailyCatch[iteration].fishes?.append(fish)
+                      }
+                      break
+                  } else {
+                      iteration += 1
+                  }
+              }
+              if !isAdded {
+                  createDailyCatch(with: date, month: month, and: fishes)
+              }
+    }
+    private func createSortedByDateArray(from dictionaryArray: [DailyCatch]) -> [DailyCatch] {
+        return dictionaryArray.sorted { catch1, catch2 in
+            let date1 = Int(catch1.date!), date2 = Int(catch2.date!)
+            return date1! > date2!
+        }
+    }
+    
     @objc private func update(sender: UIRefreshControl) {
         updatedFishes = Requests.shared.getAllElementsRequest()
         
-        let convFishes = Set(fishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending}))
-        let convUpdFishes = Set(updatedFishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending}))
-        let update = Array(convFishes.symmetricDifference(convUpdFishes))
-        //print("UPDATE COUNT - \(update.count)")
+        let convertedFishesBeforeUpdating = createConvertedByDateSet(from: fishes)
+        let convertedFishesAfterUpdating = createConvertedByDateSet(from: updatedFishes)
+        
+        let update = Array(convertedFishesBeforeUpdating.symmetricDifference(convertedFishesAfterUpdating))
+        
         divideByDate(from: update)
         fishes = updatedFishes
         tableView.reloadData()
         sender.endRefreshing()
+    }
+    
+    private func createConvertedByDateSet(from array: [Fish]) -> Set<Fish> {
+        Set(array.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending}))
     }
 }
 // MARK: - TableViewDataSource
