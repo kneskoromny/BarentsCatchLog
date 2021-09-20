@@ -20,7 +20,8 @@ class DailyCatch {
     }
 }
 
-class LogTVC: UITableViewController {
+class LogVC: UITableViewController {
+    
     // MARK: - Public Properties
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     let tableRefreshControl: UIRefreshControl = {
@@ -159,7 +160,7 @@ class LogTVC: UITableViewController {
     }
 }
 // MARK: - TableViewDataSource
-extension LogTVC {
+extension LogVC {
     override func numberOfSections(in tableView: UITableView) -> Int {
         sortedDailyCatch.count
     }
@@ -212,7 +213,7 @@ extension LogTVC {
     }
 }
 // MARK: - TableViewDelegate
-extension LogTVC {
+extension LogVC {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let fish = sortedDailyCatch[indexPath.section].fishes?[indexPath.row] else { return }
@@ -244,7 +245,7 @@ extension LogTVC {
     }
 }
 // MARK: - AlertController
-extension LogTVC {
+extension LogVC {
     func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title,
                                       message: message,

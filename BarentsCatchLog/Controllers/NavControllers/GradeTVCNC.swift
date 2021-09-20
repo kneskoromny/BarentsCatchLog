@@ -8,8 +8,4 @@
 import UIKit
 
 class GradeTVCNC: UINavigationController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }

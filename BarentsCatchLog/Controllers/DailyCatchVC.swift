@@ -58,13 +58,13 @@ class DailyCatchVC: UIViewController {
             }
         case SegueIDs.toGradeChoice.rawValue:
             if let navController = segue.destination as? GradeTVCNC {
-                if let gradeTVC = navController.topViewController as? GradeTVC {
+                if let gradeTVC = navController.topViewController as? GradeVC {
                     gradeTVC.delegate = self
                 }
             }
         default:
             if let navController = segue.destination as? FishTVCNC {
-                if let fishTVC = navController.topViewController as? FishTVC {
+                if let fishTVC = navController.topViewController as? FishVC {
                     fishTVC.delegate = self
                 }
             }

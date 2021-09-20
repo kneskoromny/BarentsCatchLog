@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--GradeTVC-->
+        <!--GradeVC-->
         <scene sceneID="9H2-Ca-SMg">
             <objects>
-                <tableViewController id="gHj-vC-9uj" customClass="GradeTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="gHj-vC-9uj" customClass="GradeVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mYA-Tj-tI7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -151,10 +151,10 @@
             </objects>
             <point key="canvasLocation" x="650.72463768115949" y="-644.19642857142856"/>
         </scene>
-        <!--StartTBC-->
+        <!--StartVC-->
         <scene sceneID="rlg-9n-lAV">
             <objects>
-                <tabBarController id="UVc-t1-r3K" customClass="StartTBC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="UVc-t1-r3K" customClass="StartVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="iDm-zS-hQD"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8UL-lw-xmh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -174,7 +174,7 @@
         <!--Отчет-->
         <scene sceneID="E1o-uT-G53">
             <objects>
-                <tableViewController id="M07-nB-cpR" customClass="ReportTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="M07-nB-cpR" customClass="ReportVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="lkH-tC-Ktr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,7 +257,7 @@
         <!--Report Description-->
         <scene sceneID="kjl-9K-C3I">
             <objects>
-                <tableViewController title="Report Description" id="ywU-1J-tca" customClass="ReportDescriptionTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Report Description" id="ywU-1J-tca" customClass="ReportDescriptionVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="adq-nY-Luo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -342,7 +342,7 @@
         <!--Filter-->
         <scene sceneID="V1s-2E-KTO">
             <objects>
-                <tableViewController title="Filter" id="Fur-ti-g0L" customClass="ReportChoiceTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Filter" id="Fur-ti-g0L" customClass="ReportChoiceVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uee-BN-rcJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -398,7 +398,7 @@
         <!--Новый отчет-->
         <scene sceneID="Yu8-WU-573">
             <objects>
-                <tableViewController id="udI-PY-efZ" customClass="AddReportTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="udI-PY-efZ" customClass="AddReportVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Xnx-CO-gQL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -622,10 +622,10 @@
             </objects>
             <point key="canvasLocation" x="651" y="-1313"/>
         </scene>
-        <!--FishTVC-->
+        <!--FishVC-->
         <scene sceneID="3o5-Uh-Y3g">
             <objects>
-                <tableViewController id="be3-Vr-GRo" customClass="FishTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="be3-Vr-GRo" customClass="FishVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3GW-sN-EqP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -701,7 +701,7 @@
         <!--Журнал-->
         <scene sceneID="tqw-dY-Yjo">
             <objects>
-                <tableViewController id="c9T-0c-ZLa" customClass="LogTVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="c9T-0c-ZLa" customClass="LogVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2ln-Ib-QrP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

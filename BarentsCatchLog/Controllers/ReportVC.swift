@@ -8,15 +8,15 @@
 import UIKit
 import CoreData
 
-protocol ReportChoiceTVCDelegate: AnyObject {
+protocol ReportChoiceVCDelegate: AnyObject {
     func getNewPredicate(
-        filter: ReportChoiceTVC,
+        filter: ReportChoiceVC,
         didSelectPredicate predicate: NSCompoundPredicate?,
         and textLabel: String
     )
 }
 
-class ReportTVC: UITableViewController {
+class ReportVC: UITableViewController {
     // MARK: - Public Properties
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
     var fetchRequest: NSFetchRequest<Fish>?
@@ -29,7 +29,8 @@ class ReportTVC: UITableViewController {
     private var totalFrz: Double = 0
     private var detailTextLabel = "Всего"
     private var flag: Bool?
-
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,13 +43,13 @@ class ReportTVC: UITableViewController {
         switch segue.identifier {
         case toReportChoiceID:
             guard let navController = segue.destination as? ReportChoiceTVCNC,
-                  let dateChoiceTVC = navController.topViewController as? ReportChoiceTVC else {
+                  let dateChoiceTVC = navController.topViewController as? ReportChoiceVC else {
                 return
             }
             dateChoiceTVC.coreDataStack = coreDataStack
             dateChoiceTVC.delegate = self
         default:
-            guard let reportDecriptionTVC = segue.destination as? ReportDescriptionTVC else {
+            guard let reportDecriptionTVC = segue.destination as? ReportDescriptionVC else {
                 return
             }
             flag = isOneFishType(fishes: caughtFishes)
@@ -80,7 +81,7 @@ class ReportTVC: UITableViewController {
     }
 }
 // MARK: - UITableViewDataSource, UITableViewDelegate
-extension ReportTVC {
+extension ReportVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "reportCell", for: indexPath)
         cell = UITableViewCell(style: .value1, reuseIdentifier: "reportCell")
@@ -108,9 +109,9 @@ extension ReportTVC {
     }
 }
 // MARK: - DateChoiceTVCDelegate
-extension ReportTVC: ReportChoiceTVCDelegate {
+extension ReportVC: ReportChoiceVCDelegate {
     
-    func getNewPredicate(filter: ReportChoiceTVC,
+    func getNewPredicate(filter: ReportChoiceVC,
                          didSelectPredicate predicate: NSCompoundPredicate?,
                          and textLabel: String) {
         guard let fetchRequest = fetchRequest else { return }
@@ -123,7 +124,7 @@ extension ReportTVC: ReportChoiceTVCDelegate {
     }
 }
 // MARK: - AlertController
-extension ReportTVC {
+extension ReportVC {
     func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title,
                                       message: message,

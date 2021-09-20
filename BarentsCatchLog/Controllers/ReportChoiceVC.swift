@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-protocol AddReportTVCDelegate {
+protocol AddReportVCDelegate {
     func newReportDidCreated(report: Report)
 }
 
@@ -19,11 +19,11 @@ struct ReportTemplate {
     let dateTo: Date
 }
 
-class ReportChoiceTVC: UITableViewController {
+class ReportChoiceVC: UITableViewController {
     
     // MARK: - Properties
     var coreDataStack: CoreDataStack!
-    weak var delegate: ReportChoiceTVCDelegate?
+    weak var delegate: ReportChoiceVCDelegate?
     var selectedPredicate: NSCompoundPredicate?
     var selectedTextLabel: String?
     
@@ -65,7 +65,7 @@ class ReportChoiceTVC: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navController = segue.destination as? AddReportTVCNC,
-              let addReportTVC = navController.topViewController as? AddReportTVC else { return }
+              let addReportTVC = navController.topViewController as? AddReportVC else { return }
         addReportTVC.delegate = self
     }
     // MARK: - IB Actions
@@ -183,7 +183,7 @@ class ReportChoiceTVC: UITableViewController {
     
 }
 // MARK: - TableViewDatasource
-extension ReportChoiceTVC {
+extension ReportChoiceVC {
     override func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
     }
@@ -213,7 +213,7 @@ extension ReportChoiceTVC {
     }
 }
 // MARK: - TableViewDelegate
-extension ReportChoiceTVC {
+extension ReportChoiceVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let fetchRequest: NSFetchRequest<Report> = Report.fetchRequest()
         do {
@@ -251,7 +251,7 @@ extension ReportChoiceTVC {
     }
 }
 // MARK: - AddReportTVCDelegate
-extension ReportChoiceTVC: AddReportTVCDelegate {
+extension ReportChoiceVC: AddReportVCDelegate {
     func newReportDidCreated(report: Report) {
         reports.append(report)
         tableView.insertRows(at: [IndexPath(row: reports.count - 1, section: 1)],
@@ -259,7 +259,7 @@ extension ReportChoiceTVC: AddReportTVCDelegate {
     }
 }
 // MARK: - AlertController
-extension ReportChoiceTVC {
+extension ReportChoiceVC {
     func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title,
                                       message: message,

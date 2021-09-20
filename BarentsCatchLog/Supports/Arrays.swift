@@ -6,6 +6,7 @@
 //
 
 struct Arrays {
+    
     static let shared = Arrays()
     
     let months = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн",

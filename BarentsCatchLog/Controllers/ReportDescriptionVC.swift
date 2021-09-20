@@ -12,7 +12,7 @@ struct TotalCatchByPeriod {
     var onBoard: Double?
 }
 
-class ReportDescriptionTVC: UITableViewController {
+class ReportDescriptionVC: UITableViewController {
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -86,7 +86,7 @@ class ReportDescriptionTVC: UITableViewController {
     }
 }
 // MARK: - UITableViewDataSource, Delegate
-extension ReportDescriptionTVC {
+extension ReportDescriptionVC {
     override func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
     }
@@ -101,8 +101,6 @@ extension ReportDescriptionTVC {
                                  height: headerView.frame.height - 5)
         nameLabel.text = sections[section]
         nameLabel.font = .systemFont(ofSize: 20)
-        //nameLabel.textAlignment = .center
-        //nameLabel.backgroundColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
         nameLabel.textColor = .systemBlue
         
         headerView.addSubview(nameLabel)

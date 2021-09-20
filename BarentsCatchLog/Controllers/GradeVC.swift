@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GradeTVC: UITableViewController {
+class GradeVC: UITableViewController {
     // MARK: - Public Properties
     var delegate: GradeTVCDelegate!
 

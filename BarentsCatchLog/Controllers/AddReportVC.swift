@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class AddReportTVC: UITableViewController {
+class AddReportVC: UITableViewController {
     
     // MARK: - IB Outlets
     @IBOutlet weak var nameCell: UITableViewCell!
@@ -28,7 +28,7 @@ class AddReportTVC: UITableViewController {
         return formatter
     }()
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
-    var delegate: AddReportTVCDelegate!
+    var delegate: AddReportVCDelegate!
     
     // MARK: - Private properties
     private var choozenFish: String?
@@ -51,13 +51,13 @@ class AddReportTVC: UITableViewController {
         switch segue.identifier {
         case SegueIDs.toFishChoice.rawValue:
             if let navController = segue.destination as? FishTVCNC {
-                if let fishTVC = navController.topViewController as? FishTVC {
+                if let fishTVC = navController.topViewController as? FishVC {
                     fishTVC.delegate = self
                 }
             }
         case SegueIDs.toGradeChoice.rawValue:
             if let navController = segue.destination as? GradeTVCNC {
-                if let gradeTVC = navController.topViewController as? GradeTVC {
+                if let gradeTVC = navController.topViewController as? GradeVC {
                     gradeTVC.delegate = self
                 }
             }
@@ -127,7 +127,7 @@ class AddReportTVC: UITableViewController {
     }
 }
     // MARK: - UITableViewDelegate
-extension AddReportTVC {
+extension AddReportVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         switch cell {
@@ -145,7 +145,7 @@ extension AddReportTVC {
     }
 }
 // MARK: - AlertController {
-extension AddReportTVC {
+extension AddReportVC {
     func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title,
                                       message: message,
@@ -161,7 +161,7 @@ extension AddReportTVC {
     }
 }
 // MARK: - GradeTVC Delegate
-extension AddReportTVC: GradeTVCDelegate {
+extension AddReportVC: GradeTVCDelegate {
     func valueDidChanged(to grade: String) {
         gradeCell.detailTextLabel?.text = grade
         self.choozenGrade = grade
@@ -170,7 +170,7 @@ extension AddReportTVC: GradeTVCDelegate {
 }
 // MARK: - DateVC Delegate
 // ПОДУМАТЬ КАК СДЕЛАТЬ ЧЕРЕЗ <T>
-extension AddReportTVC: DateVCDelegate {
+extension AddReportVC: DateVCDelegate {
     func dateDidChanged(to date: Date) {
         let convertedDate = dateFormatter.string(from: date)
         if !dateFromDidChanged {
@@ -186,7 +186,7 @@ extension AddReportTVC: DateVCDelegate {
     }
 }
 // MARK: - FishTVC Delegate
-extension AddReportTVC: FishTVCDelegate {
+extension AddReportVC: FishTVCDelegate {
     func fishDidChanged(to fish: String) {
         fishNameCell.detailTextLabel?.text = fish
         self.choozenFish = fish

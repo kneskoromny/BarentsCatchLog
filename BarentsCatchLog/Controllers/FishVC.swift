@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FishTVC: UITableViewController {
+class FishVC: UITableViewController {
     // MARK: - Public Properties
     var delegate: FishTVCDelegate!
     
@@ -16,12 +16,7 @@ class FishTVC: UITableViewController {
                           FishTypes.haddock.rawValue,
                           FishTypes.catfish.rawValue,
                           FishTypes.redfish.rawValue]
-    
-    // MARK: - View Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
+   
     // MARK: - TableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         fishes.count

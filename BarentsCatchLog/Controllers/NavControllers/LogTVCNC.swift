@@ -9,8 +9,4 @@ import UIKit
 
 class LogTVCNC: UINavigationController {
 
-    // MARK: - View Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }
