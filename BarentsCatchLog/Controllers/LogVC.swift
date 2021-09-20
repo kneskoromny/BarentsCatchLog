@@ -52,8 +52,6 @@ class LogVC: UITableViewController {
     // MARK: - Private Methods
     private func divideByDate(from fishes: [Fish]) {
         var dividedFishes: [Fish] = []
-//        var iteration = 0
-//        var isAdded = false
 
         guard let firstFish = fishes.first else { return }
         var dateForComparsion = getDayForComparsion(from: firstFish)
