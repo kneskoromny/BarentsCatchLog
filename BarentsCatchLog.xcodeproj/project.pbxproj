@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F747964826F860CD00F1FFC2 /* Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747964726F860CD00F1FFC2 /* Arrays.swift */; };
-		F747DB9826F23E3B00B3F68A /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9726F23E3B00B3F68A /* Extension+Date.swift */; };
+		F747DB9826F23E3B00B3F68A /* Date + GetAnyDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9726F23E3B00B3F68A /* Date + GetAnyDay.swift */; };
 		F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9926F46D7900B3F68A /* Predicates.swift */; };
 		F747DB9E26F4C6C400B3F68A /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9D26F4C6C400B3F68A /* Requests.swift */; };
 		F759FD6E26EE0A7F001E3D1A /* LogTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */; };
@@ -43,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		F747964726F860CD00F1FFC2 /* Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrays.swift; sourceTree = "<group>"; };
-		F747DB9726F23E3B00B3F68A /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
+		F747DB9726F23E3B00B3F68A /* Date + GetAnyDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + GetAnyDay.swift"; sourceTree = "<group>"; };
 		F747DB9926F46D7900B3F68A /* Predicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicates.swift; sourceTree = "<group>"; };
 		F747DB9D26F4C6C400B3F68A /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTVCNC.swift; sourceTree = "<group>"; };
@@ -89,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F747964926F8D2CA00F1FFC2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F747DB9726F23E3B00B3F68A /* Date + GetAnyDay.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F7703BD226D7874500D7DAFB = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +116,7 @@
 		F7703BDD26D7874500D7DAFB /* BarentsCatchLog */ = {
 			isa = PBXGroup;
 			children = (
+				F747964926F8D2CA00F1FFC2 /* Extensions */,
 				F7703BFC26D7913C00D7DAFB /* Supports */,
 				F7703BF226D78EE900D7DAFB /* Controllers */,
 				F7AE361F26F0BD37007693CF /* CustomCells */,
@@ -115,6 +124,7 @@
 				F7703BEC26D7874700D7DAFB /* Info.plist */,
 				F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */,
 				F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */,
+				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
 			);
 			path = BarentsCatchLog;
 			sourceTree = "<group>";
@@ -150,10 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				F7703BDE26D7874500D7DAFB /* AppDelegate.swift */,
-				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
 				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
 				F7703C0426DA1FAE00D7DAFB /* Enums.swift */,
-				F747DB9726F23E3B00B3F68A /* Extension+Date.swift */,
 				F747DB9926F46D7900B3F68A /* Predicates.swift */,
 				F747DB9D26F4C6C400B3F68A /* Requests.swift */,
 				F747964726F860CD00F1FFC2 /* Arrays.swift */,
@@ -265,7 +273,7 @@
 				F7703BDF26D7874500D7DAFB /* AppDelegate.swift in Sources */,
 				F759FD7026EE0A95001E3D1A /* LogTVC.swift in Sources */,
 				F7703C0526DA1FAE00D7DAFB /* Enums.swift in Sources */,
-				F747DB9826F23E3B00B3F68A /* Extension+Date.swift in Sources */,
+				F747DB9826F23E3B00B3F68A /* Date + GetAnyDay.swift in Sources */,
 				F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */,
 				F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */,
 				F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */,

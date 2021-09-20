@@ -180,7 +180,7 @@ extension LogTVC {
         }
         textLabel.textAlignment = .center
         textLabel.font = .systemFont(ofSize: 14)
-        textLabel.textColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
+        textLabel.textColor = .systemBlue
         
         headerView.addSubview(textLabel)
         headerView.addSubview(figureLabel)
@@ -199,11 +199,14 @@ extension LogTVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "logCell", for: indexPath) as! LogCell
         let fish = sortedDailyCatch[indexPath.section].fishes?[indexPath.row]
+        
         cell.fishlabel?.text = fish?.name
         if let perDay = fish?.perDay {
             cell.frzBoardLabel.text = String(format: "%.0f", perDay) + " кг"
         }
         cell.gradeLabel.text = fish?.grade
+        cell.gradeLabel.textColor = .systemGray
+        cell.frzBoardLabel.textColor = .systemGreen
         
         return cell
     }

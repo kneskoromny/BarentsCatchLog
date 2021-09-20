@@ -19,6 +19,8 @@ class AddReportTVC: UITableViewController {
     @IBOutlet weak var dateFromCell: UITableViewCell!
     @IBOutlet weak var dateToCell: UITableViewCell!
     
+    @IBOutlet var cellCollection: [UITableViewCell]!
+    
     // MARK: - Public properties
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -102,6 +104,10 @@ class AddReportTVC: UITableViewController {
         dateFromCell.detailTextLabel?.text = dateFormatter.string(from: choozenDateFrom)
         dateToCell.textLabel?.text = "Конец"
         dateToCell.detailTextLabel?.text = dateFormatter.string(from: choozenDateTo)
+        
+        cellCollection.forEach { cell in
+            cell.detailTextLabel?.textColor = .systemGray
+        }
     }
     private func createReport(id: String, fish: String?, grade: String?, dateFrom: Date, dateTo: Date) -> Report {
         let report = Report(context: coreDataStack.managedContext)

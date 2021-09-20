@@ -200,6 +200,7 @@ extension ReportChoiceTVC {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reportCell", for: indexPath)
+        cell.textLabel?.textColor = .systemGray
         switch indexPath.section {
         case 0:
             let reportTemplate = reportTemplates[indexPath.row]

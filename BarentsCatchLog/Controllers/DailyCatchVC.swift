@@ -43,6 +43,11 @@ class DailyCatchVC: UIViewController {
     private var choozenFish: String?
     private var sumFrzPerDay: Int?
     
+    // MARK: - View Life Cycle
+    override func viewDidLoad() {
+        frozenOnBoardTF.textColor = .systemGreen
+        frozenOnBoardTF.keyboardType = .decimalPad
+    }
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -163,6 +168,7 @@ extension DailyCatchVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let object = arrayForTableView[indexPath.row]
         cell.textLabel?.text = object
+        cell.detailTextLabel?.textColor = .systemGray
         switch object {
         case "Дата":
             if choozenDate != Date() {

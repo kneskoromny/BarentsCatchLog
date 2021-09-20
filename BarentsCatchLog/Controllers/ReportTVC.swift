@@ -85,9 +85,11 @@ extension ReportTVC {
         var cell = tableView.dequeueReusableCell(withIdentifier: "reportCell", for: indexPath)
         cell = UITableViewCell(style: .value1, reuseIdentifier: "reportCell")
         cell.accessoryType = .disclosureIndicator
+        cell.detailTextLabel?.textColor = .systemGray
         switch indexPath.section {
         case 0:
             cell.textLabel?.text = "Отчет"
+            cell.textLabel?.textColor = .systemBlue
             cell.detailTextLabel?.text = detailTextLabel
         default:
             cell.textLabel?.text = String(format: "%.0f", totalFrz) + " кг"

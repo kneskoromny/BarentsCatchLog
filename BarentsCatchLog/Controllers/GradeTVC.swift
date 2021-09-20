@@ -32,6 +32,7 @@ class GradeTVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gradeCell", for: indexPath)
         let grade = grades[indexPath.row]
         cell.textLabel?.text = grade
+        cell.textLabel?.textColor = .systemGray
 
         return cell
     }

@@ -31,6 +31,7 @@ class FishTVC: UITableViewController {
         let fish = fishes[indexPath.row]
         
         cell.textLabel?.text = fish
+        cell.textLabel?.textColor = .systemGray
 
         return cell
     }

@@ -101,9 +101,9 @@ extension ReportDescriptionTVC {
                                  height: headerView.frame.height - 5)
         nameLabel.text = sections[section]
         nameLabel.font = .systemFont(ofSize: 20)
-        nameLabel.textAlignment = .center
-        nameLabel.backgroundColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
-        nameLabel.textColor = .white
+        //nameLabel.textAlignment = .center
+        //nameLabel.backgroundColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
+        nameLabel.textColor = .systemBlue
         
         headerView.addSubview(nameLabel)
         return headerView
@@ -132,6 +132,10 @@ extension ReportDescriptionTVC {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReportDescriptionCell", for: indexPath) as! ReportChoiceCell
+        cell.dateLabel.textColor = .systemBlue
+        cell.gradeLabel.textColor = .systemGray
+        cell.perDayQuantityLabel.textColor = .systemGreen
+        cell.perDayTypeLabel.textColor = .systemGreen
         switch isOneTypeFish {
         case true:
             switch indexPath.section {
