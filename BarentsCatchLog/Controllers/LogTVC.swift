@@ -23,19 +23,17 @@ class DailyCatch {
 class LogTVC: UITableViewController {
     // MARK: - Public Properties
     lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
-    var dailyCatch = [DailyCatch]()
-    var sortedDailyCatch = [DailyCatch]()
     let tableRefreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(update(sender:)), for: .valueChanged)
         return control
     }()
+    var dailyCatch = [DailyCatch]()
+    var sortedDailyCatch = [DailyCatch]()
     
     // MARK: - Private Properties
     private var fishes: [Fish] = []
     private var updatedFishes: [Fish] = []
-    private var months = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн",
-                          "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"]
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -177,7 +175,7 @@ extension LogTVC {
         let textLabel = UILabel()
         textLabel.frame = CGRect(x: 5, y: 20, width: 30, height: 20)
         if let monthFigure = Int(sortedDailyCatch[section].month!) {
-            textLabel.text = months[monthFigure - 1]
+            textLabel.text = Arrays.shared.months[monthFigure - 1]
         }
         textLabel.textAlignment = .center
         textLabel.font = .systemFont(ofSize: 14)

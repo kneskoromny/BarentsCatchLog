@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F747964826F860CD00F1FFC2 /* Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747964726F860CD00F1FFC2 /* Arrays.swift */; };
 		F747DB9826F23E3B00B3F68A /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9726F23E3B00B3F68A /* Extension+Date.swift */; };
 		F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9926F46D7900B3F68A /* Predicates.swift */; };
 		F747DB9E26F4C6C400B3F68A /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9D26F4C6C400B3F68A /* Requests.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F747964726F860CD00F1FFC2 /* Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrays.swift; sourceTree = "<group>"; };
 		F747DB9726F23E3B00B3F68A /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		F747DB9926F46D7900B3F68A /* Predicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicates.swift; sourceTree = "<group>"; };
 		F747DB9D26F4C6C400B3F68A /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
@@ -108,7 +110,7 @@
 			children = (
 				F7703BFC26D7913C00D7DAFB /* Supports */,
 				F7703BF226D78EE900D7DAFB /* Controllers */,
-				F7AE361F26F0BD37007693CF /* CustomClasses */,
+				F7AE361F26F0BD37007693CF /* CustomCells */,
 				F7703BFB26D7911900D7DAFB /* Views */,
 				F7703BEC26D7874700D7DAFB /* Info.plist */,
 				F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */,
@@ -154,11 +156,12 @@
 				F747DB9726F23E3B00B3F68A /* Extension+Date.swift */,
 				F747DB9926F46D7900B3F68A /* Predicates.swift */,
 				F747DB9D26F4C6C400B3F68A /* Requests.swift */,
+				F747964726F860CD00F1FFC2 /* Arrays.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
 		};
-		F7AE361F26F0BD37007693CF /* CustomClasses */ = {
+		F7AE361F26F0BD37007693CF /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
 				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
@@ -167,7 +170,7 @@
 				F7946E0326EA300400241C16 /* AddReportNameCell.swift */,
 				F7AE361D26EF2CFD007693CF /* LogCell.swift */,
 			);
-			path = CustomClasses;
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		F7AE362026F0BD76007693CF /* NavControllers */ = {
@@ -272,6 +275,7 @@
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
 				F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */,
+				F747964826F860CD00F1FFC2 /* Arrays.swift in Sources */,
 				F7946DEE26E6773300241C16 /* GradeTVCNC.swift in Sources */,
 				F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */,
 				F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */,
