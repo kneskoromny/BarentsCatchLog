@@ -38,82 +38,67 @@ class LogTVC: UITableViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
-        do {
-            fishes = try coreDataStack.managedContext.fetch(fetchRequest)
-            //print("fishes in LOG \(fishes.count)")
-        } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
-        }
-        //print("Its a fishes count - \(fishes.count)")
-        let convertedFishes = fishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending})
+        
+        fishes = Requests.shared.getAllElementsRequest()
+        let convertedFishes = fishes.sorted(by: {
+            ($0.date)?.compare($1.date!) == .orderedDescending
+        })
         
         divideByDate(from: convertedFishes)
-        print("Its a dailyCatch count - \(dailyCatch.count)")
-        //tableView.reloadData()
-        dailyCatch.forEach { dailyCatch in
-            //print("Its a dailyCatch  - \(dailyCatch.fishes?.first)")
-        }
         tableView.refreshControl = tableRefreshControl
-        
     }
+    
     // MARK: - Private Methods
-    // добавил 4 рыбы за сегодня, рефрешнул, добавил еще 2 рефрешнул и они добавились и отдельной секцией с числом и в число к другим
     private func divideByDate(from fishes: [Fish]) {
         var dividedFishes: [Fish] = []
-        var fishDate: String?, fishMonth: String?
-        //var isFishDidAdded = false
-        if let date = fishes.first?.date {
-            let components = Calendar.current.dateComponents([.day,.month], from: date)
-            fishDate = String(describing: components.day!)
-            fishMonth = String(describing: components.month!)
-        }
-        // не работает если вносишь один тип рыбы - РЕШЕНО ЧЕРЕЗ REFRESH CONTROL
-        for fish in fishes {
-            var currentFishDate: String?, currentFishMonth: String?
-            if let date = fish.date {
-                let components = Calendar.current.dateComponents([.day, .month], from: date)
-                currentFishDate = String(describing: components.day!)
-                currentFishMonth = String(describing: components.month!)
-            }
-            print("Inside forIn - fishDate \(String(describing: fishDate))")
-            print("Inside forIn - fish.date \(String(describing: currentFishDate))")
+
+        guard let firstFish = fishes.first else { return }
+        var dateForComparsion = getDayForComparsion(from: firstFish)
+        print("StartDateForComparsion: \(dateForComparsion)")
+        var monthForComparsion = getMonthForComparsion(from: firstFish)
+        print("StartMmonthForComparsion: \(monthForComparsion)")
+        
+        fishes.forEach { fish in
+            
+            let currentFishDate = getDayForComparsion(from: fish)
+            print("currentFishDate: \(currentFishDate)")
+            let currentFishMonth = getMonthForComparsion(from: fish)
+            print("currentFishMonth: \(currentFishMonth)")
             // даты 2х последующих рыб совпадают
-            if currentFishDate == fishDate {
+            if currentFishDate == dateForComparsion {
                 dividedFishes.append(fish)
                 // появляется другая дата
-               } else {
+            } else {
+                switch dailyCatch.isEmpty {
                 // первое внесение, dailyCatch пустой
-                if dailyCatch.isEmpty {
-                    guard let date = fishDate, let month = fishMonth else { return }
-                    let catchDaily = DailyCatch(date: date, month: month, fishes: dividedFishes)
-                    dailyCatch.append(catchDaily)
-                    // рыба уже вносилась, dailyCatch содержит данные
-                } else {
-                    for element in dailyCatch {
+                case true:
+                    createDailyCatch(with: dateForComparsion, month: monthForComparsion, and: dividedFishes)
+                // рыба уже вносилась, dailyCatch содержит данные
+                default:
+                    dailyCatch.forEach { dailyCatch in
                         // есть такая же дата
-                        if element.date == fishDate {
-                            element.fishes?.append(fish)
+                        if dailyCatch.date == dateForComparsion {
+                            dailyCatch.fishes?.append(fish)
+                            print("dailyCatchFishesCount: \(dailyCatch.fishes?.count)")
                             // такой даты нет
                         } else {
-                            guard let date = fishDate, let month = fishMonth else { return }
-                            let catchDaily = DailyCatch(date: date, month: month, fishes: dividedFishes)
-                            dailyCatch.append(catchDaily)
+                            createDailyCatch(with: dateForComparsion, month: monthForComparsion, and: dividedFishes)
                         }
                     }
                 }
                 dividedFishes.removeAll()
                 dividedFishes.append(fish)
-                fishDate = currentFishDate
-                fishMonth = currentFishMonth
+                dateForComparsion = currentFishDate
+                print("NewDateForComparsion: \(dateForComparsion)")
+                monthForComparsion = currentFishMonth
+                print("NewMmonthForComparsion: \(monthForComparsion)")
             }
         }
-        print("Divided fishes count - \(dividedFishes.count)")
         // внесение последнего элемента массива fishes
         var iteration = 0
         var isAdded = false
         while iteration < dailyCatch.count {
-            if dailyCatch[iteration].date == fishDate {
+            if dailyCatch[iteration].date == dateForComparsion {
                 isAdded = true
                 for fish in dividedFishes {
                     dailyCatch[iteration].fishes?.append(fish)
@@ -125,27 +110,42 @@ class LogTVC: UITableViewController {
             
         }
         if !isAdded {
-            guard let date = fishDate, let month = fishMonth else { return }
-            let catchDaily = DailyCatch(date: date, month: month, fishes: dividedFishes)
-            dailyCatch.append(catchDaily)
+            createDailyCatch(with: dateForComparsion, month: monthForComparsion, and: dividedFishes)
         }
-        
-        
         sortedDailyCatch = dailyCatch.sorted { catch1, catch2 in
             let date1 = Int(catch1.date!), date2 = Int(catch2.date!)
             return date1! > date2!
         }
     }
+    
+    private func getDayForComparsion(from element: Fish) -> String? {
+        var day: String?
+        
+        if let elementDate = element.date {
+            let components = Calendar.current.dateComponents([.day], from: elementDate)
+            day = String(describing: components.day!)
+        }
+        return day
+    }
+    
+    private func getMonthForComparsion(from element: Fish) -> String? {
+        var month: String?
+        
+        if let elementDate = element.date {
+            let components = Calendar.current.dateComponents([.month], from: elementDate)
+            month = String(describing: components.month!)
+        }
+        return month
+    }
+    
+    private func createDailyCatch(with date: String?, month: String?, and fishes: [Fish]) {
+        guard let date = date, let month = month else { return }
+        let newDailyCatch = DailyCatch(date: date, month: month, fishes: fishes)
+        dailyCatch.append(newDailyCatch)
+    }
     // обновляет table view при свайпе вниз
     @objc private func update(sender: UIRefreshControl) {
-        let fetchRequestForUpdate: NSFetchRequest<Fish> = Fish.fetchRequest()
-        do {
-            updatedFishes = try coreDataStack.managedContext.fetch(fetchRequestForUpdate)
-            //print("UPDATED FISHES COUNT \(updatedFishes.count)")
-        } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
-        }
-        //print("FISHES COUNT - \(fishes.count)")
+        updatedFishes = Requests.shared.getAllElementsRequest()
         
         let convFishes = Set(fishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending}))
         let convUpdFishes = Set(updatedFishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending}))

@@ -11,6 +11,19 @@ import CoreData
 struct Requests {
     
     var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
+    static let shared = Requests()
+    
+    func getAllElementsRequest() -> [Fish] {
+        var elements: [Fish] = []
+        
+        let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
+        do {
+            elements = try coreDataStack.managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Fetch error: \(error) description: \(error.userInfo)")
+        }
+        return elements
+    }
     
     // запрос на подсчет аттрибута frzPerDay по указанному типу рыбы
     func getAttributeCountRequest(for fish: String, and grade: String) -> Int {
