@@ -95,9 +95,9 @@ extension ReportDescriptionTVC {
         let headerView = UIView(frame: frame)
         
         let nameLabel = UILabel()
-        nameLabel.frame = CGRect(x: 0,
+        nameLabel.frame = CGRect(x: 20,
                                  y: 0,
-                                 width: headerView.frame.width,
+                                 width: headerView.frame.width - 20,
                                  height: headerView.frame.height - 5)
         nameLabel.text = sections[section]
         nameLabel.font = .systemFont(ofSize: 20)
