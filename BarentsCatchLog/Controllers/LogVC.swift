@@ -23,7 +23,7 @@ class DailyCatch {
 class LogVC: UITableViewController {
     
     // MARK: - Public Properties
-    lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
+    lazy var coreDataStack = CoreDataStack(modelName: IDs.modelID.rawValue)
     let tableRefreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(update(sender:)), for: .valueChanged)

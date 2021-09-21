@@ -4,7 +4,10 @@
 //
 //  Created by Кирилл Нескоромный on 28.08.2021.
 //
-import Foundation
+
+enum IDs: String {
+    case modelID = "BarentsCatchLog"
+}
 
 enum FishTypes: String {
     case cod = "Треска б/г мороженая"
@@ -29,6 +32,20 @@ enum FishGrades: String {
     case moreThanFive = "5.0+"
 }
 
+enum DailyCatchVCStrings: String {
+    case date = "Дата"
+    case fish = "Объект"
+    case grade = "Навеска"
+}
+
+enum ReportDescriptionVCStrings: String {
+    case frzByGrades = "Готовая по навескам"
+    case frzOnBoard = "Готовая всего"
+    case raw = "Вылов"
+    case frzSpecies = "Готовая по видам за период"
+    case log = "Записи за период"
+}
+
 enum ReportTemplateIDs: String {
     case allFishForToday = "Все позиции за сегодня"
     case allFishForYesterday = "Вся позиции за вчера"
@@ -44,4 +61,15 @@ enum SegueIDs: String {
     case toGradeChoice = "toGradeArrayIdentifier"
     case toDateFromChoice = "toDateFromIdentifier"
     case toDateToChoice = "toDateToIdentifier"
+    case toReportChoice = "toReportChoiceTVC"
+    case toReportDescription = "toReportDecriptionTVC"
+}
+
+enum CellIDs: String {
+    case dailyCatchCell = "Cell"
+    case gradeCell = "gradeCell"
+    case fishCell = "fishCell"
+    case reportCell = "reportCell"
+    case reportChoiceCell = "reportChoiceCell"
+    case reportDescriptionCell = "ReportDescriptionCell"
 }

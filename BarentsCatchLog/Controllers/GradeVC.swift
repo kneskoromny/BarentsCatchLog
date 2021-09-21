@@ -12,13 +12,12 @@ class GradeVC: UITableViewController {
     var delegate: GradeTVCDelegate!
 
     // MARK: - Private Properties
-    private let grades = ["без навески", "0.5 -", "0.5 +",
-                          "1 -", "0.5 - 1", "1 +",
-                          "1 - 2", "2 - 3", "3 +", "5 +"]
+    private var grades: [String] = []
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        grades = Arrays.shared.grades
     }
 
     // MARK: - TableViewDataSource
@@ -29,7 +28,7 @@ class GradeVC: UITableViewController {
         grades.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "gradeCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.gradeCell.rawValue, for: indexPath)
         let grade = grades[indexPath.row]
         cell.textLabel?.text = grade
         cell.textLabel?.textColor = .systemGray

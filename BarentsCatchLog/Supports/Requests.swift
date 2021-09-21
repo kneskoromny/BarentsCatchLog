@@ -10,7 +10,7 @@ import CoreData
 
 struct Requests {
     
-    var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
+    var coreDataStack = CoreDataStack(modelName: IDs.modelID.rawValue)
     static let shared = Requests()
     
     func getAllElementsRequest() -> [Fish] {

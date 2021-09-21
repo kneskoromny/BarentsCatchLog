@@ -30,12 +30,12 @@ class DailyCatchVC: UIViewController {
         formatter.dateFormat = "dd-MM-YYYY"
         return formatter
     }()
-    lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
+    lazy var coreDataStack = CoreDataStack(modelName: IDs.modelID.rawValue)
     
     //MARK: - Private Properties
-    let arrayForTableView = ["Дата", "Рыба", "Навеска"]
-    
-    private let cellIdentifier = "Cell"
+    let arrayForTableView = [DailyCatchVCStrings.date.rawValue,
+                             DailyCatchVCStrings.fish.rawValue,
+                             DailyCatchVCStrings.grade.rawValue]
     
     private var isOnBoardWeightGreater = false
     private var choozenDate = Date()
@@ -86,7 +86,7 @@ class DailyCatchVC: UIViewController {
                       message: "Необходимо заполнить все поля перед сохранением.")
             return
         }
-        sumFrzPerDay = Requests().getAttributeCountRequest(for: fishName, and: fishGrade)
+        sumFrzPerDay = Requests.shared.getAttributeCountRequest(for: fishName, and: fishGrade)
         
         checkOnBoardWeight(between: sumFrzPerDay, and: fishWeight)
         if isOnBoardWeightGreater {
@@ -165,29 +165,30 @@ extension DailyCatchVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.dailyCatchCell.rawValue, for: indexPath)
         let object = arrayForTableView[indexPath.row]
         cell.textLabel?.text = object
         cell.detailTextLabel?.textColor = .systemGray
         switch object {
-        case "Дата":
+        case DailyCatchVCStrings.date.rawValue:
             if choozenDate != Date() {
                 let convertedDate = dateFormatter.string(from: choozenDate)
                 cell.detailTextLabel?.text = String(describing: convertedDate)
             } else {
                 cell.detailTextLabel?.text = "Сегодня"
             }
-        case "Рыба":
+        case DailyCatchVCStrings.fish.rawValue:
             if choozenFish != nil {
                 cell.detailTextLabel?.text = choozenFish
             } else {
-                cell.detailTextLabel?.text = ""
+                //убрать
+                //cell.detailTextLabel?.text = ""
             }
         default:
             if choozenGrade != nil {
                 cell.detailTextLabel?.text = choozenGrade
             } else {
-                cell.detailTextLabel?.text = ""
+                //cell.detailTextLabel?.text = ""
             }
         }
         return cell

@@ -27,7 +27,7 @@ class AddReportVC: UITableViewController {
         formatter.dateFormat = "dd-MM-YYYY"
         return formatter
     }()
-    lazy var coreDataStack = CoreDataStack(modelName: "BarentsCatchLog")
+    lazy var coreDataStack = CoreDataStack(modelName: IDs.modelID.rawValue)
     var delegate: AddReportVCDelegate!
     
     // MARK: - Private properties

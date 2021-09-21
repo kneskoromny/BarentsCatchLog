@@ -16,7 +16,7 @@ class ReportDescriptionVC: UITableViewController {
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MM"
+        formatter.dateFormat = "dd.MM"
         return formatter
     }()
     var caughtFishes: [Fish]!
@@ -40,17 +40,17 @@ class ReportDescriptionVC: UITableViewController {
     private func prepareTableViewDependingInputData() {
         switch isOneTypeFish {
         case true:
-            sections.append("Готовая по навескам")
+            sections.append(ReportDescriptionVCStrings.frzByGrades.rawValue)
             convertedCaughtFishes = caughtFishes.sorted(by: { ($0.date)?.compare($1.date!) == .orderedDescending})
-            sections.append("Готовая всего")
+            sections.append(ReportDescriptionVCStrings.frzOnBoard.rawValue)
             getTotalFrzFish(from: caughtFishes)
-            sections.append("Вылов")
+            sections.append(ReportDescriptionVCStrings.raw.rawValue)
             getRawFish(from: caughtFishes)
         default:
-            sections.append("Готовая по видам за период")
+            sections.append(ReportDescriptionVCStrings.frzSpecies.rawValue)
             convertedCaughtFishes = caughtFishes.sorted(by: { $0.name! > $1.name! })
             divideByName(from: convertedCaughtFishes)
-            sections.append("Записи за период")
+            sections.append(ReportDescriptionVCStrings.log.rawValue)
         }
     }
     private func getRawFish(from fishes: [Fish]) {
@@ -129,7 +129,7 @@ extension ReportDescriptionVC {
         50
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReportDescriptionCell", for: indexPath) as! ReportChoiceCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.reportDescriptionCell.rawValue, for: indexPath) as! ReportChoiceCell
         cell.dateLabel.textColor = .systemBlue
         cell.gradeLabel.textColor = .systemGray
         cell.perDayQuantityLabel.textColor = .systemGreen

@@ -22,7 +22,7 @@ class FishVC: UITableViewController {
         fishes.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fishCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.fishCell.rawValue, for: indexPath)
         let fish = fishes[indexPath.row]
         
         cell.textLabel?.text = fish

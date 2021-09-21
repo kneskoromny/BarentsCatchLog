@@ -59,8 +59,6 @@ class ReportChoiceVC: UITableViewController {
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
-        print("\(reports.count) reports in viewWillAppear")
-        print("\(reportTemplates.count) templates in viewWillAppear")
     }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,6 +85,7 @@ class ReportChoiceVC: UITableViewController {
         isEditingTableView.toggle()
     }
     // MARK: - Private Methods
+    // сделать из предикатов
     private func getPredicates(from report: Report) {
         var totalPredicates: [NSPredicate] = []
         
@@ -199,7 +198,7 @@ extension ReportChoiceVC {
         }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reportCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.reportChoiceCell.rawValue, for: indexPath)
         cell.textLabel?.textColor = .systemGray
         switch indexPath.section {
         case 0:
