@@ -167,7 +167,6 @@ class DailyCatchVC: UIViewController {
         return toolBar
     }
     @objc private func doneAction() {
-        print("DONE")
         view.endEditing(true)
     }
 }

@@ -53,6 +53,7 @@ class ReportChoiceVC: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        // есть такой же, но с рыбой как сделать через <T>?
         let fetchRequest: NSFetchRequest<Report> = Report.fetchRequest()
         do {
             reports = try coreDataStack.managedContext.fetch(fetchRequest)
@@ -232,6 +233,10 @@ extension ReportChoiceVC {
         }
         
         cell.accessoryType = .checkmark
+    }
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let cell =  tableView.cellForRow(at: indexPath) else { return }
+        cell.accessoryType = .none
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
