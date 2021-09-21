@@ -35,6 +35,7 @@ class LogVC: UITableViewController {
     // MARK: - Private Properties
     private var fishes: [Fish] = []
     private var updatedFishes: [Fish] = []
+    private var isEditingTableView = true
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -48,6 +49,13 @@ class LogVC: UITableViewController {
         divideByDate(from: convertedFishes)
         tableView.refreshControl = tableRefreshControl
     }
+    
+    // MARK: - IB Actions
+    @IBAction func deleteLogRecordBtnPressed(_ sender: UIBarButtonItem) {
+        tableView.setEditing(isEditingTableView, animated: true)
+        isEditingTableView.toggle()
+    }
+    
     
     // MARK: - Private Methods
     private func divideByDate(from fishes: [Fish]) {

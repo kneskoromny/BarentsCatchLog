@@ -708,11 +708,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="logCell" rowHeight="70" id="rtt-nJ-Xqt" customClass="LogCell" customModule="BarentsCatchLog" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="logCell" rowHeight="70" id="rtt-nJ-Xqt" customClass="LogCell" customModule="BarentsCatchLog" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rtt-nJ-Xqt" id="yXg-bM-rd8">
-                                    <rect key="frame" x="0.0" y="0.0" width="384.5" height="70"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8tw-VV-fPq">
@@ -733,7 +733,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4bu-TH-QUL">
-                                            <rect key="frame" x="307" y="18" width="49.5" height="34"/>
+                                            <rect key="frame" x="324.5" y="18" width="49.5" height="34"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqR-Xs-ISA">
                                                     <rect key="frame" x="0.0" y="0.0" width="49.5" height="17"/>
@@ -770,7 +770,13 @@
                             <outlet property="delegate" destination="c9T-0c-ZLa" id="0hs-CI-YvA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Журнал" id="wIR-MQ-Az4"/>
+                    <navigationItem key="navigationItem" title="Журнал" id="wIR-MQ-Az4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="8Ob-bW-24O">
+                            <connections>
+                                <action selector="deleteLogRecordBtnPressed:" destination="c9T-0c-ZLa" id="Nwk-WA-vls"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIH-ey-dcu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
