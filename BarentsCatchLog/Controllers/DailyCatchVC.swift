@@ -46,6 +46,7 @@ class DailyCatchVC: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         frozenOnBoardTF.textColor = .systemGreen
+        frozenOnBoardTF.inputAccessoryView = createToolbar()
         frozenOnBoardTF.keyboardType = .decimalPad
     }
     //MARK: - Navigation
@@ -155,6 +156,19 @@ class DailyCatchVC: UIViewController {
         choozenGrade = nil
         frozenOnBoardTF.text = nil
         tableView.reloadData()
+    }
+    private func createToolbar() -> UIToolbar {
+        let toolBar = UIToolbar()
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.items = [flexSpace, doneBtn]
+        toolBar.sizeToFit()
+        
+        return toolBar
+    }
+    @objc private func doneAction() {
+        print("DONE")
+        view.endEditing(true)
     }
 }
 
