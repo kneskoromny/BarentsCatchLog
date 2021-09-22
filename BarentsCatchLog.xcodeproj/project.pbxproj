@@ -37,6 +37,9 @@
 		F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */; };
 		F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AE361D26EF2CFD007693CF /* LogCell.swift */; };
 		F7C48F4226FB08780031E370 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4126FB08780031E370 /* CustomView.swift */; };
+		F7C48F4626FB8FE30031E370 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4526FB8FE30031E370 /* SettingsVC.swift */; };
+		F7C48F4826FB90390031E370 /* SettingsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4726FB90390031E370 /* SettingsListVC.swift */; };
+		F7C48F4A26FB906B0031E370 /* SettingsListTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4926FB906B0031E370 /* SettingsListTVCNC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +75,9 @@
 		F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVCNC.swift; sourceTree = "<group>"; };
 		F7AE361D26EF2CFD007693CF /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		F7C48F4126FB08780031E370 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		F7C48F4526FB8FE30031E370 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		F7C48F4726FB90390031E370 /* SettingsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListVC.swift; sourceTree = "<group>"; };
+		F7C48F4926FB906B0031E370 /* SettingsListTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListTVCNC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,8 @@
 				F7946DF726E74D0F00241C16 /* ReportDescriptionVC.swift */,
 				F7946DFF26E9F13800241C16 /* AddReportVC.swift */,
 				F759FD6F26EE0A95001E3D1A /* LogVC.swift */,
+				F7C48F4526FB8FE30031E370 /* SettingsVC.swift */,
+				F7C48F4726FB90390031E370 /* SettingsListVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -174,6 +182,7 @@
 		F7AE362026F0BD76007693CF /* NavControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F7C48F4926FB906B0031E370 /* SettingsListTVCNC.swift */,
 				F7703BF326D78F9400D7DAFB /* StartVC.swift */,
 				F7946DED26E6773300241C16 /* GradeTVCNC.swift */,
 				F7946DEF26E681B900241C16 /* FishTVCNC.swift */,
@@ -292,8 +301,10 @@
 				F759FD7026EE0A95001E3D1A /* LogVC.swift in Sources */,
 				F7703C0526DA1FAE00D7DAFB /* Enums.swift in Sources */,
 				F747DB9826F23E3B00B3F68A /* Date + GetAnyDay.swift in Sources */,
+				F7C48F4826FB90390031E370 /* SettingsListVC.swift in Sources */,
 				F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */,
 				F7946DF826E74D0F00241C16 /* ReportDescriptionVC.swift in Sources */,
+				F7C48F4626FB8FE30031E370 /* SettingsVC.swift in Sources */,
 				F7946DFC26E89A0E00241C16 /* ReportDescriptionCell.swift in Sources */,
 				F7946DEC26E4F34A00241C16 /* GradeVC.swift in Sources */,
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
@@ -302,6 +313,7 @@
 				F747964826F860CD00F1FFC2 /* Arrays.swift in Sources */,
 				F7946DEE26E6773300241C16 /* GradeTVCNC.swift in Sources */,
 				F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */,
+				F7C48F4A26FB906B0031E370 /* SettingsListTVCNC.swift in Sources */,
 				F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */,
 				F7946DF426E74A0600241C16 /* ReportVC.swift in Sources */,
 				F7946DF626E74CD200241C16 /* ReportChoiceVC.swift in Sources */,

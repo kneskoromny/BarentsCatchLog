@@ -58,6 +58,11 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Новая запись" id="2jV-t7-y0U">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="gearshape" catalog="system" id="UAO-dw-bNI">
+                                            <connections>
+                                                <segue destination="7wh-Er-XeW" kind="presentation" id="5Lp-wf-65H"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="2Cc-8Q-mnH">
                                             <color key="tintColor" systemColor="systemRedColor"/>
                                             <connections>
@@ -780,7 +785,52 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eIH-ey-dcu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1634.7826086956522" y="738.61607142857144"/>
+            <point key="canvasLocation" x="1483" y="739"/>
+        </scene>
+        <!--SettingsVC-->
+        <scene sceneID="UTN-6H-lhm">
+            <objects>
+                <viewController id="7wh-Er-XeW" customClass="SettingsVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pYg-Td-L3P">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="NZK-MB-xMR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="60O-8v-hQd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uxo-Qc-4XP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3209" y="739"/>
+        </scene>
+        <!--Settings ListVC-->
+        <scene sceneID="6QN-b4-SCd">
+            <objects>
+                <tableViewController id="fAe-7B-Fjh" customClass="SettingsListVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ylW-8D-0Q9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ogD-Ph-iG9">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ogD-Ph-iG9" id="4qH-jE-PkS">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fAe-7B-Fjh" id="y4s-XM-d7P"/>
+                            <outlet property="delegate" destination="fAe-7B-Fjh" id="JYa-12-AaL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="10y-t8-yCk"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RMF-Pc-Avc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4966.666666666667" y="738.61607142857144"/>
         </scene>
         <!--Report ChoiceTVCNC-->
         <scene sceneID="pT2-1g-ssF">
@@ -838,6 +888,24 @@
             </objects>
             <point key="canvasLocation" x="651" y="739"/>
         </scene>
+        <!--Settings ListTVCNC-->
+        <scene sceneID="W2S-yL-7MV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XCY-dI-tn7" customClass="SettingsListTVCNC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="x7y-A4-Rev">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fAe-7B-Fjh" kind="relationship" relationship="rootViewController" id="5mP-8f-kD3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ntJ-On-hdL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4056.521739130435" y="738.61607142857144"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="MAb-sJ-dJD"/>
@@ -846,6 +914,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="newspaper" catalog="system" width="128" height="108"/>
         <image name="play" catalog="system" width="120" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
