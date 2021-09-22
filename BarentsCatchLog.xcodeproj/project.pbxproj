@@ -37,6 +37,7 @@
 		F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */; };
 		F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0326EA300400241C16 /* AddReportNameCell.swift */; };
 		F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AE361D26EF2CFD007693CF /* LogCell.swift */; };
+		F7C48F4226FB08780031E370 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4126FB08780031E370 /* CustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVCNC.swift; sourceTree = "<group>"; };
 		F7946E0326EA300400241C16 /* AddReportNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportNameCell.swift; sourceTree = "<group>"; };
 		F7AE361D26EF2CFD007693CF /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
+		F7C48F4126FB08780031E370 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 		F7AE361F26F0BD37007693CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F7C48F4126FB08780031E370 /* CustomView.swift */,
 				F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */,
 				F7946E0326EA300400241C16 /* AddReportNameCell.swift */,
 				F7AE361D26EF2CFD007693CF /* LogCell.swift */,
@@ -308,6 +311,7 @@
 				F7946DF626E74CD200241C16 /* ReportChoiceVC.swift in Sources */,
 				F7946E0026E9F13800241C16 /* AddReportVC.swift in Sources */,
 				F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */,
+				F7C48F4226FB08780031E370 /* CustomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

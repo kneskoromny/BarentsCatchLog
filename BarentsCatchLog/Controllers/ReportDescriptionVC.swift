@@ -91,20 +91,8 @@ extension ReportDescriptionVC {
         sections.count
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40)
-        let headerView = UIView(frame: frame)
         
-        let nameLabel = UILabel()
-        nameLabel.frame = CGRect(x: 20,
-                                 y: 0,
-                                 width: headerView.frame.width - 20,
-                                 height: headerView.frame.height - 5)
-        nameLabel.text = sections[section]
-        nameLabel.font = .systemFont(ofSize: 20)
-        nameLabel.textColor = .systemBlue
-        
-        headerView.addSubview(nameLabel)
-        return headerView
+        return CustomView.createViewForHeader(with: tableView.frame.width, and: 40, and: sections[section])
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
