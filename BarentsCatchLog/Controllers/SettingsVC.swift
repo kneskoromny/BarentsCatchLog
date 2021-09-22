@@ -21,6 +21,12 @@ class SettingsVC: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ratioTF.keyboardType = .decimalPad
+        ratioTF.inputAccessoryView = createToolbar()
+        gradeTF.keyboardType = .decimalPad
+        gradeTF.inputAccessoryView = createToolbar()
+        
         CustomView.createDesign(for: saveNameRatioBtn, with: .systemBlue, and: "Сохранить")
         CustomView.createDesign(for: saveGradeBtn, with: .systemBlue, and: "Сохранить")
         CustomView.createDesign(for: showDefaultsBtn, with: .systemGreen, and: "Показать список")
@@ -33,6 +39,20 @@ class SettingsVC: UIViewController {
     @IBAction func saveGradeBtnPressed() {
     }
     @IBAction func showDefaultsBtnPressed() {
+    }
+    
+    // MARK: - Private Methods
+    private func createToolbar() -> UIToolbar {
+        let toolBar = UIToolbar()
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.items = [flexSpace, doneBtn]
+        toolBar.sizeToFit()
+        
+        return toolBar
+    }
+    @objc private func doneAction() {
+        view.endEditing(true)
     }
     
 

@@ -67,9 +67,7 @@ class CustomView: UIView {
         button.layer.shadowColor = UIColor.systemGray.cgColor
         button.layer.shadowOffset = CGSize(width: 5, height: 5)
         button.layer.shadowRadius = 5
-        button.layer.shadowOpacity = 1.0 
-    
-        
+        button.layer.shadowOpacity = 1.0
     }
 
 }
