@@ -55,11 +55,13 @@ class CustomView: UIView {
         return headerView
     }
     
-    static func createDesign(for button: UIButton) {
-        button.layer.backgroundColor = UIColor.systemBlue.cgColor
+    static func createDesign(for button: UIButton,
+                             with color: UIColor,
+                             and title: String) {
+        button.layer.backgroundColor = color.cgColor
         button.layer.cornerRadius = button.frame.height / 3
         button.setTitleColor(.white, for: .normal)
-        button.setTitle("Сохранить", for: .normal)
+        button.setTitle(title, for: .normal)
         
     
         button.layer.shadowColor = UIColor.systemGray.cgColor

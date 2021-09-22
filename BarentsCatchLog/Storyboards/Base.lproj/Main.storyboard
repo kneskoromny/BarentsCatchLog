@@ -794,10 +794,86 @@
                     <view key="view" contentMode="scaleToFill" id="pYg-Td-L3P">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="70" translatesAutoresizingMaskIntoConstraints="NO" id="r9u-yr-U5x">
+                                <rect key="frame" x="66.5" y="73" width="281.5" height="696"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пользовательские настройки" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh0-sc-EPZ">
+                                        <rect key="frame" x="4" y="0.0" width="273" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Внесите название объекта промысла" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="guq-G9-Iz3">
+                                        <rect key="frame" x="0.0" y="94" width="281.5" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Внесите переводной коэффициент" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L0V-UD-oKQ">
+                                        <rect key="frame" x="8" y="198" width="265.5" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0v-dy-ArP">
+                                        <rect key="frame" x="0.0" y="302" width="281.5" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="aEc-GF-QEW"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="saveNameRatioBtnPressed" destination="7wh-Er-XeW" eventType="touchUpInside" id="7BF-to-RNL"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Внесите навеску" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J1t-7S-k9r">
+                                        <rect key="frame" x="69.5" y="422" width="142" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVG-1x-6xf">
+                                        <rect key="frame" x="0.0" y="526" width="281.5" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="lAZ-Ty-Evl"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="saveGradeBtnPressed" destination="7wh-Er-XeW" eventType="touchUpInside" id="wYM-4t-udM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbG-cI-Qes">
+                                        <rect key="frame" x="0.0" y="646" width="281.5" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="W3v-zo-L0c"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showDefaultsBtnPressed" destination="7wh-Er-XeW" eventType="touchUpInside" id="5wS-kG-HZy"/>
+                                            <segue destination="XCY-dI-tn7" kind="presentation" id="v2S-vf-hTM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="XbG-cI-Qes" firstAttribute="width" secondItem="r9u-yr-U5x" secondAttribute="width" id="u1y-OE-fV2"/>
+                                    <constraint firstItem="kVG-1x-6xf" firstAttribute="width" secondItem="r9u-yr-U5x" secondAttribute="width" id="vLj-hX-Ygc"/>
+                                    <constraint firstItem="u0v-dy-ArP" firstAttribute="width" secondItem="r9u-yr-U5x" secondAttribute="width" id="xLV-xL-AHR"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="NZK-MB-xMR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="r9u-yr-U5x" firstAttribute="centerY" secondItem="pYg-Td-L3P" secondAttribute="centerY" id="Ltf-T3-t0V"/>
+                            <constraint firstItem="r9u-yr-U5x" firstAttribute="centerX" secondItem="pYg-Td-L3P" secondAttribute="centerX" id="aRZ-jI-cQr"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="60O-8v-hQd"/>
+                    <connections>
+                        <outlet property="gradeTF" destination="J1t-7S-k9r" id="ZhR-07-re4"/>
+                        <outlet property="nameTF" destination="guq-G9-Iz3" id="mAK-TU-IMM"/>
+                        <outlet property="ratioTF" destination="L0V-UD-oKQ" id="hnA-Ac-Ejz"/>
+                        <outlet property="saveGradeBtn" destination="kVG-1x-6xf" id="FVQ-I0-zcE"/>
+                        <outlet property="saveNameRatioBtn" destination="u0v-dy-ArP" id="mNT-jS-1Ov"/>
+                        <outlet property="showDefaultsBtn" destination="XbG-cI-Qes" id="R86-Sw-T7T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uxo-Qc-4XP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -808,7 +884,7 @@
             <objects>
                 <tableViewController id="fAe-7B-Fjh" customClass="SettingsListVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ylW-8D-0Q9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -894,7 +970,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XCY-dI-tn7" customClass="SettingsListTVCNC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x7y-A4-Rev">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -50,7 +50,7 @@ class DailyCatchVC: UIViewController {
         frozenOnBoardTF.textColor = .systemGreen
         frozenOnBoardTF.inputAccessoryView = createToolbar()
         frozenOnBoardTF.keyboardType = .decimalPad
-        CustomView.createDesign(for: saveBtn)
+        CustomView.createDesign(for: saveBtn, with: .systemBlue, and: "Сохранить")
     }
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
