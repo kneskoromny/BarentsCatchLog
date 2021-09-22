@@ -74,11 +74,10 @@ class ReportVC: UITableViewController {
         }
         return filteredFishes.count == fishes.count ? true : false
     }
-    private func configureCell(for cell: UITableViewCell, in section: Int) {
-        switch section {
+    private func configureCell(for cell: UITableViewCell, and indexPath: IndexPath) {
+        switch indexPath.section {
         case 0:
             cell.textLabel?.text = "Отчет"
-            //cell.textLabel?.textColor = .systemBlue
             cell.detailTextLabel?.text = detailTextLabel
         default:
             let stringFrz = String(format: "%.0f", totalFrz)
@@ -96,12 +95,8 @@ extension ReportVC {
         var cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.reportCell.rawValue, for: indexPath)
         
         cell = UITableViewCell(style: .value1, reuseIdentifier: CellIDs.reportCell.rawValue)
-        switch indexPath.section {
-        case 0:
-            configureCell(for: cell, in: 0)
-        default:
-            configureCell(for: cell, in: 1)
-        }
+        configureCell(for: cell, and: indexPath)
+
         return cell
     }
     // MARK: - TableViewDelegate

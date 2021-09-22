@@ -169,17 +169,7 @@ class DailyCatchVC: UIViewController {
     @objc private func doneAction() {
         view.endEditing(true)
     }
-}
-
-// MARK: - UITableViewDataSource
-extension DailyCatchVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        arrayForTableView.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.dailyCatchCell.rawValue, for: indexPath)
-        let object = arrayForTableView[indexPath.row]
+    private func configure(for cell: UITableViewCell, from object: String) {
         cell.textLabel?.text = object
         cell.detailTextLabel?.textColor = .systemGray
         switch object {
@@ -195,6 +185,21 @@ extension DailyCatchVC: UITableViewDataSource {
         default:
             cell.detailTextLabel?.text = choozenGrade
         }
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension DailyCatchVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        arrayForTableView.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.dailyCatchCell.rawValue, for: indexPath)
+        let object = arrayForTableView[indexPath.row]
+        
+        configure(for: cell, from: object)
+
         return cell
     }
 }

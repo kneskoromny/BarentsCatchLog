@@ -20,6 +20,12 @@ class GradeVC: UITableViewController {
         grades = Arrays.shared.grades
     }
 
+    // MARK: - Private Methods
+    private func configure(for cell: UITableViewCell, with grade: String) {
+        cell.textLabel?.text = grade
+        cell.textLabel?.textColor = .systemGray
+    }
+    
     // MARK: - TableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         1
@@ -30,8 +36,8 @@ class GradeVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.gradeCell.rawValue, for: indexPath)
         let grade = grades[indexPath.row]
-        cell.textLabel?.text = grade
-        cell.textLabel?.textColor = .systemGray
+        
+        configure(for: cell, with: grade)
 
         return cell
     }
