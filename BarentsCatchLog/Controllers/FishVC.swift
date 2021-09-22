@@ -17,6 +17,12 @@ class FishVC: UITableViewController {
                           FishTypes.catfish.rawValue,
                           FishTypes.redfish.rawValue]
    
+    // MARK: - Private Methods
+    private func configure(for cell: UITableViewCell, with fish: String) {
+        cell.textLabel?.text = fish
+        cell.textLabel?.textColor = .systemGray
+    }
+    
     // MARK: - TableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         fishes.count
@@ -25,8 +31,7 @@ class FishVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.fishCell.rawValue, for: indexPath)
         let fish = fishes[indexPath.row]
         
-        cell.textLabel?.text = fish
-        cell.textLabel?.textColor = .systemGray
+        configure(for: cell, with: fish)
 
         return cell
     }
