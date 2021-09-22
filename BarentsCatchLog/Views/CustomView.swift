@@ -9,7 +9,7 @@ import UIKit
 
 class CustomView: UIView {
     
-    static func createViewForHeader(with width: CGFloat, and height: CGFloat, and title: String?) -> UIView {
+    static func createHeaderForReportDescriptionVC(with width: CGFloat, and height: CGFloat, and title: String?) -> UIView {
         let frame = CGRect(x: 0, y: 0, width: width, height: height)
         let headerView = UIView(frame: frame)
         
@@ -23,6 +23,35 @@ class CustomView: UIView {
         nameLabel.textColor = .systemBlue
         
         headerView.addSubview(nameLabel)
+        return headerView
+    }
+    
+    static func createHeaderForLogVC(with width: CGFloat, height: CGFloat, day: String?, and month: String?) -> UIView {
+        let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        
+        let figureLabel = UILabel()
+        figureLabel.frame = CGRect(x: 5, y: 0, width: 30, height: 20)
+        if let day = day {
+            figureLabel.text = day
+        }
+        figureLabel.textAlignment = .center
+        figureLabel.font = .systemFont(ofSize: 16)
+        figureLabel.textColor = .systemBlue
+        
+        let textLabel = UILabel()
+        textLabel.frame = CGRect(x: 5, y: 20, width: 30, height: 20)
+        if let month = month {
+            if let monthFigure = Int(month) {
+                textLabel.text = Arrays.shared.months[monthFigure - 1]
+            }
+        }
+        textLabel.textAlignment = .center
+        textLabel.font = .systemFont(ofSize: 14)
+        textLabel.textColor = .systemBlue
+        
+        headerView.addSubview(textLabel)
+        headerView.addSubview(figureLabel)
+        
         return headerView
     }
 

@@ -171,34 +171,13 @@ extension LogVC {
         sortedDailyCatch.count
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40))
+        let day = sortedDailyCatch[section].date
+        let month = sortedDailyCatch[section].month
         
-        let figureLabel = UILabel()
-        figureLabel.frame = CGRect(x: 5, y: 0, width: 30, height: 20)
-        figureLabel.text = sortedDailyCatch[section].date!
-        figureLabel.textAlignment = .center
-        figureLabel.font = .systemFont(ofSize: 16)
-        figureLabel.textColor = UIColor(red: 72/255, green: 159/255, blue: 248/255, alpha: 1)
-        
-        let textLabel = UILabel()
-        textLabel.frame = CGRect(x: 5, y: 20, width: 30, height: 20)
-        if let monthFigure = Int(sortedDailyCatch[section].month!) {
-            textLabel.text = Arrays.shared.months[monthFigure - 1]
-        }
-        textLabel.textAlignment = .center
-        textLabel.font = .systemFont(ofSize: 14)
-        textLabel.textColor = .systemBlue
-        
-        headerView.addSubview(textLabel)
-        headerView.addSubview(figureLabel)
-        
-        return headerView
+        return CustomView.createHeaderForLogVC(with: tableView.frame.width, height: 40, day: day, and: month)
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
-    }
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        sortedDailyCatch[section].date!
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sortedDailyCatch[section].fishes?.count ?? 0
@@ -206,14 +185,7 @@ extension LogVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "logCell", for: indexPath) as! LogCell
         let fish = sortedDailyCatch[indexPath.section].fishes?[indexPath.row]
-        
-        cell.fishlabel?.text = fish?.name
-        if let perDay = fish?.perDay {
-            cell.frzBoardLabel.text = String(format: "%.0f", perDay) + " кг"
-        }
-        cell.gradeLabel.text = fish?.grade
-        cell.gradeLabel.textColor = .systemGray
-        cell.frzBoardLabel.textColor = .systemGreen
+        cell.configure(with: fish)
         
         return cell
     }

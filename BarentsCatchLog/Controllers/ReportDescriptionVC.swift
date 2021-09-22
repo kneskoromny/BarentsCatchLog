@@ -14,11 +14,6 @@ struct TotalCatchByPeriod {
 
 class ReportDescriptionVC: UITableViewController {
     //MARK: - Public Properties
-    lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM"
-        return formatter
-    }()
     var caughtFishes: [Fish]!
     var isOneTypeFish: Bool!
     
@@ -92,7 +87,7 @@ extension ReportDescriptionVC {
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        return CustomView.createViewForHeader(with: tableView.frame.width, and: 40, and: sections[section])
+        return CustomView.createHeaderForReportDescriptionVC(with: tableView.frame.width, and: 40, and: sections[section])
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
