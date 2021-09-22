@@ -879,7 +879,7 @@
             </objects>
             <point key="canvasLocation" x="3209" y="739"/>
         </scene>
-        <!--Внесенные настройки-->
+        <!--Внесенные данные-->
         <scene sceneID="6QN-b4-SCd">
             <objects>
                 <tableViewController id="fAe-7B-Fjh" customClass="SettingsListVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
@@ -918,7 +918,7 @@
                             <outlet property="delegate" destination="fAe-7B-Fjh" id="JYa-12-AaL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Внесенные настройки" id="10y-t8-yCk"/>
+                    <navigationItem key="navigationItem" title="Внесенные данные" id="10y-t8-yCk"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RMF-Pc-Avc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

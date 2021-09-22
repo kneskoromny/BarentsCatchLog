@@ -38,6 +38,11 @@ enum DailyCatchVCStrings: String {
     case grade = "Навеска"
 }
 
+enum SettingsListVCStrings: String {
+    case fishRatio = "Объекты промысла и коэффициенты"
+    case grade = "Навески"
+}
+
 enum ReportDescriptionVCStrings: String {
     case frzByGrades = "Готовая по навескам"
     case frzOnBoard = "Готовая всего"

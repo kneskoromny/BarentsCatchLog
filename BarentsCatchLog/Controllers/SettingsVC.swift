@@ -54,6 +54,10 @@ class SettingsVC: UIViewController {
     @objc private func doneAction() {
         view.endEditing(true)
     }
+    private func saveGrade() {
+        guard let grade = gradeTF.text else { return }
+        StorageManager.shared.save(grade: grade)
+    }
     
 
 }
