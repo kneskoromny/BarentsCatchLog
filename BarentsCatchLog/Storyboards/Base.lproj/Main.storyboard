@@ -879,7 +879,7 @@
             </objects>
             <point key="canvasLocation" x="3209" y="739"/>
         </scene>
-        <!--Settings ListVC-->
+        <!--Внесенные настройки-->
         <scene sceneID="6QN-b4-SCd">
             <objects>
                 <tableViewController id="fAe-7B-Fjh" customClass="SettingsListVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
@@ -888,12 +888,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ogD-Ph-iG9">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingsListCell" textLabel="xDD-nh-mRx" detailTextLabel="tCl-yA-krC" style="IBUITableViewCellStyleValue1" id="ogD-Ph-iG9">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ogD-Ph-iG9" id="4qH-jE-PkS">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xDD-nh-mRx">
+                                            <rect key="frame" x="20" y="13" width="30" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tCl-yA-krC">
+                                            <rect key="frame" x="359" y="15" width="35" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" systemColor="systemGrayColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -902,7 +918,7 @@
                             <outlet property="delegate" destination="fAe-7B-Fjh" id="JYa-12-AaL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="10y-t8-yCk"/>
+                    <navigationItem key="navigationItem" title="Внесенные настройки" id="10y-t8-yCk"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RMF-Pc-Avc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
