@@ -129,56 +129,32 @@ extension ReportDescriptionVC {
         50
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.reportDescriptionCell.rawValue, for: indexPath) as! ReportChoiceCell
-        cell.dateLabel.textColor = .systemBlue
-        cell.gradeLabel.textColor = .systemGray
-        cell.perDayQuantityLabel.textColor = .systemGreen
-        cell.perDayTypeLabel.textColor = .systemGreen
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.reportDescriptionCell.rawValue, for: indexPath) as! ReportDescriptionCell
+        
+        cell.configureColors()
+        
         switch isOneTypeFish {
         case true:
             switch indexPath.section {
             case 0:
                 let fish = convertedCaughtFishes[indexPath.row]
-                let convertedDate = dateFormatter.string(from: fish.date!)
-                cell.dateLabel.text = convertedDate
-                cell.nameLabel.text = fish.name
-                cell.gradeLabel.text = fish.grade
-                cell.perDayQuantityLabel.text = String(format: "%.0f", fish.perDay) + " кг"
-                cell.perDayTypeLabel.text = "готовой"
+                cell.configureCellAsLog(with: fish)
             case 1:
                 let fish = caughtFishes.first
-                cell.dateLabel.isHidden = true
-                cell.nameLabel.text = fish?.name
-                cell.gradeLabel.isHidden = true
-                cell.perDayQuantityLabel.text = String(format: "%.0f", frzFish!) + " кг"
-                cell.perDayTypeLabel.text = "готовой"
+                cell.configureCellAsTotal(with: fish, weight: frzFish, isFrz: true)
             default:
                 let fish = caughtFishes.first
-                cell.dateLabel.isHidden = true
-                cell.nameLabel.text = fish?.name
-                if let fishRatio = fish?.ratio {
-                    cell.gradeLabel.text = "Коэффициент: \(fishRatio)"
-                }
-                cell.perDayQuantityLabel.text = String(format: "%.0f", rawFish!) + " кг"
-                cell.perDayTypeLabel.text = "вылова"
+                cell.configureCellAsTotal(with: fish, weight: rawFish, isFrz: false)
             }
         default:
             switch indexPath.section {
             case 0:
                 let fish = totalCatch[indexPath.row]
-                cell.dateLabel.isHidden = true
-                cell.nameLabel.text = fish.name
-                cell.gradeLabel.isHidden = true
-                cell.perDayQuantityLabel.text = String(format: "%.0f", fish.onBoard!) + " кг"
-                cell.perDayTypeLabel.text = "готовой"
+                cell.configureCellAsTotalBySpecies(with: fish)
+                
             default:
                 let fish = convertedCaughtFishes[indexPath.row]
-                let convertedDate = dateFormatter.string(from: fish.date!)
-                cell.dateLabel.text = convertedDate
-                cell.nameLabel.text = fish.name
-                cell.gradeLabel.text = fish.grade
-                cell.perDayQuantityLabel.text = String(format: "%.0f", fish.perDay) + " кг"
-                cell.perDayTypeLabel.text = "готовой"
+                cell.configureCellAsLog(with: fish)
             }
         }
         return cell

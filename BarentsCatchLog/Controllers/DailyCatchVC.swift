@@ -191,18 +191,9 @@ extension DailyCatchVC: UITableViewDataSource {
                 cell.detailTextLabel?.text = "Сегодня"
             }
         case DailyCatchVCStrings.fish.rawValue:
-            if choozenFish != nil {
-                cell.detailTextLabel?.text = choozenFish
-            } else {
-                //убрать
-                //cell.detailTextLabel?.text = ""
-            }
+            cell.detailTextLabel?.text = choozenFish
         default:
-            if choozenGrade != nil {
-                cell.detailTextLabel?.text = choozenGrade
-            } else {
-                //cell.detailTextLabel?.text = ""
-            }
+            cell.detailTextLabel?.text = choozenGrade
         }
         return cell
     }

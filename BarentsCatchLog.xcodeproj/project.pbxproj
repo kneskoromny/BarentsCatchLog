@@ -23,8 +23,6 @@
 		F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */; };
 		F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */; };
 		F7703C0526DA1FAE00D7DAFB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7703C0426DA1FAE00D7DAFB /* Enums.swift */; };
-		F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */; };
-		F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */; };
 		F7946DE826E4EE4B00241C16 /* DateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DE726E4EE4B00241C16 /* DateVC.swift */; };
 		F7946DEC26E4F34A00241C16 /* GradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DEB26E4F34900241C16 /* GradeVC.swift */; };
 		F7946DEE26E6773300241C16 /* GradeTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DED26E6773300241C16 /* GradeTVCNC.swift */; };
@@ -34,7 +32,7 @@
 		F7946DF626E74CD200241C16 /* ReportChoiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF526E74CD200241C16 /* ReportChoiceVC.swift */; };
 		F7946DF826E74D0F00241C16 /* ReportDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF726E74D0F00241C16 /* ReportDescriptionVC.swift */; };
 		F7946DFA26E782ED00241C16 /* ReportChoiceTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */; };
-		F7946DFC26E89A0E00241C16 /* ReportChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFB26E89A0E00241C16 /* ReportChoiceCell.swift */; };
+		F7946DFC26E89A0E00241C16 /* ReportDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */; };
 		F7946E0026E9F13800241C16 /* AddReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946DFF26E9F13800241C16 /* AddReportVC.swift */; };
 		F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */; };
 		F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7946E0326EA300400241C16 /* AddReportNameCell.swift */; };
@@ -60,8 +58,6 @@
 		F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F7703C0026D7956200D7DAFB /* BarentsCatchLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarentsCatchLog.xcdatamodel; sourceTree = "<group>"; };
 		F7703C0426DA1FAE00D7DAFB /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCatchCell.swift; sourceTree = "<group>"; };
-		F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrawlDescriptionCell.swift; sourceTree = "<group>"; };
 		F7946DE726E4EE4B00241C16 /* DateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateVC.swift; sourceTree = "<group>"; };
 		F7946DEB26E4F34900241C16 /* GradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeVC.swift; sourceTree = "<group>"; };
 		F7946DED26E6773300241C16 /* GradeTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeTVCNC.swift; sourceTree = "<group>"; };
@@ -71,7 +67,7 @@
 		F7946DF526E74CD200241C16 /* ReportChoiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChoiceVC.swift; sourceTree = "<group>"; };
 		F7946DF726E74D0F00241C16 /* ReportDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDescriptionVC.swift; sourceTree = "<group>"; };
 		F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChoiceTVCNC.swift; sourceTree = "<group>"; };
-		F7946DFB26E89A0E00241C16 /* ReportChoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChoiceCell.swift; sourceTree = "<group>"; };
+		F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDescriptionCell.swift; sourceTree = "<group>"; };
 		F7946DFF26E9F13800241C16 /* AddReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportVC.swift; sourceTree = "<group>"; };
 		F7946E0126E9F16A00241C16 /* AddReportTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportTVCNC.swift; sourceTree = "<group>"; };
 		F7946E0326EA300400241C16 /* AddReportNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReportNameCell.swift; sourceTree = "<group>"; };
@@ -169,9 +165,7 @@
 		F7AE361F26F0BD37007693CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
-				F7946DE526E3BF4E00241C16 /* TrawlDescriptionCell.swift */,
-				F7946DFB26E89A0E00241C16 /* ReportChoiceCell.swift */,
+				F7946DFB26E89A0E00241C16 /* ReportDescriptionCell.swift */,
 				F7946E0326EA300400241C16 /* AddReportNameCell.swift */,
 				F7AE361D26EF2CFD007693CF /* LogCell.swift */,
 			);
@@ -299,10 +293,9 @@
 				F7703C0526DA1FAE00D7DAFB /* Enums.swift in Sources */,
 				F747DB9826F23E3B00B3F68A /* Date + GetAnyDay.swift in Sources */,
 				F7946E0426EA300400241C16 /* AddReportNameCell.swift in Sources */,
-				F7946DE626E3BF4E00241C16 /* TrawlDescriptionCell.swift in Sources */,
 				F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */,
 				F7946DF826E74D0F00241C16 /* ReportDescriptionVC.swift in Sources */,
-				F7946DFC26E89A0E00241C16 /* ReportChoiceCell.swift in Sources */,
+				F7946DFC26E89A0E00241C16 /* ReportDescriptionCell.swift in Sources */,
 				F7946DEC26E4F34A00241C16 /* GradeVC.swift in Sources */,
 				F7703C0126D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld in Sources */,
 				F7703BE126D7874500D7DAFB /* SceneDelegate.swift in Sources */,
@@ -314,7 +307,6 @@
 				F7946DF426E74A0600241C16 /* ReportVC.swift in Sources */,
 				F7946DF626E74CD200241C16 /* ReportChoiceVC.swift in Sources */,
 				F7946E0026E9F13800241C16 /* AddReportVC.swift in Sources */,
-				F7946DE426E39B5F00241C16 /* DailyCatchCell.swift in Sources */,
 				F7703BFE26D792BD00D7DAFB /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
