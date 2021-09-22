@@ -24,19 +24,29 @@ class SettingsVC: UIViewController {
         
         ratioTF.keyboardType = .decimalPad
         ratioTF.inputAccessoryView = createToolbar()
-        gradeTF.keyboardType = .decimalPad
         gradeTF.inputAccessoryView = createToolbar()
         
         CustomView.createDesign(for: saveNameRatioBtn, with: .systemBlue, and: "Сохранить")
         CustomView.createDesign(for: saveGradeBtn, with: .systemBlue, and: "Сохранить")
         CustomView.createDesign(for: showDefaultsBtn, with: .systemGreen, and: "Показать список")
-
+        
     }
     
     // MARK: - IB Actions
     @IBAction func saveNameRatioBtnPressed() {
     }
     @IBAction func saveGradeBtnPressed() {
+        guard let grade = gradeTF.text else {
+            showAlert(title: "Внимание!", message: "Вы пытаетесь внести пустое значение.")
+            return
+        }
+        if grade == "" {
+            showAlert(title: "Внимание!", message: "Вы пытаетесь внести пустое значение.")
+            return
+        }
+        print(grade)
+        saveGrade(with: grade)
+        gradeTF.text = ""
     }
     @IBAction func showDefaultsBtnPressed() {
     }
@@ -54,10 +64,24 @@ class SettingsVC: UIViewController {
     @objc private func doneAction() {
         view.endEditing(true)
     }
-    private func saveGrade() {
-        guard let grade = gradeTF.text else { return }
+    private func saveGrade(with grade: String) {
         StorageManager.shared.save(grade: grade)
     }
-    
-
+}
+// MARK: - AlertController
+extension SettingsVC {
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "OK",
+                                       style: .default) { action in
+            if let completion = completion {
+                completion()
+            }
+        }
+        
+        alert.addAction(doneAction)
+        present(alert, animated: true)
+    }
 }
