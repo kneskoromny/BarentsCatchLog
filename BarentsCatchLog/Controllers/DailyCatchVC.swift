@@ -105,15 +105,17 @@ class DailyCatchVC: UIViewController {
         createInstance(name: fishName, grade: fishGrade, date: choozenDate, weight: fishWeight)
         refreshUI()
     }
-    // очищает Core Data
-    @IBAction func deleteDataBtnPressed() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Fish")
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try coreDataStack.managedContext.execute(batchDeleteRequest)
-        } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
+    @IBAction func deleteAllDataBtnPressed(_ sender: UIBarButtonItem) {
+        showAlert(title: "Внимание!", message: "Вы удаляете все записи. Это действие нельзя отменить.") {
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Fish")
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try self.coreDataStack.managedContext.execute(batchDeleteRequest)
+            } catch let error as NSError {
+                print("Fetch error: \(error) description: \(error.userInfo)")
+            }
         }
     }
     
@@ -255,7 +257,11 @@ extension DailyCatchVC {
                 completion()
             }
         }
+        let cancel = UIAlertAction(title: "Отмена", style: .cancel) { action in
+            self.dismiss(animated: true, completion: nil)
+        }
         alert.addAction(doneAction)
+        alert.addAction(cancel)
         present(alert, animated: true)
     }
 }
