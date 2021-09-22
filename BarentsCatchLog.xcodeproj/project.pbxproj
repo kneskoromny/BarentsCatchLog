@@ -116,15 +116,14 @@
 		F7703BDD26D7874500D7DAFB /* BarentsCatchLog */ = {
 			isa = PBXGroup;
 			children = (
+				F7C48F3E26FAF5180031E370 /* Resources */,
 				F747964926F8D2CA00F1FFC2 /* Extensions */,
-				F7703BFC26D7913C00D7DAFB /* Supports */,
+				F7703BFC26D7913C00D7DAFB /* Helpers */,
 				F7703BF226D78EE900D7DAFB /* Controllers */,
-				F7AE361F26F0BD37007693CF /* CustomCells */,
-				F7703BFB26D7911900D7DAFB /* Views */,
-				F7703BEC26D7874700D7DAFB /* Info.plist */,
-				F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */,
-				F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */,
-				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
+				F7AE361F26F0BD37007693CF /* Views */,
+				F7703BFB26D7911900D7DAFB /* Storyboards */,
+				F7C48F3F26FAF5870031E370 /* Supporting */,
+				F7C48F4026FAF5BB0031E370 /* CoreDataStack */,
 			);
 			path = BarentsCatchLog;
 			sourceTree = "<group>";
@@ -147,29 +146,27 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		F7703BFB26D7911900D7DAFB /* Views */ = {
+		F7703BFB26D7911900D7DAFB /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				F7703BE426D7874500D7DAFB /* Main.storyboard */,
 				F7703BE926D7874700D7DAFB /* LaunchScreen.storyboard */,
 			);
-			path = Views;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		F7703BFC26D7913C00D7DAFB /* Supports */ = {
+		F7703BFC26D7913C00D7DAFB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				F7703BDE26D7874500D7DAFB /* AppDelegate.swift */,
-				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
 				F7703C0426DA1FAE00D7DAFB /* Enums.swift */,
 				F747DB9926F46D7900B3F68A /* Predicates.swift */,
 				F747DB9D26F4C6C400B3F68A /* Requests.swift */,
 				F747964726F860CD00F1FFC2 /* Arrays.swift */,
 			);
-			path = Supports;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
-		F7AE361F26F0BD37007693CF /* CustomCells */ = {
+		F7AE361F26F0BD37007693CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F7946DE326E39B5F00241C16 /* DailyCatchCell.swift */,
@@ -178,7 +175,7 @@
 				F7946E0326EA300400241C16 /* AddReportNameCell.swift */,
 				F7AE361D26EF2CFD007693CF /* LogCell.swift */,
 			);
-			path = CustomCells;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F7AE362026F0BD76007693CF /* NavControllers */ = {
@@ -191,6 +188,33 @@
 				F759FD6D26EE0A7F001E3D1A /* LogTVCNC.swift */,
 			);
 			path = NavControllers;
+			sourceTree = "<group>";
+		};
+		F7C48F3E26FAF5180031E370 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F7703BE726D7874700D7DAFB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F7C48F3F26FAF5870031E370 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				F7703BE026D7874500D7DAFB /* SceneDelegate.swift */,
+				F7703BDE26D7874500D7DAFB /* AppDelegate.swift */,
+				F7703BEC26D7874700D7DAFB /* Info.plist */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		F7C48F4026FAF5BB0031E370 /* CoreDataStack */ = {
+			isa = PBXGroup;
+			children = (
+				F7703BFD26D792BD00D7DAFB /* CoreDataStack.swift */,
+				F7703BFF26D7956200D7DAFB /* BarentsCatchLog.xcdatamodeld */,
+			);
+			path = CoreDataStack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +392,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = BarentsCatchLog/Supporting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -423,6 +448,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = BarentsCatchLog/Supporting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -440,7 +466,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TB5VXYZS9X;
-				INFOPLIST_FILE = BarentsCatchLog/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/BarentsCatchLog/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -460,7 +486,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TB5VXYZS9X;
-				INFOPLIST_FILE = BarentsCatchLog/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/BarentsCatchLog/Supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
