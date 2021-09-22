@@ -23,6 +23,8 @@ class DailyCatchVC: UIViewController {
     //MARK: - IB Outlets
     @IBOutlet weak var frozenOnBoardTF: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var saveBtn: UIButton!
+    
     
     //MARK: - Public Properties
     lazy var dateFormatter: DateFormatter = {
@@ -48,6 +50,7 @@ class DailyCatchVC: UIViewController {
         frozenOnBoardTF.textColor = .systemGreen
         frozenOnBoardTF.inputAccessoryView = createToolbar()
         frozenOnBoardTF.keyboardType = .decimalPad
+        CustomView.createDesign(for: saveBtn)
     }
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
