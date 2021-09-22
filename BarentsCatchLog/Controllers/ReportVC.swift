@@ -73,25 +73,34 @@ class ReportVC: UITableViewController {
             fish.name == fishFromCatch?.name
         }
         return filteredFishes.count == fishes.count ? true : false
-        
+    }
+    private func configureCell(for cell: UITableViewCell, in section: Int) {
+        switch section {
+        case 0:
+            cell.textLabel?.text = "Отчет"
+            //cell.textLabel?.textColor = .systemBlue
+            cell.detailTextLabel?.text = detailTextLabel
+        default:
+            let stringFrz = String(format: "%.0f", totalFrz)
+            cell.textLabel?.text = "\(stringFrz) кг"
+            cell.textLabel?.textColor = .systemGreen
+            cell.detailTextLabel?.text = "Количество записей: \(caughtFishes.count)"
+        }
+        cell.accessoryType = .disclosureIndicator
+        cell.detailTextLabel?.textColor = .systemGray
     }
 }
 // MARK: - TableViewDataSource
 extension ReportVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.reportCell.rawValue, for: indexPath)
+        
         cell = UITableViewCell(style: .value1, reuseIdentifier: CellIDs.reportCell.rawValue)
-        cell.accessoryType = .disclosureIndicator
-        cell.detailTextLabel?.textColor = .systemGray
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = "Отчет"
-            cell.textLabel?.textColor = .systemBlue
-            cell.detailTextLabel?.text = detailTextLabel
+            configureCell(for: cell, in: 0)
         default:
-            cell.textLabel?.text = String(format: "%.0f", totalFrz) + " кг"
-            cell.textLabel?.textColor = .systemGreen
-            cell.detailTextLabel?.text = "Количество записей: \(caughtFishes.count)"
+            configureCell(for: cell, in: 1)
         }
         return cell
     }

@@ -183,7 +183,7 @@ extension LogVC {
         sortedDailyCatch[section].fishes?.count ?? 0
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "logCell", for: indexPath) as! LogCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.logCell.rawValue, for: indexPath) as! LogCell
         let fish = sortedDailyCatch[indexPath.section].fishes?[indexPath.row]
         cell.configure(with: fish)
         
@@ -207,13 +207,9 @@ extension LogVC {
                         dailyCatch === daily
                     }) {
                         sortedDailyCatch[indexPath.section].fishes?.remove(at: index)
-                        //print("1")
                         tableView.deleteRows(at: [indexPath], with: .left)
-                        //print("3")
                         sortedDailyCatch.remove(at: index2)
-                        //print("2")
                         tableView.deleteSections(indexSet, with: .left)
-                        //print("4")
                     }
                 }
                 coreDataStack.managedContext.delete(fish)

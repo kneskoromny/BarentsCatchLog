@@ -72,4 +72,5 @@ enum CellIDs: String {
     case reportCell = "reportCell"
     case reportChoiceCell = "reportChoiceCell"
     case reportDescriptionCell = "ReportDescriptionCell"
+    case logCell = "logCell"
 }

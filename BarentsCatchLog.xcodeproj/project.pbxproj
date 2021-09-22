@@ -128,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				F7AE362026F0BD76007693CF /* NavControllers */,
-				F7703BF326D78F9400D7DAFB /* StartVC.swift */,
 				F7703BE226D7874500D7DAFB /* DailyCatchVC.swift */,
 				F7946DE726E4EE4B00241C16 /* DateVC.swift */,
 				F7946DEB26E4F34900241C16 /* GradeVC.swift */,
@@ -175,6 +174,7 @@
 		F7AE362026F0BD76007693CF /* NavControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F7703BF326D78F9400D7DAFB /* StartVC.swift */,
 				F7946DED26E6773300241C16 /* GradeTVCNC.swift */,
 				F7946DEF26E681B900241C16 /* FishTVCNC.swift */,
 				F7946DF926E782ED00241C16 /* ReportChoiceTVCNC.swift */,
