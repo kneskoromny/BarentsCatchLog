@@ -34,19 +34,31 @@ class SettingsVC: UIViewController {
     
     // MARK: - IB Actions
     @IBAction func saveNameRatioBtnPressed() {
+        guard let name = nameTF.text, let ratio = ratioTF.text else {
+            showAlert()
+            return }
+        if name == "" || ratio == "" {
+            showAlert()
+            return
+        }
+        saveInputFish(with: name, and: ratio)
+        nameTF.text = ""
+        ratioTF.text = ""
+        view.endEditing(true)
     }
     @IBAction func saveGradeBtnPressed() {
         guard let grade = gradeTF.text else {
-            showAlert(title: "Внимание!", message: "Вы пытаетесь внести пустое значение.")
+            showAlert()
             return
         }
         if grade == "" {
-            showAlert(title: "Внимание!", message: "Вы пытаетесь внести пустое значение.")
+            showAlert()
             return
         }
         print(grade)
         saveGrade(with: grade)
         gradeTF.text = ""
+        
     }
     @IBAction func showDefaultsBtnPressed() {
     }
@@ -67,12 +79,17 @@ class SettingsVC: UIViewController {
     private func saveGrade(with grade: String) {
         StorageManager.shared.save(grade: grade)
     }
+    private func saveInputFish(with name: String, and ratio: String) {
+        guard let doubleRatio = Double(ratio) else { return }
+        let inputFish = InputFish(fish: name, ratio: doubleRatio)
+        StorageManager.shared.save(inputFish: inputFish)
+    }
 }
 // MARK: - AlertController
 extension SettingsVC {
-    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: title,
-                                      message: message,
+    func showAlert(completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: "Внимание!",
+                                      message: "Вы пытаетесь внести пустое значение.",
                                       preferredStyle: .alert)
         let doneAction = UIAlertAction(title: "OK",
                                        style: .default) { action in

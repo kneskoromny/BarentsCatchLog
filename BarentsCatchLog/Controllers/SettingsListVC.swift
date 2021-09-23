@@ -12,11 +12,14 @@ class SettingsListVC: UITableViewController {
     var sections = [SettingsListVCStrings.fishRatio.rawValue,
                     SettingsListVCStrings.grade.rawValue]
     var grades: [String] = []
+    var inputFishes: [InputFish] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         grades = StorageManager.shared.fetchGrades()
-        print(grades.count)
+        print("GradesCount: \(grades.count)")
+        inputFishes = StorageManager.shared.fetchInputFishes()
+        print("InputFishesCount: \(inputFishes.count)")
     }
 
     // MARK: - Table View Data Source
@@ -30,7 +33,7 @@ class SettingsListVC: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            return inputFishes.count
         default:
             return grades.count
         }
@@ -42,7 +45,10 @@ class SettingsListVC: UITableViewController {
 
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = "пусто"
+            let inputFish = inputFishes[indexPath.row]
+            cell.textLabel?.text = inputFish.fish
+            let stringRatio = String(inputFish.ratio)
+            cell.detailTextLabel?.text = stringRatio
         default:
             let grade = grades[indexPath.row]
             cell.textLabel?.text = grade
