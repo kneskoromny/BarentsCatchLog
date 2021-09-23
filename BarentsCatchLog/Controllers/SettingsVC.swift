@@ -29,9 +29,6 @@ class SettingsVC: UIViewController {
         ratioTF.inputAccessoryView = createToolbar()
         gradeTF.inputAccessoryView = createToolbar()
         
-//        CustomView.createDesign(for: saveNameRatioBtn, with: .systemBlue, and: "Сохранить")
-//        CustomView.createDesign(for: saveGradeBtn, with: .systemBlue, and: "Сохранить")
-//        CustomView.createDesign(for: showDefaultsBtn, with: .systemGreen, and: "Показать список")
         createUI()
     }
     
@@ -58,7 +55,6 @@ class SettingsVC: UIViewController {
             showAlert()
             return
         }
-        print(grade)
         saveGrade(with: grade)
         gradeTF.text = ""
         

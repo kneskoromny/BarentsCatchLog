@@ -11,11 +11,11 @@ import CoreData
 protocol DateVCDelegate {
     func dateDidChanged(to date: Date)
 }
-protocol GradeTVCDelegate {
+protocol GradeVCDelegate {
     func valueDidChanged(to grade: String)
 }
-protocol FishTVCDelegate {
-    func fishDidChanged(to fish: String)
+protocol FishVCDelegate {
+    func fishDidChanged(to fish: InputFish)
 }
 
 class DailyCatchVC: UIViewController {
@@ -42,11 +42,13 @@ class DailyCatchVC: UIViewController {
     private var isOnBoardWeightGreater = false
     private var choozenDate = Date()
     private var choozenGrade: String?
-    private var choozenFish: String?
+    private var choozenFish: InputFish?
     private var sumFrzPerDay: Int?
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
+        checkTemplates()
+        
         frozenOnBoardTF.textColor = .systemGreen
         frozenOnBoardTF.inputAccessoryView = createToolbar()
         frozenOnBoardTF.keyboardType = .decimalPad
@@ -80,7 +82,7 @@ class DailyCatchVC: UIViewController {
     
     //MARK: - IB Actions
     @IBAction func saveBtnPressed() {
-        guard let fishName = choozenFish, let fishGrade = choozenGrade, let fishWeight = frozenOnBoardTF.text else {
+        guard let fishName = choozenFish?.fish, let fishGrade = choozenGrade, let fishWeight = frozenOnBoardTF.text else {
             showAlert(title: "Пустые поля!",
                       message: "Необходимо заполнить все поля перед сохранением.")
             return
@@ -129,26 +131,14 @@ class DailyCatchVC: UIViewController {
             }
         }
     }
-    private func getRatio(for fish: FishTypes.RawValue) -> Ratios.RawValue {
-        var ratio = Ratios.cod.rawValue
-        switch fish {
-        case FishTypes.cod.rawValue:
-            ratio = Ratios.cod.rawValue
-        case FishTypes.haddock.rawValue:
-            ratio = Ratios.haddock.rawValue
-        case FishTypes.catfish.rawValue:
-            ratio = Ratios.catfish.rawValue
-        default:
-            ratio = Ratios.redfish.rawValue
-        }
-        return ratio
-    }
     private func createInstance(name: String, grade: String, date: Date, weight: String) {
         let fishCatch = Fish(context: coreDataStack.managedContext)
         fishCatch.name = name
         fishCatch.grade = grade
         fishCatch.date = date
-        fishCatch.ratio = getRatio(for: name)
+        if let fishRatio = choozenFish?.ratio {
+            fishCatch.ratio = fishRatio
+        }
         if let doubleWeight = Double(weight) {
             fishCatch.onBoard = doubleWeight
         }
@@ -186,14 +176,14 @@ class DailyCatchVC: UIViewController {
                 cell.detailTextLabel?.text = "Сегодня"
             }
         case DailyCatchVCStrings.fish.rawValue:
-            cell.detailTextLabel?.text = choozenFish
+            cell.detailTextLabel?.text = choozenFish?.fish
         default:
             cell.detailTextLabel?.text = choozenGrade
         }
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - TableViewDataSource
 extension DailyCatchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrayForTableView.count
@@ -208,7 +198,7 @@ extension DailyCatchVC: UITableViewDataSource {
         return cell
     }
 }
-// MARK: - UITableViewDelegate
+// MARK: - TableViewDelegate
 extension DailyCatchVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
@@ -221,6 +211,33 @@ extension DailyCatchVC: UITableViewDelegate {
         }
     }
 }
+// MARK: - Create User Input Template
+private func createCodTemplate() {
+    let codTemplate = InputFish(fish: FishTypes.cod.rawValue, ratio: Ratios.cod.rawValue)
+    StorageManager.shared.save(inputFish: codTemplate)
+}
+private func createHaddockTemplate() {
+    let haddockTemplate = InputFish(fish: FishTypes.haddock.rawValue, ratio: Ratios.haddock.rawValue)
+    StorageManager.shared.save(inputFish: haddockTemplate)
+}
+private func isTemplate(fish: String, in array: [InputFish]) -> Bool {
+    let filteredArray = array.filter { input in
+        input.fish == fish
+    }
+    return !filteredArray.isEmpty ? true : false
+}
+private func checkTemplates() {
+    let fetchedFishes = StorageManager.shared.fetchInputFishes()
+    let isCodTemplate = isTemplate(fish: FishTypes.cod.rawValue, in: fetchedFishes)
+    if !isCodTemplate {
+        createCodTemplate()
+    }
+    let isHaddockTemplate = isTemplate(fish: FishTypes.haddock.rawValue, in: fetchedFishes)
+    if !isHaddockTemplate {
+        createHaddockTemplate()
+    }
+}
+
 // MARK: - DateVC Delegate
 // ПОДУМАТЬ КАК СДЕЛАТЬ ЧЕРЕЗ <T>
 extension DailyCatchVC: DateVCDelegate {
@@ -230,7 +247,7 @@ extension DailyCatchVC: DateVCDelegate {
     }
 }
 // MARK: - GradeTVC Delegate
-extension DailyCatchVC: GradeTVCDelegate {
+extension DailyCatchVC: GradeVCDelegate {
     func valueDidChanged(to grade: String) {
         self.choozenGrade = grade
         self.tableView.reloadData()
@@ -238,8 +255,8 @@ extension DailyCatchVC: GradeTVCDelegate {
 }
 
 // MARK: - FishTVC Delegate
-extension DailyCatchVC: FishTVCDelegate {
-    func fishDidChanged(to fish: String) {
+extension DailyCatchVC: FishVCDelegate {
+    func fishDidChanged(to fish: InputFish) {
         self.choozenFish = fish
         self.tableView.reloadData()
     }
@@ -265,5 +282,6 @@ extension DailyCatchVC {
         present(alert, animated: true)
     }
 }
+
 
 

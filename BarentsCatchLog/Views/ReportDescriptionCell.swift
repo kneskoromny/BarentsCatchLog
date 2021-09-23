@@ -42,6 +42,8 @@ class ReportDescriptionCell: UITableViewCell {
         if let weight = weight {
             let stringWeight = String(format: "%.0f", weight)
             perDayQuantityLabel.text = "\(stringWeight) кг"
+        } else {
+            perDayQuantityLabel.text = "нет"
         }
         switch isFrz {
         case true:
@@ -50,6 +52,8 @@ class ReportDescriptionCell: UITableViewCell {
         default:
             if let fishRatio = fish?.ratio {
                 gradeLabel.text = "Коэффициент: \(fishRatio)"
+            } else {
+                gradeLabel.isHidden = true
             }
             perDayTypeLabel.text = "вылова"
         }

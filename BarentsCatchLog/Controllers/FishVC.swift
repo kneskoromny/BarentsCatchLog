@@ -9,17 +9,20 @@ import UIKit
 
 class FishVC: UITableViewController {
     // MARK: - Public Properties
-    var delegate: FishTVCDelegate!
+    var delegate: FishVCDelegate!
     
     // MARK: - Private Properties
-    private var fishes = [FishTypes.cod.rawValue,
-                          FishTypes.haddock.rawValue,
-                          FishTypes.catfish.rawValue,
-                          FishTypes.redfish.rawValue]
+    private var fishes: [InputFish] = []
+    
+    // MARK: - View Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fishes = StorageManager.shared.fetchInputFishes()
+    }
    
     // MARK: - Private Methods
-    private func configure(for cell: UITableViewCell, with fish: String) {
-        cell.textLabel?.text = fish
+    private func configure(for cell: UITableViewCell, with name: String) {
+        cell.textLabel?.text = name
         cell.textLabel?.textColor = .systemGray
     }
     
@@ -31,7 +34,7 @@ class FishVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.fishCell.rawValue, for: indexPath)
         let fish = fishes[indexPath.row]
         
-        configure(for: cell, with: fish)
+        configure(for: cell, with: fish.fish)
 
         return cell
     }

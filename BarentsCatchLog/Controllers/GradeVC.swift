@@ -9,7 +9,7 @@ import UIKit
 
 class GradeVC: UITableViewController {
     // MARK: - Public Properties
-    var delegate: GradeTVCDelegate!
+    var delegate: GradeVCDelegate!
 
     // MARK: - Private Properties
     private var grades: [String] = []
@@ -17,7 +17,7 @@ class GradeVC: UITableViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        grades = Arrays.shared.grades
+        grades = StorageManager.shared.fetchGrades()
     }
 
     // MARK: - Private Methods

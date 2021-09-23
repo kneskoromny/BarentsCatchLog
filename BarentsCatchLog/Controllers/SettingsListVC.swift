@@ -9,17 +9,15 @@ import UIKit
 
 class SettingsListVC: UITableViewController {
     // MARK: - Private Properties
-    var sections = [SettingsListVCStrings.fishRatio.rawValue,
+    var sections = [SettingsListVCStrings.userElements.rawValue,
                     SettingsListVCStrings.grade.rawValue]
+    var userElements: [InputFish] = []
     var grades: [String] = []
-    var inputFishes: [InputFish] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         grades = StorageManager.shared.fetchGrades()
-        print("GradesCount: \(grades.count)")
-        inputFishes = StorageManager.shared.fetchInputFishes()
-        print("InputFishesCount: \(inputFishes.count)")
+        userElements = StorageManager.shared.fetchInputFishes()
     }
     
     // MARK: - Private Methods
@@ -33,7 +31,7 @@ class SettingsListVC: UITableViewController {
         cell.detailTextLabel?.isHidden = true
     }
     private func deleteInputFish(at index: Int) {
-        inputFishes.remove(at: index)
+        userElements.remove(at: index)
         StorageManager.shared.deleteInputFish(at: index)
     }
     private func deleteGrade(at index: Int) {
@@ -51,7 +49,7 @@ class SettingsListVC: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return inputFishes.count
+            return userElements.count
         default:
             return grades.count
         }
@@ -61,7 +59,7 @@ class SettingsListVC: UITableViewController {
         
         switch indexPath.section {
         case 0:
-            let inputFish = inputFishes[indexPath.row]
+            let inputFish = userElements[indexPath.row]
             configure(for: cell, with: inputFish)
         default:
             let grade = grades[indexPath.row]
@@ -80,5 +78,22 @@ class SettingsListVC: UITableViewController {
             }
             tableView.deleteRows(at: [indexPath], with: .left)
         }
+    }
+}
+// MARK: - AlertController
+extension SettingsListVC {
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "OK",
+                                       style: .default) { action in
+            if let completion = completion {
+                completion()
+            }
+        }
+        alert.addAction(doneAction)
+        
+        present(alert, animated: true)
     }
 }

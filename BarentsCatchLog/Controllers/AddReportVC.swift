@@ -161,7 +161,7 @@ extension AddReportVC {
     }
 }
 // MARK: - GradeTVC Delegate
-extension AddReportVC: GradeTVCDelegate {
+extension AddReportVC: GradeVCDelegate {
     func valueDidChanged(to grade: String) {
         gradeCell.detailTextLabel?.text = grade
         self.choozenGrade = grade
@@ -186,10 +186,10 @@ extension AddReportVC: DateVCDelegate {
     }
 }
 // MARK: - FishTVC Delegate
-extension AddReportVC: FishTVCDelegate {
-    func fishDidChanged(to fish: String) {
-        fishNameCell.detailTextLabel?.text = fish
-        self.choozenFish = fish
+extension AddReportVC: FishVCDelegate {
+    func fishDidChanged(to input: InputFish) {
+        fishNameCell.detailTextLabel?.text = input.fish
+        self.choozenFish = input.fish
         self.tableView.reloadData()
     }
 }
