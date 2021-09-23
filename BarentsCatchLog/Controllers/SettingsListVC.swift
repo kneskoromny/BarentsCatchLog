@@ -21,6 +21,25 @@ class SettingsListVC: UITableViewController {
         inputFishes = StorageManager.shared.fetchInputFishes()
         print("InputFishesCount: \(inputFishes.count)")
     }
+    
+    // MARK: - Private Methods
+    private func configure(for cell: UITableViewCell, with fish: InputFish) {
+        cell.textLabel?.text = fish.fish
+        let stringRatio = String(fish.ratio)
+        cell.detailTextLabel?.text = stringRatio
+    }
+    private func configure(for cell: UITableViewCell, with grade: String) {
+        cell.textLabel?.text = grade
+        cell.detailTextLabel?.isHidden = true
+    }
+    private func deleteInputFish(at index: Int) {
+        inputFishes.remove(at: index)
+        StorageManager.shared.deleteInputFish(at: index)
+    }
+    private func deleteGrade(at index: Int) {
+        grades.remove(at: index)
+        StorageManager.shared.deleteGrade(at: index)
+    }
 
     // MARK: - TableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,17 +58,14 @@ class SettingsListVC: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.settingsListCell.rawValue, for: indexPath)
-
+        
         switch indexPath.section {
         case 0:
             let inputFish = inputFishes[indexPath.row]
-            cell.textLabel?.text = inputFish.fish
-            let stringRatio = String(inputFish.ratio)
-            cell.detailTextLabel?.text = stringRatio
+            configure(for: cell, with: inputFish)
         default:
             let grade = grades[indexPath.row]
-            cell.textLabel?.text = grade
-            cell.detailTextLabel?.isHidden = true
+            configure(for: cell, with: grade)
         }
         return cell
     }
@@ -58,14 +74,11 @@ class SettingsListVC: UITableViewController {
         if editingStyle == .delete {
             switch indexPath.section {
             case 0:
-                inputFishes.remove(at: indexPath.row)
-                StorageManager.shared.deleteInputFish(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .left)
+                deleteInputFish(at: indexPath.row)
             default:
-                grades.remove(at: indexPath.row)
-                StorageManager.shared.deleteGrade(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .left)
+                deleteGrade(at: indexPath.row)
             }
+            tableView.deleteRows(at: [indexPath], with: .left)
         }
     }
 }
