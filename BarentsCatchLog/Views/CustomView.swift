@@ -69,5 +69,9 @@ class CustomView: UIView {
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 1.0
     }
+    static func createDesign(for label: UILabel, with text: String) {
+        label.textColor = .systemGray
+        label.text = text
+    }
 
 }

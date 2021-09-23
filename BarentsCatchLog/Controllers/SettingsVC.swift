@@ -9,10 +9,13 @@ import UIKit
 
 class SettingsVC: UIViewController {
     // MARK: - IB Outlets
+    
+    @IBOutlet weak var firstExplanationLabel: UILabel!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var ratioTF: UITextField!
     @IBOutlet weak var saveNameRatioBtn: UIButton!
     
+    @IBOutlet weak var secondExplanationLabel: UILabel!
     @IBOutlet weak var gradeTF: UITextField!
     @IBOutlet weak var saveGradeBtn: UIButton!
     
@@ -26,10 +29,10 @@ class SettingsVC: UIViewController {
         ratioTF.inputAccessoryView = createToolbar()
         gradeTF.inputAccessoryView = createToolbar()
         
-        CustomView.createDesign(for: saveNameRatioBtn, with: .systemBlue, and: "Сохранить")
-        CustomView.createDesign(for: saveGradeBtn, with: .systemBlue, and: "Сохранить")
-        CustomView.createDesign(for: showDefaultsBtn, with: .systemGreen, and: "Показать список")
-        
+//        CustomView.createDesign(for: saveNameRatioBtn, with: .systemBlue, and: "Сохранить")
+//        CustomView.createDesign(for: saveGradeBtn, with: .systemBlue, and: "Сохранить")
+//        CustomView.createDesign(for: showDefaultsBtn, with: .systemGreen, and: "Показать список")
+        createUI()
     }
     
     // MARK: - IB Actions
@@ -64,6 +67,18 @@ class SettingsVC: UIViewController {
     }
     
     // MARK: - Private Methods
+    private func createUI() {
+        CustomView.createDesign(for: firstExplanationLabel, with: """
+            Внесите объекты промысла, с которыми работаете в данный момент.
+            Если в процессе промысла появится новый, вы сможете добавить его отдельно.
+            """)
+        CustomView.createDesign(for: secondExplanationLabel, with: """
+              Затем поочередно добавьте навески, они будут доступны для каждого объекта промысла.
+            """)
+        CustomView.createDesign(for: saveNameRatioBtn, with: .systemBlue, and: "Сохранить")
+        CustomView.createDesign(for: saveGradeBtn, with: .systemBlue, and: "Сохранить")
+        CustomView.createDesign(for: showDefaultsBtn, with: .systemGreen, and: "Показать внесенные данные")
+    }
     private func createToolbar() -> UIToolbar {
         let toolBar = UIToolbar()
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
