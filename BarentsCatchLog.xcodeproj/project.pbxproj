@@ -41,6 +41,7 @@
 		F7C48F4826FB90390031E370 /* SettingsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4726FB90390031E370 /* SettingsListVC.swift */; };
 		F7C48F4A26FB906B0031E370 /* SettingsListTVCNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4926FB906B0031E370 /* SettingsListTVCNC.swift */; };
 		F7C48F4C26FBA0100031E370 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4B26FBA0100031E370 /* StorageManager.swift */; };
+		F7C48F5026FC551E0031E370 /* InputFish.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C48F4F26FC551E0031E370 /* InputFish.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		F7C48F4726FB90390031E370 /* SettingsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListVC.swift; sourceTree = "<group>"; };
 		F7C48F4926FB906B0031E370 /* SettingsListTVCNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListTVCNC.swift; sourceTree = "<group>"; };
 		F7C48F4B26FBA0100031E370 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		F7C48F4F26FC551E0031E370 /* InputFish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFish.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,14 +122,14 @@
 		F7703BDD26D7874500D7DAFB /* BarentsCatchLog */ = {
 			isa = PBXGroup;
 			children = (
+				F7C48F4E26FC55030031E370 /* Models */,
 				F7C48F3E26FAF5180031E370 /* Resources */,
 				F747964926F8D2CA00F1FFC2 /* Extensions */,
-				F7703BFC26D7913C00D7DAFB /* Helpers */,
+				F7703BFC26D7913C00D7DAFB /* Services */,
 				F7703BF226D78EE900D7DAFB /* Controllers */,
 				F7AE361F26F0BD37007693CF /* Views */,
 				F7703BFB26D7911900D7DAFB /* Storyboards */,
 				F7C48F3F26FAF5870031E370 /* Supporting */,
-				F7C48F4D26FBA0160031E370 /* Managers */,
 				F7C48F4026FAF5BB0031E370 /* CoreDataStack */,
 			);
 			path = BarentsCatchLog;
@@ -161,15 +163,16 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		F7703BFC26D7913C00D7DAFB /* Helpers */ = {
+		F7703BFC26D7913C00D7DAFB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F7C48F4B26FBA0100031E370 /* StorageManager.swift */,
 				F7703C0426DA1FAE00D7DAFB /* Enums.swift */,
 				F747DB9926F46D7900B3F68A /* Predicates.swift */,
 				F747DB9D26F4C6C400B3F68A /* Requests.swift */,
 				F747964726F860CD00F1FFC2 /* Arrays.swift */,
 			);
-			path = Helpers;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		F7AE361F26F0BD37007693CF /* Views */ = {
@@ -223,12 +226,12 @@
 			path = CoreDataStack;
 			sourceTree = "<group>";
 		};
-		F7C48F4D26FBA0160031E370 /* Managers */ = {
+		F7C48F4E26FC55030031E370 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F7C48F4B26FBA0100031E370 /* StorageManager.swift */,
+				F7C48F4F26FC551E0031E370 /* InputFish.swift */,
 			);
-			path = Managers;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +330,7 @@
 				F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */,
 				F7C48F4A26FB906B0031E370 /* SettingsListTVCNC.swift in Sources */,
 				F7946E0226E9F16A00241C16 /* AddReportTVCNC.swift in Sources */,
+				F7C48F5026FC551E0031E370 /* InputFish.swift in Sources */,
 				F7946DF426E74A0600241C16 /* ReportVC.swift in Sources */,
 				F7946DF626E74CD200241C16 /* ReportChoiceVC.swift in Sources */,
 				F7946E0026E9F13800241C16 /* AddReportVC.swift in Sources */,
