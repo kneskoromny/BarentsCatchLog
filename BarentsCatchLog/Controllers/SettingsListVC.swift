@@ -22,14 +22,13 @@ class SettingsListVC: UITableViewController {
         print("InputFishesCount: \(inputFishes.count)")
     }
 
-    // MARK: - Table View Data Source
+    // MARK: - TableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         sections[section]
     }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -38,8 +37,6 @@ class SettingsListVC: UITableViewController {
             return grades.count
         }
     }
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.settingsListCell.rawValue, for: indexPath)
 
@@ -54,7 +51,21 @@ class SettingsListVC: UITableViewController {
             cell.textLabel?.text = grade
             cell.detailTextLabel?.isHidden = true
         }
-
         return cell
+    }
+    // MARK: - TableViewDelegate
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            switch indexPath.section {
+            case 0:
+                inputFishes.remove(at: indexPath.row)
+                StorageManager.shared.deleteInputFish(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+            default:
+                grades.remove(at: indexPath.row)
+                StorageManager.shared.deleteGrade(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+            }
+        }
     }
 }
