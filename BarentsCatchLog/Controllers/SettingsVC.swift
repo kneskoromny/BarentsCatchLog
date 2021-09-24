@@ -22,7 +22,7 @@ class SettingsVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var showDefaultsBtn: UIButton!
     
     @IBOutlet weak var controlBottomConstraint: NSLayoutConstraint!
-
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class SettingsVC: UIViewController, UITextFieldDelegate {
         
         createUI()
         
-       
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow(notification:)),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -43,11 +43,12 @@ class SettingsVC: UIViewController, UITextFieldDelegate {
                                                selector: #selector(keyboardWillHide(notification:)),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        
     }
     override func touchesBegan( _ touches: Set<UITouch>, with event: UIEvent?) {
-             super.touchesBegan(touches, with: event)
-            view.endEditing(true)
-        }
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
     
     // MARK: - IB Actions
     @IBAction func saveNameRatioBtnPressed() {
@@ -85,12 +86,16 @@ class SettingsVC: UIViewController, UITextFieldDelegate {
         return true
     }
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.view.frame.origin.y -= keyboardSize.height / 2
+        if gradeTF.isFirstResponder {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                self.view.frame.origin.y -= keyboardSize.height 
+            }
         }
     }
     @objc func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
+        if gradeTF.isFirstResponder {
+            self.view.frame.origin.y = 0
+        }
     }
     @objc func doneAction() {
         view.endEditing(true)
@@ -103,7 +108,7 @@ class SettingsVC: UIViewController, UITextFieldDelegate {
         if let number = fmtUS.number(from: text)?.doubleValue {
             return number
         }
-
+        
         let fmtCurrent = NumberFormatter()
         fmtCurrent.locale = Locale.current
         if let number = fmtCurrent.number(from: text)?.doubleValue {
