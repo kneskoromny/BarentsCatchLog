@@ -19,6 +19,10 @@ enum Ratios: Double {
     case haddock = 1.4
 }
 
+enum Grades: String {
+    case withoutGrade = "без навески"
+}
+
 enum DailyCatchVCStrings: String {
     case date = "Дата"
     case fish = "Объект"

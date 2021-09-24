@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsVC: UIViewController {
+class SettingsVC: UIViewController, UITextFieldDelegate {
     // MARK: - IB Outlets
     
     @IBOutlet weak var firstExplanationLabel: UILabel!
@@ -21,16 +21,33 @@ class SettingsVC: UIViewController {
     
     @IBOutlet weak var showDefaultsBtn: UIButton!
     
+    @IBOutlet weak var controlBottomConstraint: NSLayoutConstraint!
+
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nameTF.delegate = self
+        gradeTF.delegate = self
         ratioTF.keyboardType = .decimalPad
         ratioTF.inputAccessoryView = createToolbar()
-        gradeTF.inputAccessoryView = createToolbar()
         
         createUI()
+        
+       
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(notification:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
+    override func touchesBegan( _ touches: Set<UITouch>, with event: UIEvent?) {
+             super.touchesBegan(touches, with: event)
+            view.endEditing(true)
+        }
     
     // MARK: - IB Actions
     @IBAction func saveNameRatioBtnPressed() {
@@ -62,14 +79,45 @@ class SettingsVC: UIViewController {
     @IBAction func showDefaultsBtnPressed() {
     }
     
+    // MARK: - Public Methods
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.view.frame.origin.y -= keyboardSize.height / 2
+        }
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+    @objc func doneAction() {
+        view.endEditing(true)
+    }
+    
     // MARK: - Private Methods
+    func parseNumber(_ text: String) -> Double? {
+        let fmtUS = NumberFormatter()
+        fmtUS.locale = Locale(identifier: "en_US")
+        if let number = fmtUS.number(from: text)?.doubleValue {
+            return number
+        }
+
+        let fmtCurrent = NumberFormatter()
+        fmtCurrent.locale = Locale.current
+        if let number = fmtCurrent.number(from: text)?.doubleValue {
+            return number
+        }
+        return nil
+    }
     private func createUI() {
         CustomView.createDesign(for: firstExplanationLabel, with: """
-            Внесите объекты промысла, с которыми работаете в данный момент.
+            Поочередно внесите объекты промысла, с которыми планируете работать.
             Если в процессе промысла появится новый, вы сможете добавить его отдельно.
             """)
         CustomView.createDesign(for: secondExplanationLabel, with: """
-              Затем поочередно добавьте навески, они будут доступны для каждого объекта промысла.
+              Поочередно добавьте навески, они будут доступны для каждого объекта промысла.
             """)
         CustomView.createDesign(for: saveNameRatioBtn, with: .systemBlue, and: "Сохранить")
         CustomView.createDesign(for: saveGradeBtn, with: .systemBlue, and: "Сохранить")
@@ -84,14 +132,13 @@ class SettingsVC: UIViewController {
         
         return toolBar
     }
-    @objc private func doneAction() {
-        view.endEditing(true)
-    }
+    
     private func saveGrade(with grade: String) {
         StorageManager.shared.save(grade: grade)
     }
     private func saveInputFish(with name: String, and ratio: String) {
-        guard let doubleRatio = Double(ratio) else { return }
+        guard let doubleRatio = parseNumber(ratio) else { return }
+        print("doubleRatio: \(doubleRatio)")
         let inputFish = InputFish(fish: name, ratio: doubleRatio)
         StorageManager.shared.save(inputFish: inputFish)
     }

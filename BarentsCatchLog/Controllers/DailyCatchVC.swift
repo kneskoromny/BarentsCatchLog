@@ -220,21 +220,36 @@ private func createHaddockTemplate() {
     let haddockTemplate = InputFish(fish: FishTypes.haddock.rawValue, ratio: Ratios.haddock.rawValue)
     StorageManager.shared.save(inputFish: haddockTemplate)
 }
-private func isTemplate(fish: String, in array: [InputFish]) -> Bool {
+private func createGradeTemplate() {
+    let gradeTemplate = Grades.withoutGrade.rawValue
+    StorageManager.shared.save(grade: gradeTemplate)
+}
+private func isFishTemplate(fish: String, in array: [InputFish]) -> Bool {
     let filteredArray = array.filter { input in
         input.fish == fish
     }
     return !filteredArray.isEmpty ? true : false
 }
+private func isGradeTemplate(grade: String, in array: [String]) -> Bool {
+    let filteredArray = array.filter { inputGrade in
+        inputGrade == grade
+    }
+    return !filteredArray.isEmpty ? true : false
+}
 private func checkTemplates() {
     let fetchedFishes = StorageManager.shared.fetchInputFishes()
-    let isCodTemplate = isTemplate(fish: FishTypes.cod.rawValue, in: fetchedFishes)
+    let isCodTemplate = isFishTemplate(fish: FishTypes.cod.rawValue, in: fetchedFishes)
     if !isCodTemplate {
         createCodTemplate()
     }
-    let isHaddockTemplate = isTemplate(fish: FishTypes.haddock.rawValue, in: fetchedFishes)
+    let isHaddockTemplate = isFishTemplate(fish: FishTypes.haddock.rawValue, in: fetchedFishes)
     if !isHaddockTemplate {
         createHaddockTemplate()
+    }
+    let fetchedGrades = StorageManager.shared.fetchGrades()
+    let isGradeTemplate = isGradeTemplate(grade: Grades.withoutGrade.rawValue, in: fetchedGrades)
+    if !isGradeTemplate {
+        createGradeTemplate()
     }
 }
 
