@@ -16,6 +16,13 @@ class ByTrawlsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Public Properties
+    lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-YYYY"
+        return formatter
+    }()
+    
     // MARK: - Private Properties
     private var choozenDate = Date()
     
@@ -30,6 +37,7 @@ class ByTrawlsVC: UIViewController {
         if segue.identifier == SegueIDs.toDateFromChoice.rawValue {
             if let dateVC = segue.destination as? DateVC {
                 dateVC.choozenDate = choozenDate
+                dateVC.delegate = self
             }
         }
     }
@@ -60,5 +68,13 @@ extension ByTrawlsVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.byTrawlsCell.rawValue, for: indexPath)
         
         return cell
+    }
+}
+// MARK: - DateVC Delegate
+extension ByTrawlsVC: DateVCDelegate {
+    func dateDidChanged(to date: Date) {
+        self.choozenDate = date
+        let convertedDate = dateFormatter.string(from: choozenDate)
+        self.choozeDateBtn.setTitle(convertedDate, for: .normal)
     }
 }
