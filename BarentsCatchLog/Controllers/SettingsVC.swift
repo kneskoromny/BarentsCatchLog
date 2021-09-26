@@ -119,7 +119,6 @@ class SettingsVC: UIViewController, UITextFieldDelegate {
     private func createUI() {
         CustomView.createDesign(for: firstExplanationLabel, with: """
             Поочередно внесите объекты промысла, с которыми планируете работать.
-            Если в процессе промысла появится новый, вы сможете добавить его отдельно.
             """)
         CustomView.createDesign(for: secondExplanationLabel, with: """
               Поочередно добавьте навески, они будут доступны для каждого объекта промысла.
