@@ -25,6 +25,7 @@ class ByTrawlsVC: UIViewController {
     
     // MARK: - Private Properties
     private var choozenDate = Date()
+    private var trawlsQuantity = 1
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -47,6 +48,13 @@ class ByTrawlsVC: UIViewController {
         performSegue(withIdentifier: SegueIDs.toDateFromChoice.rawValue, sender: nil)
     }
     @IBAction func trawlsQuantitySCValueChanged(_ sender: Any) {
+        switch trawlsQuantitySC.selectedSegmentIndex {
+        case 0: trawlsQuantity = 1
+        case 1: trawlsQuantity = 2
+        case 2: trawlsQuantity = 3
+        case 3: trawlsQuantity = 4
+        default: trawlsQuantity = 5
+        }
     }
     @IBAction func calculateBtnPressed() {
     }
