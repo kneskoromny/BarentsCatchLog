@@ -16,10 +16,37 @@ class ByTrawlsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Private Properties
+    private var choozenDate = Date()
     
-    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIDs.toDateFromChoice.rawValue {
+            if let dateVC = segue.destination as? DateVC {
+                dateVC.choozenDate = choozenDate
+            }
+        }
+    }
+    
+    // MARK: - IB Actions
+    @IBAction func choozeDateBtnPressed() {
+        performSegue(withIdentifier: SegueIDs.toDateFromChoice.rawValue, sender: nil)
+    }
+    @IBAction func trawlsQuantitySCValueChanged(_ sender: Any) {
+    }
+    @IBAction func calculateBtnPressed() {
+    }
+    
+    // MARK: - Private Methods
+    private func configureUI() {
+        CustomView.createDesign(for: choozeDateBtn, with: .systemBlue, and: "Выбрать дату")
+        CustomView.createDesign(for: calculateBtn, with: .systemGreen, and: "Разделить по тралам")
     }
 }
 // MARK: - TableViewDataSource

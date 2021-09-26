@@ -1006,8 +1006,11 @@
                                 <rect key="frame" x="20" y="20" width="335" height="181"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csE-ie-48B">
-                                        <rect key="frame" x="118.5" y="0.0" width="98" height="33.5"/>
+                                        <rect key="frame" x="84" y="0.0" width="167.5" height="33.5"/>
                                         <state key="normal" title="Выбрать дату"/>
+                                        <connections>
+                                            <action selector="choozeDateBtnPressed" destination="XRN-JX-YZh" eventType="touchUpInside" id="yLr-p0-6Cm"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество тралов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZw-xJ-Eox">
                                         <rect key="frame" x="91" y="54.5" width="153.5" height="20"/>
@@ -1024,14 +1027,21 @@
                                             <segment title="4"/>
                                             <segment title="5"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="trawlsQuantitySCValueChanged:" destination="XRN-JX-YZh" eventType="valueChanged" id="Gev-tz-mvI"/>
+                                        </connections>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5L6-np-CCz">
-                                        <rect key="frame" x="100.5" y="147.5" width="134" height="33.5"/>
+                                        <rect key="frame" x="84" y="147.5" width="167.5" height="33.5"/>
                                         <state key="normal" title="Посчитать"/>
+                                        <connections>
+                                            <action selector="calculateBtnPressed" destination="XRN-JX-YZh" eventType="touchUpInside" id="SVU-h1-g0z"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="5L6-np-CCz" firstAttribute="width" secondItem="dO1-5f-6dU" secondAttribute="width" multiplier="0.4" id="poj-UA-3Qc"/>
+                                    <constraint firstItem="csE-ie-48B" firstAttribute="width" secondItem="dO1-5f-6dU" secondAttribute="width" multiplier="0.5" id="Eih-fl-JXW"/>
+                                    <constraint firstItem="5L6-np-CCz" firstAttribute="width" secondItem="dO1-5f-6dU" secondAttribute="width" multiplier="0.5" id="poj-UA-3Qc"/>
                                     <constraint firstItem="gw5-D8-pVD" firstAttribute="width" secondItem="dO1-5f-6dU" secondAttribute="width" id="t6M-E9-PVa"/>
                                 </constraints>
                             </stackView>
@@ -1091,6 +1101,7 @@
                         <outlet property="choozeDateBtn" destination="csE-ie-48B" id="PdJ-xP-FtS"/>
                         <outlet property="tableView" destination="KPG-DQ-JKj" id="Rg1-d7-CNJ"/>
                         <outlet property="trawlsQuantitySC" destination="gw5-D8-pVD" id="7Mg-rs-GHq"/>
+                        <segue destination="JJi-xC-COe" kind="presentation" identifier="toDateFromIdentifier" id="bTB-9Q-4FN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DfY-Ap-USx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1119,7 +1130,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="MAb-sJ-dJD"/>
         <segue reference="YaX-bK-37G"/>
-        <segue reference="Y6S-qH-vgU"/>
+        <segue reference="bTB-9Q-4FN"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
