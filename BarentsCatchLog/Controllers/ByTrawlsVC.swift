@@ -26,6 +26,7 @@ class ByTrawlsVC: UIViewController {
     // MARK: - Private Properties
     private var choozenDate = Date()
     private var trawlsQuantity = 1
+    private var fishes: [Fish] = []
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -57,6 +58,8 @@ class ByTrawlsVC: UIViewController {
         }
     }
     @IBAction func calculateBtnPressed() {
+        fishes = Requests.shared.getAllElements(for: choozenDate)
+        print("FISHES COUNT: \(fishes.count)")
     }
     
     // MARK: - Private Methods

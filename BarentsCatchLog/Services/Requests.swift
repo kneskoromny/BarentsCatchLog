@@ -30,7 +30,7 @@ struct Requests {
         var result = 0
         let countRequest = NSFetchRequest<NSDictionary>(entityName: "Fish")
         
-        let predicatesForCount = Predicates().getPredicateFrom(name: fish, grade: grade)
+        let predicatesForCount = Predicates.shared.getPredicateFrom(name: fish, grade: grade)
         let predicateForCount = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCount)
         countRequest.predicate = predicateForCount
         
@@ -60,7 +60,7 @@ struct Requests {
     func getElementAvailabilityRequest(for fish: String, grade: String, dateFrom: Date, dateTo: Date) -> Fish? {
         var result: Fish?
         let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
-        let predicatesForCatchBeforeInput = Predicates().getPredicateFrom(name: fish,
+        let predicatesForCatchBeforeInput = Predicates.shared.getPredicateFrom(name: fish,
                                                        grade: grade,
                                                        dateFrom: dateFrom,
                                                        dateTo: dateTo)
@@ -73,6 +73,23 @@ struct Requests {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
         return result
+    }
+    // запрос на всю рыбу за один день
+    func getAllElements(for date: Date) -> [Fish] {
+        var elements: [Fish] = []
+        
+        let fetchRequest: NSFetchRequest<Fish> = Fish.fetchRequest()
+        let predicatesForCatch = Predicates.shared.getNewPredicateFrom(dateFrom: date, dateTo: date)
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicatesForCatch)
+        fetchRequest.predicate = predicate
+        
+        do {
+            elements = try coreDataStack.managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Fetch error: \(error) description: \(error.userInfo)")
+        }
+        return elements
+        
     }
     
     
