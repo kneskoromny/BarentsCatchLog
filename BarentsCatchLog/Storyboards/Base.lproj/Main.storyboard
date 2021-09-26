@@ -170,6 +170,7 @@
                         <segue destination="4t9-p1-WJe" kind="relationship" relationship="viewControllers" id="8Ar-3Q-kgY"/>
                         <segue destination="cHp-eJ-WX7" kind="relationship" relationship="viewControllers" id="pjN-Un-EWv"/>
                         <segue destination="xOP-sF-Vca" kind="relationship" relationship="viewControllers" id="ukj-zD-IM0"/>
+                        <segue destination="XRN-JX-YZh" kind="relationship" relationship="viewControllers" id="4zw-LY-DXZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZP-QI-lko" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -993,6 +994,22 @@
             </objects>
             <point key="canvasLocation" x="651" y="739"/>
         </scene>
+        <!--По тралам-->
+        <scene sceneID="z8K-Da-7YX">
+            <objects>
+                <viewController id="XRN-JX-YZh" customClass="ByTrawlsVC" customModule="BarentsCatchLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="opp-GX-wWP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="CKf-hh-Jlj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="По тралам" image="divide.circle" catalog="system" id="TSz-1Q-guL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DfY-Ap-USx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="651" y="1466"/>
+        </scene>
         <!--Settings ListTVCNC-->
         <scene sceneID="W2S-yL-7MV">
             <objects>
@@ -1013,12 +1030,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MAb-sJ-dJD"/>
-        <segue reference="YaX-bK-37G"/>
-        <segue reference="Y6S-qH-vgU"/>
+        <segue reference="J9o-ij-3cC"/>
+        <segue reference="zFF-pq-wsb"/>
+        <segue reference="FmF-AT-Bk9"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>
+        <image name="divide.circle" catalog="system" width="128" height="121"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="newspaper" catalog="system" width="128" height="108"/>
         <image name="play" catalog="system" width="120" height="128"/>
