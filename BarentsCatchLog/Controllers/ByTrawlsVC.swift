@@ -34,13 +34,7 @@ class ByTrawlsVC: UIViewController {
     private var fishes: [Fish] = []
     private var totalCatch: [TotalCatchByPeriod] = []
     private var dividedFishes: [DividedFish] = []
-    
-    // проценты для расчета кол-ва в трале, зависят от кол-ва тралов
-    private var firstTrawlPercent: Double?
-    private var secondTrawlPercent: Double?
-    private var thirdTrawlPercent: Double?
-    private var fourthTrawlPercent: Double?
-    private var fifthTrawlPercent: Double?
+    private var isFirstCalculate = true
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -78,24 +72,34 @@ class ByTrawlsVC: UIViewController {
         }
     }
     @IBAction func calculateBtnPressed() {
-        fishes = Requests.shared.getAllElements(for: choozenDate)
-//        print("FISHES COUNT: \(fishes.count)")
-        fishes.forEach { fish in
-//            print("FISHNAME: \(fish.name)")
+        if isFirstCalculate {
+            fishes = Requests.shared.getAllElements(for: choozenDate)
+            
+            divideByName(from: fishes)
+            createDividedFish(trawlsCount: trawls.count, from: totalCatch)
+            dividedFishes.forEach { divFish in
+                print("Name: \(divFish.name!), Fishes: \(divFish.fishes!)")
+            }
+            tableView.reloadData()
+            tableView.isHidden.toggle()
+            isFirstCalculate.toggle()
+            UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut]) { [weak self] in
+                self?.calculateBtn.backgroundColor = .systemRed
+                self?.calculateBtn.setTitle("Сбросить", for: .normal)
+            }
+        } else {
+            fishes.removeAll()
+            totalCatch.removeAll()
+            dividedFishes.removeAll()
+            tableView.reloadData()
+            isFirstCalculate.toggle()
+            tableView.isHidden.toggle()
+            UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut]) { [weak self] in
+                self?.calculateBtn.backgroundColor = .systemGreen
+                self?.calculateBtn.setTitle("Разделить по тралам", for: .normal)
+            }
+            
         }
-        divideByName(from: fishes)
-        //dividedFishes = divideBy(trawlsCount: trawls.count, from: totalCatch)
-        createDividedFish(trawlsCount: trawls.count, from: totalCatch)
-        dividedFishes.forEach { divFish in
-            print("Name: \(divFish.name!), Fishes: \(divFish.fishes!)")
-        }
-        
-        
-//        print("TOTAL CATCH COUNT: \(totalCatch.count)")
-        totalCatch.forEach { totalCatch in
-//            print("Name: \(totalCatch.name), onBoard: \(totalCatch.onBoard), ratio: \(totalCatch.ratio), raw: \(totalCatch.raw)")
-        }
-        tableView.reloadData()
     }
     
     // MARK: - Private Methods
@@ -111,6 +115,7 @@ class ByTrawlsVC: UIViewController {
     private func configureUI() {
         CustomView.createDesign(for: choozeDateBtn, with: .systemBlue, and: "Выбрать дату")
         CustomView.createDesign(for: calculateBtn, with: .systemGreen, and: "Разделить по тралам")
+        tableView.isHidden = true
     }
     private func divideByName(from fishes: [Fish]) {
         if let fish = fishes.first {
@@ -133,31 +138,6 @@ class ByTrawlsVC: UIViewController {
             totalCatch.append(totalCatchByPeriod)
         }
     }
-//    private func divideBy(trawlsCount: Int, from totalCatch: [TotalCatchByPeriod]) -> [DividedFish] {
-//        var dividedFishes: [DividedFish] = []
-//        switch trawls.count {
-//        case 1:
-//            for element in totalCatch {
-//                let dividedFish = DividedFish(
-//                    name: element.name,
-//                    fishes: element.divideByTrawls(count: 1))
-//                print(dividedFish)
-//                dividedFishes.append(dividedFish)
-//            }
-//        case 2:
-//            for element in totalCatch {
-//                let dividedFish = DividedFish(
-//                    name: element.name,
-//                    fishes: element.divideByTrawls(count: 2))
-//                print(dividedFish)
-//                dividedFishes.append(dividedFish)
-//            }
-//        default:
-//            print("fdef")
-//
-//        }
-//        return dividedFishes
-//    }
     private func createDividedFish(trawlsCount: Int, from totalCatch: [TotalCatchByPeriod]) {
         for element in totalCatch {
             let dividedFish = DividedFish(
@@ -186,10 +166,6 @@ extension ByTrawlsVC: UITableViewDataSource {
         let element = dividedFishes[indexPath.row]
         
         cell.textLabel?.text = element.name
-        
-        
-        //let index = sections.firstIndex(of: "Трал 1")
-        
         switch trawls[indexPath.section] {
         case "Трал 1":
             guard let fishes = element.fishes else { return cell}
