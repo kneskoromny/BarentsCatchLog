@@ -64,34 +64,35 @@ class ByTrawlsVC: UIViewController {
     @IBAction func calculateBtnPressed() {
         if isFirstCalculate {
             fishes = Requests.shared.getAllElements(for: choozenDate)
-            
             divideByName(from: fishes)
             createDividedFish(trawlsCount: trawls.count, from: totalCatch)
-            dividedFishes.forEach { divFish in
-                print("Name: \(divFish.name!), Fishes: \(divFish.fishes!)")
-            }
             tableView.reloadData()
-            tableView.isHidden.toggle()
-            isFirstCalculate.toggle()
-            UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut]) { [weak self] in
-                self?.calculateBtn.backgroundColor = .systemRed
-                self?.calculateBtn.setTitle("Сбросить", for: .normal)
-            }
+            toggleBoolean()
+            animateButton(with: .systemRed, and: "Сбросить")
         } else {
-            fishes.removeAll()
-            totalCatch.removeAll()
-            dividedFishes.removeAll()
+            cleanArrays()
             tableView.reloadData()
-            isFirstCalculate.toggle()
-            tableView.isHidden.toggle()
-            UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut]) { [weak self] in
-                self?.calculateBtn.backgroundColor = .systemGreen
-                self?.calculateBtn.setTitle("Разделить по тралам", for: .normal)
-            }
+            toggleBoolean()
+            animateButton(with: .systemGreen, and: "Разделить по тралам")
         }
     }
     
     // MARK: - Private Methods
+    private func toggleBoolean() {
+        //tableView.isHidden.toggle()
+        isFirstCalculate.toggle()
+    }
+    private func cleanArrays() {
+        fishes.removeAll()
+        totalCatch.removeAll()
+        dividedFishes.removeAll()
+    }
+    private func animateButton(with color: UIColor, and text: String) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseInOut]) { [weak self] in
+            self?.calculateBtn.backgroundColor = color
+            self?.calculateBtn.setTitle(text, for: .normal)
+        }
+    }
     private func addSectionTitle(sectionCount: Int) {
         trawls = []
         var number = 1
@@ -104,7 +105,7 @@ class ByTrawlsVC: UIViewController {
         CustomView.createDesign(for: choozeDateBtn, with: .systemBlue, and: "Выбрать дату")
         CustomView.createDesign(for: calculateBtn, with: .systemGreen, and: "Разделить по тралам")
         addSectionTitle(sectionCount: trawlsQuantity)
-        tableView.isHidden = true
+        //tableView.isHidden = true
     }
     private func divideByName(from fishes: [Fish]) {
         if let fish = fishes.first {
