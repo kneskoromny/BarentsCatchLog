@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F71B607A2700939600EFDA18 /* ByTrawlsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71B60792700939600EFDA18 /* ByTrawlsVC.swift */; };
+		F71B60852703A8AE00EFDA18 /* TotalCatchByPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71B60842703A8AE00EFDA18 /* TotalCatchByPeriod.swift */; };
 		F747964826F860CD00F1FFC2 /* Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747964726F860CD00F1FFC2 /* Arrays.swift */; };
 		F747DB9826F23E3B00B3F68A /* Date + GetAnyDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9726F23E3B00B3F68A /* Date + GetAnyDay.swift */; };
 		F747DB9A26F46D7900B3F68A /* Predicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747DB9926F46D7900B3F68A /* Predicates.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		F71B60792700939600EFDA18 /* ByTrawlsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByTrawlsVC.swift; sourceTree = "<group>"; };
+		F71B60842703A8AE00EFDA18 /* TotalCatchByPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCatchByPeriod.swift; sourceTree = "<group>"; };
 		F747964726F860CD00F1FFC2 /* Arrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrays.swift; sourceTree = "<group>"; };
 		F747DB9726F23E3B00B3F68A /* Date + GetAnyDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + GetAnyDay.swift"; sourceTree = "<group>"; };
 		F747DB9926F46D7900B3F68A /* Predicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicates.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				F7C48F4F26FC551E0031E370 /* InputFish.swift */,
+				F71B60842703A8AE00EFDA18 /* TotalCatchByPeriod.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				F759FD7026EE0A95001E3D1A /* LogVC.swift in Sources */,
 				F7703C0526DA1FAE00D7DAFB /* Enums.swift in Sources */,
 				F747DB9826F23E3B00B3F68A /* Date + GetAnyDay.swift in Sources */,
+				F71B60852703A8AE00EFDA18 /* TotalCatchByPeriod.swift in Sources */,
 				F7C48F4826FB90390031E370 /* SettingsListVC.swift in Sources */,
 				F7AE361E26EF2CFD007693CF /* LogCell.swift in Sources */,
 				F7946DF826E74D0F00241C16 /* ReportDescriptionVC.swift in Sources */,
