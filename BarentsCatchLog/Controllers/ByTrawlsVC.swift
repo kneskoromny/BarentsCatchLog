@@ -66,20 +66,15 @@ class ByTrawlsVC: UIViewController {
         // сделать получше
         switch trawlsQuantitySC.selectedSegmentIndex {
         case 0:
-            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
-            //addSectionTitle(sectionCount: sectionsCount)
+            trawls = ["Трал 1"]
         case 1:
-            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
-            addSectionTitle(sectionCount: sectionsCount)
+            addSectionTitle(sectionCount: 2)
         case 2:
-            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
-            addSectionTitle(sectionCount: sectionsCount)
+            addSectionTitle(sectionCount: 3)
         case 3:
-            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
-            addSectionTitle(sectionCount: sectionsCount)
+            addSectionTitle(sectionCount: 4)
         default:
-            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
-            addSectionTitle(sectionCount: sectionsCount)
+            addSectionTitle(sectionCount: 5)
         }
     }
     @IBAction func calculateBtnPressed() {
@@ -89,7 +84,8 @@ class ByTrawlsVC: UIViewController {
 //            print("FISHNAME: \(fish.name)")
         }
         divideByName(from: fishes)
-        dividedFishes = divideBy(trawlsCount: trawls.count, from: totalCatch)
+        //dividedFishes = divideBy(trawlsCount: trawls.count, from: totalCatch)
+        createDividedFish(trawlsCount: trawls.count, from: totalCatch)
         dividedFishes.forEach { divFish in
             print("Name: \(divFish.name!), Fishes: \(divFish.fishes!)")
         }
@@ -104,7 +100,8 @@ class ByTrawlsVC: UIViewController {
     
     // MARK: - Private Methods
     private func addSectionTitle(sectionCount: Int) {
-        var number = 1
+        trawls = ["Трал 1"]
+        var number = 2
         while number <= sectionCount {
             trawls.append("Трал \(number)")
             number += 1
@@ -136,24 +133,39 @@ class ByTrawlsVC: UIViewController {
             totalCatch.append(totalCatchByPeriod)
         }
     }
-    private func divideBy(trawlsCount: Int, from totalCatch: [TotalCatchByPeriod]) -> [DividedFish] {
-        var dividedFishes: [DividedFish] = []
-        switch trawls.count {
-        case 1:
-            print("fdef")
-        case 2:
-            for element in totalCatch {
-                let dividedFish = DividedFish(
-                    name: element.name,
-                    fishes: element.divideByTrawls(count: 2))
-                print(dividedFish)
-                dividedFishes.append(dividedFish)
-            }
-        default:
-            print("fdef")
-            
-        }
-        return dividedFishes
+//    private func divideBy(trawlsCount: Int, from totalCatch: [TotalCatchByPeriod]) -> [DividedFish] {
+//        var dividedFishes: [DividedFish] = []
+//        switch trawls.count {
+//        case 1:
+//            for element in totalCatch {
+//                let dividedFish = DividedFish(
+//                    name: element.name,
+//                    fishes: element.divideByTrawls(count: 1))
+//                print(dividedFish)
+//                dividedFishes.append(dividedFish)
+//            }
+//        case 2:
+//            for element in totalCatch {
+//                let dividedFish = DividedFish(
+//                    name: element.name,
+//                    fishes: element.divideByTrawls(count: 2))
+//                print(dividedFish)
+//                dividedFishes.append(dividedFish)
+//            }
+//        default:
+//            print("fdef")
+//
+//        }
+//        return dividedFishes
+//    }
+    private func createDividedFish(trawlsCount: Int, from totalCatch: [TotalCatchByPeriod]) {
+        for element in totalCatch {
+            let dividedFish = DividedFish(
+                name: element.name,
+                fishes: element.divideByTrawls(count: trawlsCount))
+            print(dividedFish)
+            dividedFishes.append(dividedFish)
+    }
     }
 }
 // MARK: - TableViewDataSource
