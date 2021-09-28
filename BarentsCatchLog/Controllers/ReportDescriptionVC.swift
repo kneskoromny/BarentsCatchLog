@@ -58,10 +58,7 @@ struct TotalCatchByPeriod {
         }
         return inTrawlFishes
     }
-    
-    
 }
-
 class ReportDescriptionVC: UITableViewController {
     //MARK: - Public Properties
     var caughtFishes: [Fish]!
@@ -193,3 +190,4 @@ extension ReportDescriptionVC {
     }
     
 }
+

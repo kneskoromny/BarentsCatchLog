@@ -30,7 +30,8 @@ class ByTrawlsVC: UIViewController {
     
     // MARK: - Private Properties
     private var choozenDate = Date()
-    private var trawls = ["Трал 1"]
+    private let trawlsQuantity = 1
+    private var trawls: [String] = []
     private var fishes: [Fish] = []
     private var totalCatch: [TotalCatchByPeriod] = []
     private var dividedFishes: [DividedFish] = []
@@ -57,19 +58,8 @@ class ByTrawlsVC: UIViewController {
         performSegue(withIdentifier: SegueIDs.toDateFromChoice.rawValue, sender: nil)
     }
     @IBAction func trawlsQuantitySCValueChanged(_ sender: Any) {
-        // сделать получше
-        switch trawlsQuantitySC.selectedSegmentIndex {
-        case 0:
-            trawls = ["Трал 1"]
-        case 1:
-            addSectionTitle(sectionCount: 2)
-        case 2:
-            addSectionTitle(sectionCount: 3)
-        case 3:
-            addSectionTitle(sectionCount: 4)
-        default:
-            addSectionTitle(sectionCount: 5)
-        }
+        let sectionCount = trawlsQuantitySC.selectedSegmentIndex + 1
+        addSectionTitle(sectionCount: sectionCount)
     }
     @IBAction func calculateBtnPressed() {
         if isFirstCalculate {
@@ -98,23 +88,22 @@ class ByTrawlsVC: UIViewController {
                 self?.calculateBtn.backgroundColor = .systemGreen
                 self?.calculateBtn.setTitle("Разделить по тралам", for: .normal)
             }
-            
         }
     }
     
     // MARK: - Private Methods
     private func addSectionTitle(sectionCount: Int) {
-        trawls = ["Трал 1"]
-        var number = 2
+        trawls = []
+        var number = 1
         while number <= sectionCount {
             trawls.append("Трал \(number)")
             number += 1
         }
-        print(trawls)
     }
     private func configureUI() {
         CustomView.createDesign(for: choozeDateBtn, with: .systemBlue, and: "Выбрать дату")
         CustomView.createDesign(for: calculateBtn, with: .systemGreen, and: "Разделить по тралам")
+        addSectionTitle(sectionCount: trawlsQuantity)
         tableView.isHidden = true
     }
     private func divideByName(from fishes: [Fish]) {
@@ -145,7 +134,11 @@ class ByTrawlsVC: UIViewController {
                 fishes: element.divideByTrawls(count: trawlsCount))
             print(dividedFish)
             dividedFishes.append(dividedFish)
+        }
     }
+    private func getWeightDependingTrawl(number: Int, from array: [Double]?) -> String  {
+        guard let catches = array else { return "" }
+        return String(format: "%.0f", catches[number])
     }
 }
 // MARK: - TableViewDataSource
@@ -164,27 +157,25 @@ extension ByTrawlsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.byTrawlsCell.rawValue, for: indexPath)
         let element = dividedFishes[indexPath.row]
-        
         cell.textLabel?.text = element.name
+        
         switch trawls[indexPath.section] {
         case "Трал 1":
-            guard let fishes = element.fishes else { return cell}
-            let strInTrawl = String(format: "%.0f", fishes[0])
-            cell.detailTextLabel?.text = strInTrawl
+            cell.detailTextLabel?.text = getWeightDependingTrawl(number: 0,
+                                                                 from: element.fishes)
         case "Трал 2":
-            let strInTrawl = String(format: "%.0f", element.fishes![1])
-            cell.detailTextLabel?.text = strInTrawl
+            cell.detailTextLabel?.text = getWeightDependingTrawl(number: 1,
+                                                                 from: element.fishes)
         case "Трал 3":
-            let strInTrawl = String(format: "%.0f", element.fishes![2])
-            cell.detailTextLabel?.text = strInTrawl
+            cell.detailTextLabel?.text = getWeightDependingTrawl(number: 2,
+                                                                 from: element.fishes)
         case "Трал 4":
-            let strInTrawl = String(format: "%.0f", element.fishes![3])
-            cell.detailTextLabel?.text = strInTrawl
+            cell.detailTextLabel?.text = getWeightDependingTrawl(number: 3,
+                                                                 from: element.fishes)
         default:
-            let strInTrawl = String(format: "%.0f", element.fishes![4])
-            cell.detailTextLabel?.text = strInTrawl
+            cell.detailTextLabel?.text = getWeightDependingTrawl(number: 4,
+                                                                 from: element.fishes)
         }
-        
         return cell
     }
 }
