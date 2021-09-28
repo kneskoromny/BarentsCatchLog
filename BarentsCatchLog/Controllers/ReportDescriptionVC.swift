@@ -10,6 +10,14 @@ import UIKit
 struct TotalCatchByPeriod {
     var name: String?
     var onBoard: Double?
+    var ratio: Double?
+    
+    var raw: Double {
+        guard let onBoard = onBoard, let ratio = ratio else {
+            return 0
+        }
+        return (onBoard * ratio).rounded()
+    }
 }
 
 class ReportDescriptionVC: UITableViewController {
@@ -19,7 +27,7 @@ class ReportDescriptionVC: UITableViewController {
     
     //MARK: - Private Properties
     private var sections: [String] = []
-    private var totalCatch = [TotalCatchByPeriod]()
+    private var totalCatch: [TotalCatchByPeriod] = []
     private var convertedCaughtFishes: [Fish] = []
     private var rawFish: Double?
     private var frzFish: Double?
