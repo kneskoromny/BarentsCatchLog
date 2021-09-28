@@ -38,8 +38,7 @@ class DailyCatchVC: UIViewController {
     let arrayForTableView = [DailyCatchVCStrings.date.rawValue,
                              DailyCatchVCStrings.fish.rawValue,
                              DailyCatchVCStrings.grade.rawValue]
-    
-    private var isOnBoardWeightGreater = false
+
     private var choozenDate = Date()
     private var choozenGrade: String?
     private var choozenFish: InputFish?
@@ -94,16 +93,6 @@ class DailyCatchVC: UIViewController {
         }
         sumFrzPerDay = Requests.shared.getAttributeCountRequest(for: fishName, and: fishGrade)
         
-        checkOnBoardWeight(between: sumFrzPerDay, and: fishWeight)
-        if isOnBoardWeightGreater {
-            showAlert(title: "Что-то не так!",
-                      message: "Проверьте данные. Вносимое количество не может быть меньше, чем внесено ранее.") {
-                self.frozenOnBoardTF.becomeFirstResponder()
-                self.frozenOnBoardTF.text = ""
-            }
-            return
-        }
-        
         createInstance(name: fishName, grade: fishGrade, date: choozenDate, weight: fishWeight)
         refreshUI()
     }
@@ -122,15 +111,6 @@ class DailyCatchVC: UIViewController {
     }
     
     //MARK: - Private Methods
-    private func checkOnBoardWeight(between onBoardFish: Int?, and inputFish: String) {
-        if let onBoardFish = onBoardFish {
-            let doubleOnBoard = Double(onBoardFish)
-            let doubleInputFish = Double(inputFish)
-            if let doubleInputFish = doubleInputFish {
-                isOnBoardWeightGreater = doubleOnBoard > doubleInputFish ? true : false
-            }
-        }
-    }
     private func createInstance(name: String, grade: String, date: Date, weight: String) {
         let fishCatch = Fish(context: coreDataStack.managedContext)
         fishCatch.name = name
