@@ -108,7 +108,7 @@
                                             <outlet property="delegate" destination="4t9-p1-WJe" id="Jgz-bR-cLI"/>
                                         </connections>
                                     </tableView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Готовой на борту" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcB-04-yaE">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Готовой за сутки" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcB-04-yaE">
                                         <rect key="frame" x="0.0" y="131" width="343" height="102.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -1130,7 +1130,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="MAb-sJ-dJD"/>
         <segue reference="YaX-bK-37G"/>
-        <segue reference="bTB-9Q-4FN"/>
+        <segue reference="Y6S-qH-vgU"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle.grid.2x2" catalog="system" width="128" height="112"/>

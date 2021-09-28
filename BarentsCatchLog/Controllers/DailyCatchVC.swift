@@ -140,9 +140,11 @@ class DailyCatchVC: UIViewController {
             fishCatch.ratio = fishRatio
         }
         if let doubleWeight = Double(weight) {
-            fishCatch.onBoard = doubleWeight
+            // изменил
+            fishCatch.perDay = doubleWeight
         }
-        fishCatch.perDay = fishCatch.onBoard - (Double(sumFrzPerDay ?? 0))
+        // изменил
+        fishCatch.onBoard = fishCatch.perDay + (Double(sumFrzPerDay ?? 0))
         coreDataStack.saveContext()
     }
     private func refreshUI() {
