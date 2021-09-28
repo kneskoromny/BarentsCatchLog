@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct DividedFish {
+    var name: String?
+    var fishes: [Double]?
+}
+
 class ByTrawlsVC: UIViewController {
     
     // MARK: - IB Outlets
@@ -25,9 +30,10 @@ class ByTrawlsVC: UIViewController {
     
     // MARK: - Private Properties
     private var choozenDate = Date()
-    private var trawlsQuantity = 1
+    private var trawls = ["Трал 1"]
     private var fishes: [Fish] = []
     private var totalCatch: [TotalCatchByPeriod] = []
+    private var dividedFishes: [DividedFish] = []
     
     // проценты для расчета кол-ва в трале, зависят от кол-ва тралов
     private var firstTrawlPercent: Double?
@@ -57,29 +63,54 @@ class ByTrawlsVC: UIViewController {
         performSegue(withIdentifier: SegueIDs.toDateFromChoice.rawValue, sender: nil)
     }
     @IBAction func trawlsQuantitySCValueChanged(_ sender: Any) {
+        // сделать получше
         switch trawlsQuantitySC.selectedSegmentIndex {
-        case 0: trawlsQuantity = 1
-        case 1: trawlsQuantity = 2
-        case 2: trawlsQuantity = 3
-        case 3: trawlsQuantity = 4
-        default: trawlsQuantity = 5
+        case 0:
+            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
+            //addSectionTitle(sectionCount: sectionsCount)
+        case 1:
+            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
+            addSectionTitle(sectionCount: sectionsCount)
+        case 2:
+            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
+            addSectionTitle(sectionCount: sectionsCount)
+        case 3:
+            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
+            addSectionTitle(sectionCount: sectionsCount)
+        default:
+            let sectionsCount = trawlsQuantitySC.selectedSegmentIndex + 1
+            addSectionTitle(sectionCount: sectionsCount)
         }
     }
     @IBAction func calculateBtnPressed() {
         fishes = Requests.shared.getAllElements(for: choozenDate)
-        print("FISHES COUNT: \(fishes.count)")
+//        print("FISHES COUNT: \(fishes.count)")
         fishes.forEach { fish in
-            print("FISHNAME: \(fish.name)")
+//            print("FISHNAME: \(fish.name)")
         }
         divideByName(from: fishes)
-        print("TOTAL CATCH COUNT: \(totalCatch.count)")
+        dividedFishes = divideBy(trawlsCount: trawls.count, from: totalCatch)
+        dividedFishes.forEach { divFish in
+            print("Name: \(divFish.name!), Fishes: \(divFish.fishes!)")
+        }
+        
+        
+//        print("TOTAL CATCH COUNT: \(totalCatch.count)")
         totalCatch.forEach { totalCatch in
-            print("Name: \(totalCatch.name), onBoard: \(totalCatch.onBoard), ratio: \(totalCatch.ratio), raw: \(totalCatch.raw)")
+//            print("Name: \(totalCatch.name), onBoard: \(totalCatch.onBoard), ratio: \(totalCatch.ratio), raw: \(totalCatch.raw)")
         }
         tableView.reloadData()
     }
     
     // MARK: - Private Methods
+    private func addSectionTitle(sectionCount: Int) {
+        var number = 1
+        while number <= sectionCount {
+            trawls.append("Трал \(number)")
+            number += 1
+        }
+        print(trawls)
+    }
     private func configureUI() {
         CustomView.createDesign(for: choozeDateBtn, with: .systemBlue, and: "Выбрать дату")
         CustomView.createDesign(for: calculateBtn, with: .systemGreen, and: "Разделить по тралам")
@@ -105,41 +136,67 @@ class ByTrawlsVC: UIViewController {
             totalCatch.append(totalCatchByPeriod)
         }
     }
-    private func divideBy(trawls: Int, from totalCatch: [TotalCatchByPeriod]) {
-        switch trawls {
+    private func divideBy(trawlsCount: Int, from totalCatch: [TotalCatchByPeriod]) -> [DividedFish] {
+        var dividedFishes: [DividedFish] = []
+        switch trawls.count {
         case 1:
+            print("fdef")
+        case 2:
             for element in totalCatch {
-                print("fdfadf")
+                let dividedFish = DividedFish(
+                    name: element.name,
+                    fishes: element.divideByTrawls(count: 2))
+                print(dividedFish)
+                dividedFishes.append(dividedFish)
             }
         default:
             print("fdef")
             
         }
+        return dividedFishes
     }
 }
 // MARK: - TableViewDataSource
 extension ByTrawlsVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        trawlsQuantity
+        trawls.count
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        // трал 1, трал 2
-        "трал 1"
+        trawls[section]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        totalCatch.count
+        dividedFishes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.byTrawlsCell.rawValue, for: indexPath)
-        let element = totalCatch[indexPath.row]
+        let element = dividedFishes[indexPath.row]
         
         cell.textLabel?.text = element.name
-        if let onBoard = element.onBoard, let ratio = element.ratio {
-            let rawOnBoard = (onBoard * ratio).rounded()
-            cell.detailTextLabel?.text = String(rawOnBoard)
+        
+        
+        //let index = sections.firstIndex(of: "Трал 1")
+        
+        switch trawls[indexPath.section] {
+        case "Трал 1":
+            guard let fishes = element.fishes else { return cell}
+            let strInTrawl = String(format: "%.0f", fishes[0])
+            cell.detailTextLabel?.text = strInTrawl
+        case "Трал 2":
+            let strInTrawl = String(format: "%.0f", element.fishes![1])
+            cell.detailTextLabel?.text = strInTrawl
+        case "Трал 3":
+            let strInTrawl = String(format: "%.0f", element.fishes![2])
+            cell.detailTextLabel?.text = strInTrawl
+        case "Трал 4":
+            let strInTrawl = String(format: "%.0f", element.fishes![3])
+            cell.detailTextLabel?.text = strInTrawl
+        default:
+            let strInTrawl = String(format: "%.0f", element.fishes![4])
+            cell.detailTextLabel?.text = strInTrawl
         }
+        
         return cell
     }
 }

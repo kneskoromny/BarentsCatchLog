@@ -11,13 +11,30 @@ struct TotalCatchByPeriod {
     var name: String?
     var onBoard: Double?
     var ratio: Double?
-    
     var raw: Double {
         guard let onBoard = onBoard, let ratio = ratio else {
             return 0
         }
         return (onBoard * ratio).rounded()
     }
+    func divideByTrawls(count: Int) -> [Double] {
+        var inTrawlFishes: [Double] = []
+        switch count {
+        case 1:
+            inTrawlFishes.append(raw)
+        case 2:
+            let trawl1 = (raw * 0.55).rounded()
+            inTrawlFishes.append(trawl1)
+            let trawl2 = raw - trawl1
+            inTrawlFishes.append(trawl2)
+        default:
+            print("fhdfkjdnf")
+        
+        }
+        return inTrawlFishes
+    }
+    
+    
 }
 
 class ReportDescriptionVC: UITableViewController {
