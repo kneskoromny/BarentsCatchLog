@@ -20,3 +20,9 @@ BarentsCatchLog - Приложение для рыбаков Баренцева 
 
 ### Скриншоты
 
+![IMG_4854](https://user-images.githubusercontent.com/25160645/140963043-17341879-04f0-4707-95eb-230f9659d0f6.PNG)
+![IMG_4855](https://user-images.githubusercontent.com/25160645/140963072-00b2e7bd-7be1-4f4a-9bcd-8e589a8653df.PNG)
+![IMG_4856](https://user-images.githubusercontent.com/25160645/140963095-57834761-2593-4e28-a996-0f989b5ae444.PNG)
+![IMG_4859](https://user-images.githubusercontent.com/25160645/140963119-f8884425-599e-4905-9b81-30b12b982f48.PNG)
+![IMG_4860](https://user-images.githubusercontent.com/25160645/140963166-85ff4fe0-c41c-4f7d-a3d9-177caa56f23b.PNG)
+![IMG_4857](https://user-images.githubusercontent.com/25160645/140963184-e6dd47ec-1f96-4c28-adc5-5bd5dd87ef87.PNG)
